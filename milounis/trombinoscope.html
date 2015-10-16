@@ -5,6 +5,11 @@
 <title>Trombinoscope</title>
 <script src="../js/jquery.min.js" ></script>
 <script src="../js/d3.v3.min.js" ></script>
+<style type="text/css">
+.imgcb{ margin:10px; float:left; border-radius:10px; padding:5px; border:#ccc 3px solid; }
+.imgcb:hover{box-shadow: 1px 1px 20px #555;}
+
+</style>
 <script>
 	var dataEtu;   
 	$(document).ready(  
@@ -16,41 +21,42 @@
 		            dataType: "xml",
 		            success: function(xml) 
 		                     {
+								   d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
+									   dataEtu = data;
+									   /*
+									   data.forEach(function(d,i){
+										   console.log(d.idPhoto+" "+d.Nom);
+									   })
+									   */
 		            				var i=0;
 		                       $(xml).find('enclosure').each(   
 		                         function()
 		                         {
+								 urlimg = this.attributes[1].nodeValue ;
 		                        	 	//console.log(this.attributes[1].nodeValue);
-		                            $('<div class="items" id="link_' + i + '"></div>').html('<img onclick="voirData(' + i + ')" src="' + this.attributes[1].nodeValue + '" />').appendTo('#Div_XML');
-			                       i++;
-		                          });
-		                      }
+										dataEtu.forEach(function(d){
+										if(d.idPhoto==i & d.idPhoto!="" ){
+										$('<a class="example-image-link imgcb" href="' + urlimg + '" data-lightbox="example-1"  data-title="' + d['Prénom']+" "+d.Nom +'">').html(' <img width="100px"  class="example-image" src="' + urlimg + '" alt="' + d['Prénom']+" "+d.Nom +'" /></a>').appendTo('#Div_XML');
+																				
+										}
+			                       
+		                          });i++;
+		                      
 		        });
-		   d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
-			   dataEtu = data;
-			   /*
-			   data.forEach(function(d,i){
-				   console.log(d.idPhoto+" "+d.Nom);
-			   })
-			   */
-			 });		   		   
-		  }
-		);
-	
-	function voirData(id){
-		//chercher les data
-		dataEtu.forEach(function(d){
-			if(d.idPhoto==id && d.idPhoto!=""){
-                $('<div class="data" id="data_' + id + '"></div>').html(d.Prénom+" "+d.Nom).appendTo('#link_' + id);
+									 });		   		   
 				
-			}
-		})
-		
-	}
+				
+		        }});
+		  
+		});
+	
 </script>
 </head>
+<link rel="stylesheet" href="dist/css/lightbox.css">
 <body>
+
 <div id="Div_XML"></div>
+  <script src="dist/js/lightbox-plus-jquery.min.js"></script>
 
 </body>
 </html>
