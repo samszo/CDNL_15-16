@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Le trombinoscope des CDNL</title>
+<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/jquery.min.js" ></script>
+<script src="../js/d3.v3.min.js" ></script>
+<script>
+	var dataEtu;   
+	$(document).ready(  
+		 function()
+		 {
+		   $.ajax( {
+		            type: "GET",
+		            url: "../php/lecteurFlux.php?url=cdnl1516photo",
+		            dataType: "xml",
+		            success: function(xml) 
+		                     {
+		            			var i=0;
+		                       $(xml).find('enclosure').each(   
+		                         function()
+		                         {
+		                        	 	//console.log(this.attributes[1].nodeValue);
+		                            $('<div class="items" id="link_' + i + '"></div>').html('<div id="comp_'+ i +'" class="bulle"></div><div class="deco"><img onclick="comp(' + i + ')" onMouseOver="prenom(' + i + ')" src="' + this.attributes[1].nodeValue + '" /><div class="data" id="data_' + i + '"></div></div>').appendTo('#Div_XML');
+			                       i++;
+		                          });
+								  
+								  nbrEtu = $(".items").length;
+								  if(nbrEtu > 0){$("#nombre").html("Les CDNL sont au nombre de " + nbrEtu + " !");}
+							
+		                      }
+		        });
+		   d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
+			   dataEtu = data;
+			   /*
+			   data.forEach(function(d,i){
+				   console.log(d.idPhoto+" "+d.Nom);
+			   })
+			   */
+			   		
+			 });
+				
+
+				
+		  }
+		);
+	
+	function prenom(id){
+		//chercher les data
+		dataEtu.forEach(function(d){
+			if(d.idPhoto==id && d.idPhoto!=""){
+
+					$('#data_' + id ).html(d.Prénom+" "+d.Nom).appendTo('#link_' + id + ' .deco');
+
+				
+			}
+		})
+	}
+	
+	function comp(id){
+		var dicton = "Très fort en ";
+		var texte = "";
+		var obj = "";
+		//chercher les data
+		dataEtu.forEach(function(d){
+			if(d.idPhoto==id && d.idPhoto!=""){
+
+				j = 0;
+				dicton = d.Prénom + " connaît bien ";
+			
+				for(i = 2 ; i <= 53 ; i++){
+
+					     if(i == 2){obj = "Outils graphiques [Photoshop]"; texte="Photoshop, ";}
+					else if(i == 3){obj = "Outils graphiques [Illustrator]"; texte="Illustrator, ";}
+					else if(i == 4){obj = "Outils graphiques [IN Design]"; texte="IN Design, ";}
+					else if(i == 5){obj = "Outils graphiques [GIMP]"; texte="GIMP, ";}
+					else if(i == 6){obj = "Outils graphiques [Flash]"; texte="Flash, ";}
+					else if(i == 7){obj = "Outils graphiques [Final Cut Pro]"; texte="Final Cut Pro, ";}
+					else if(i == 8){obj = "Langages informatiques [Zend]"; texte="Zend, ";}
+					else if(i == 9){obj = "Langages informatiques [XML]"; texte="XML, ";}
+					else if(i == 10){obj = "Langages informatiques [Symphony]"; texte="Symphony, ";}
+					else if(i == 11){obj = "Langages informatiques [HTML]"; texte="HTML, ";}
+					else if(i == 12){obj = "Langages informatiques [CSS]"; texte="CSS, ";}
+					else if(i == 13){obj = "Langages informatiques [PHP]"; texte="PHP, ";}
+					else if(i == 14){obj = "Langages informatiques [SQL]"; texte="SQL, ";}
+					else if(i == 15){obj = "Langages informatiques [Javascript]"; texte="Javascript, ";}
+					else if(i == 16){obj = "Langages informatiques [JQuery]"; texte="JQuery, ";}
+					else if(i == 17){obj = "Langages informatiques [AJAX]"; texte="AJAX (pas la lessive...), ";}
+					else if(i == 18){obj = "Langages informatiques [Bootstrap]"; texte="Bootstrap, ";}
+					else if(i == 19){obj = "Langages informatiques [Android]"; texte="Android, ";}
+					else if(i == 20){obj = "Langages informatiques [Objective-C]"; texte="Objective-C, ";}
+					else if(i == 21){obj = "Langages informatiques [JSON]"; texte="JSON, ";}
+					else if(i == 22){obj = "Langages informatiques [OWL]"; texte="OWL, ";}
+					else if(i == 23){obj = "Langages informatiques [SCALA]"; texte="SCALA, ";}
+					else if(i == 24){obj = "Langages informatiques [SASS]"; texte="SASS, ";}
+					else if(i == 25){obj = "Langages informatiques [SVG]"; texte="SVG, ";}
+					else if(i == 26){obj = "Langages informatiques [JAVA]"; texte="JAVA, ";}
+					else if(i == 27){obj = "Langages informatiques [D3]"; texte="D3, ";}
+					else if(i == 28){obj = "Langages informatiques [Cordova]"; texte="Cordova, ";}
+					else if(i == 29){obj = "Langages informatiques [COMPASS]"; texte="COMPASS, ";}
+					else if(i == 30){obj = "Langages informatiques [Action script]"; texte="Action script, ";}
+					else if(i == 31){obj = "Langages informatiques [.NET]"; texte=".NET, ";}
+					else if(i == 32){obj = "CMS [Wordpress]"; texte="Wordpress, ";}
+					else if(i == 33){obj = "CMS [SQL]"; texte="SQL, ";}
+					else if(i == 34){obj = "CMS [SPIP]"; texte="SPIP, ";}
+					else if(i == 35){obj = "CMS [SASS]"; texte="SASS, ";}
+					else if(i == 36){obj = "CMS [Prestashop]"; texte="Prestashop, ";}
+					else if(i == 37){obj = "CMS [Objective-C]"; texte="Objective-C, ";}
+					else if(i == 38){obj = "CMS [Magento]"; texte="Magento, ";}
+					else if(i == 39){obj = "CMS [Joomla]"; texte="Joomla, ";}
+					else if(i == 40){obj = "CMS [JSON]"; texte="JSON, ";}
+					else if(i == 41){obj = "CMS [Drupal]"; texte="Drupal, ";}
+					else if(i == 42){obj = "Outils graphiques [Cinéma 4D]"; texte="Cinéma 4D, ";}
+					else if(i == 43){obj = "Outils graphiques [Bridge]"; texte="Bridge, ";}
+					else if(i == 44){obj = "Outils graphiques [Blender]"; texte="Blender, ";}
+					else if(i == 45){obj = "Outils graphiques [After Effect]"; texte="After Effect, ";}
+					else if(i == 46){obj = "Outils graphiques [3DS MAX]"; texte="3DS MAX, ";}
+					else if(i == 47){obj = "Outils graphiques [Première]"; texte="Première, ";}
+					else if(i == 48){obj = "Outils graphiques [Paint]"; texte="Paint, ";}
+					else if(i == 49){obj = "Outils graphiques [Maya]"; texte="Maya, ";}
+					else if(i == 50){obj = "Outils graphiques [Inkscape]"; texte="Inkscape, ";}
+					else if(i == 51){obj = "aaaaaa"; texte="aaaaa, ";}
+					else if(i == 52){obj = "aaaaaa"; texte="aaaaa, ";}
+
+					if(j < 6 && d[obj] == "expert" || j < 6 && d[obj] == "trop bon" || j < 6 && d[obj] == "bon"){dicton += texte; j++;}
+				}
+				
+					dicton += "...";
+			
+					$(".bulle").fadeOut(2000);
+					$('#comp_' + id ).html(dicton);
+					//$('#comp_' + id ).css("display", "block");
+					$('#comp_' + id ).fadeIn(2000);
+				
+			}
+		})
+	}
+
+	
+	/*function prenoms(){
+		var nbrPerso = $(".items").length;
+		alert(nbrPerso);
+		for(i = 0 ; i < nbrPerso ; i++)
+		{
+			dataEtu.forEach(function(d){
+				if(d.idPhoto==i && d.idPhoto!=""){
+					$('<div class="data" id="data_' + i + '"></div>').html(d.Prénom+" "+d.Nom).appendTo('#link_' + i + ' .deco');
+					
+				}
+			})
+		}
+	}*/
+</script>
+</head>
+<body>
+
+<div class="header">
+	<h1 class="centre">Les CDNL sont dans le Cloud !</h1>
+</div>
+<div class="conteneur">
+	<div id="Div_XML">
+	</div>
+</div>
+<div class="clear"></div>
+<div class="footer">
+	<p id="nombre" class="centre"></p>
+	<br/>
+	<p class="centre">Trombi de Ghislain</p>
+</div>
+</body>
+</html>
