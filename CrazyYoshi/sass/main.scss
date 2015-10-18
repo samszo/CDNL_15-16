@@ -2,65 +2,87 @@
 @import "compass/support";
 @import "compass/css3";
 @import "utilities/variables";
-@import "utilities/material-color";
-
-
 //NAVIGATION
-body{
+body {
     @include display-flex();
     @include flex-direction(column);
     @include align-items(center);
-    background-color: $clr-grey-900;
-
+    font-family: 'Avenir Next LT Pro Bold';
 }
 
-
-header{
-
-    background-color : $clr-grey-400;
+header {
     height: $header-h;
     width: $header-w;
-
+    z-index: 6;
+    @include maintone-deep();
 }
 
-nav{
-    width: $main-wid;
-    font-family: 'Avenir Next LT Pro Bold';
-    overflow: hidden;
-    margin: 2vh 0;
-    ul {
-        @include display-flex();
-        @include flex-direction(row);
-        @include align-items(center);
-        @include justify-content(center);
-        @include flex-wrap(wrap);
-
-        background-color: $clr-red;
-        li {
-            padding: 20px;
-            text-align: center;
-            font-size: 1em;
-            transition: .2s;
-            &:hover {
-                cursor: pointer;
-                font-size: 1.7em;
-
-            }
-            text-transform: uppercase;
-
-        }
-    }
-}
-
-main{
+main {
     min-height: 30vh;
     width: $main-wid;
-
-    article{
-        figure{
-
+    @include display-flex();
+    @include flex-direction(row);
+    z-index: 10;
+    div#right-bloc {
+        width: $nav-w;
+        @include display-flex();
+        @include flex-direction(column);
+        @include flex-shrink(0);
+        ul {
+            width: $nav-w;
+            height: $nav-h;
+            @include maintone-clear();
+            @include display-flex();
+            @include flex-direction(row);
+            @include align-items(center);
+            @include justify-content(center);
+            @include flex-wrap(wrap);
+            z-index: 8;
+            li {
+                padding: 20px;
+                text-align: center;
+                font-size: 1em;
+                transition: .2s;
+                &:hover {
+                    cursor: pointer;
+                    @include white-deep();
+                }
+                text-transform: uppercase;
+            }
+        }
+        #content {
+            @include white();
+            height: $content-h;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            @include display-flex();
+            @include flex-direction(row);
+            @include flex-wrap(wrap);
+            @include align-items(center);
+            @include justify-content(space-around);
+            article {}
         }
     }
-
+    aside {
+        height: $aside-h;
+        width: $aside-w;
+        @include maintone();
+        @include flex-shrink(0);
+        z-index: 5;
+        div {
+            height: 5vh;
+            width: 100%;
+        }
+        ul {
+            width: 100%;
+            height: 100%;
+            li {
+                width: 100%;
+                padding: 2% 0 2% 0;
+                text-align: center;
+                border-top: dashed 3px $maintone-clear;
+                border-bottom: dashed 3px $maintone-clear;
+            }
+        }
+    }
 }
-

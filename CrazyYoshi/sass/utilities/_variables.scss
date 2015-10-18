@@ -1,20 +1,61 @@
-$main-wid : 80vw;
+/*Colors*/
 
-$header-h : 20vh;
-$header-w : $main-wid;
+$maintone: #ec7063;
+$maintone-clear: tint($maintone, 20);
+$maintone-deep: shade($maintone, 10);
+$white: #fdfefe;
+$white-deep:shade($white, 10);
+$white-clear:tint($white, 10);
 
-$nav-h : 5vh;
+/**/
 
-
-
-//colors
-
-
-
-@mixin insetShadow{
--moz-box-shadow: 0px 0px 10px 0px $shadow;
--webkit-box-shadow: 0px 0px 10px 0px $shadow;
--o-box-shadow: 0px 0px 10px 0px $shadow;
-box-shadow: 0px 0px 10px 0px $shadow;
-filter:progid:DXImageTransform.Microsoft.Shadow(color=$shadow, Direction=NaN, Strength=10);
+@mixin maintone() {
+    color: $white;
+    background-color: $maintone;
 }
+
+@mixin maintone-clear() {
+    color: $white;
+    background-color: $maintone-clear;
+}
+
+@mixin maintone-deep() {
+    color: $white;
+    background-color: $maintone-deep;
+}
+
+@mixin white() {
+    background-color: $white;
+    color: $maintone-deep;
+}
+
+@mixin white-deep() {
+    background-color: $white;
+    color: $maintone-deep;
+    border-bottom: 15px inset $maintone-deep;
+}
+
+
+/*Main properties*/
+
+$main-wid: 100vw;
+
+/*Header Properties*/
+
+$header-h: 12vh;
+$header-w: $main-wid;
+
+/*Aside properties*/
+
+$aside-h: 88vh;
+$aside-w: 20vw;
+
+/*nav properties*/
+
+$nav-h: 5vh;
+$nav-w: 80vw;
+
+/*content properties*/
+
+$content-h: 83vh;
+$content-w: 80vw;

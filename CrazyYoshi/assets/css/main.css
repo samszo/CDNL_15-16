@@ -1,4 +1,4 @@
-/* line 5, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,50 +20,57 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
 
-/* line 9, ../../sass/main.scss */
+/*Colors*/
+/**/
+/*Main properties*/
+/*Header Properties*/
+/*Aside properties*/
+/*nav properties*/
+/*content properties*/
+/* line 6, ../../sass/main.scss */
 body {
   display: -webkit-flex;
   display: flex;
@@ -71,25 +78,44 @@ body {
   flex-direction: column;
   -webkit-align-items: center;
   align-items: center;
-  background-color: #212121;
-}
-
-/* line 18, ../../sass/main.scss */
-header {
-  background-color: #bdbdbd;
-  height: 20vh;
-  width: 80vw;
-}
-
-/* line 26, ../../sass/main.scss */
-nav {
-  width: 80vw;
   font-family: 'Avenir Next LT Pro Bold';
-  overflow: hidden;
-  margin: 2vh 0;
+}
+
+/* line 13, ../../sass/main.scss */
+header {
+  height: 12vh;
+  width: 100vw;
+  z-index: 6;
+  color: #fdfefe;
+  background-color: #d46559;
+}
+
+/* line 20, ../../sass/main.scss */
+main {
+  min-height: 30vh;
+  width: 100vw;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  z-index: 10;
+}
+/* line 26, ../../sass/main.scss */
+main div#right-bloc {
+  width: 80vw;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
 }
 /* line 31, ../../sass/main.scss */
-nav ul {
+main div#right-bloc ul {
+  width: 80vw;
+  height: 5vh;
+  color: #fdfefe;
+  background-color: #f08d82;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -100,24 +126,66 @@ nav ul {
   justify-content: center;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  background-color: #f44336;
+  z-index: 8;
 }
-/* line 39, ../../sass/main.scss */
-nav ul li {
+/* line 41, ../../sass/main.scss */
+main div#right-bloc ul li {
   padding: 20px;
   text-align: center;
   font-size: 1em;
   transition: .2s;
   text-transform: uppercase;
 }
-/* line 44, ../../sass/main.scss */
-nav ul li:hover {
+/* line 46, ../../sass/main.scss */
+main div#right-bloc ul li:hover {
   cursor: pointer;
-  font-size: 1.7em;
+  background-color: #fdfefe;
+  color: #d46559;
+  border-bottom: 15px inset #d46559;
 }
-
-/* line 55, ../../sass/main.scss */
-main {
-  min-height: 30vh;
-  width: 80vw;
+/* line 53, ../../sass/main.scss */
+main div#right-bloc #content {
+  background-color: #fdfefe;
+  color: #d46559;
+  height: 83vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+/* line 66, ../../sass/main.scss */
+main aside {
+  height: 88vh;
+  width: 20vw;
+  color: #fdfefe;
+  background-color: #ec7063;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  z-index: 5;
+}
+/* line 72, ../../sass/main.scss */
+main aside div {
+  height: 5vh;
+  width: 100%;
+}
+/* line 76, ../../sass/main.scss */
+main aside ul {
+  width: 100%;
+  height: 100%;
+}
+/* line 79, ../../sass/main.scss */
+main aside ul li {
+  width: 100%;
+  padding: 2% 0 2% 0;
+  text-align: center;
+  border-top: dashed 3px #f08d82;
+  border-bottom: dashed 3px #f08d82;
 }
