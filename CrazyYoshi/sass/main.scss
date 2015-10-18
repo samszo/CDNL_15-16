@@ -1,1 +1,66 @@
 @import "compass/reset";
+@import "compass/support";
+@import "compass/css3";
+@import "utilities/variables";
+@import "utilities/material-color";
+
+
+//NAVIGATION
+body{
+    @include display-flex();
+    @include flex-direction(column);
+    @include align-items(center);
+    background-color: $clr-grey-900;
+
+}
+
+
+header{
+
+    background-color : $clr-grey-400;
+    height: $header-h;
+    width: $header-w;
+
+}
+
+nav{
+    width: $main-wid;
+    font-family: 'Avenir Next LT Pro Bold';
+    overflow: hidden;
+    margin: 2vh 0;
+    ul {
+        @include display-flex();
+        @include flex-direction(row);
+        @include align-items(center);
+        @include justify-content(center);
+        @include flex-wrap(wrap);
+
+        background-color: $clr-red;
+        li {
+            padding: 20px;
+            text-align: center;
+            font-size: 1em;
+            transition: .2s;
+            &:hover {
+                cursor: pointer;
+                font-size: 1.7em;
+
+            }
+            text-transform: uppercase;
+
+        }
+    }
+}
+
+main{
+    min-height: 30vh;
+    width: $main-wid;
+
+    article{
+        figure{
+
+        }
+    }
+
+}
+

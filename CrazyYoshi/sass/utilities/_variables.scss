@@ -1,0 +1,20 @@
+$main-wid : 80vw;
+
+$header-h : 20vh;
+$header-w : $main-wid;
+
+$nav-h : 5vh;
+
+
+
+//colors
+
+
+
+@mixin insetShadow{
+-moz-box-shadow: 0px 0px 10px 0px $shadow;
+-webkit-box-shadow: 0px 0px 10px 0px $shadow;
+-o-box-shadow: 0px 0px 10px 0px $shadow;
+box-shadow: 0px 0px 10px 0px $shadow;
+filter:progid:DXImageTransform.Microsoft.Shadow(color=$shadow, Direction=NaN, Strength=10);
+}
