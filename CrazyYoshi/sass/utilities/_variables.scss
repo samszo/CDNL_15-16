@@ -29,9 +29,15 @@ $white-clear:tint($white, 10);
     color: $maintone-deep;
 }
 
-@mixin white-deep() {
+@mixin white-hover() {
     background-color: $white;
     color: $maintone-deep;
+    border-bottom: 15px inset $maintone-deep;
+}
+
+@mixin maintone-deep-hover() {
+    background-color: $maintone-clear;
+    color: $white;
     border-bottom: 15px inset $maintone-deep;
 }
 
