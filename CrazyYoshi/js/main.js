@@ -1,8 +1,6 @@
 var dataEtu;
 var xmlDoc;
 var photos = new Array();
-var content = "";
-var aside = "";
 var nav = "";
 
 $(document).ready(
@@ -51,17 +49,19 @@ var getDatas = function () {
                             img: photos[d.idPhoto]['img'],
                             data: d
                         };
-                        console.log(photos[d.idPhoto]);
                     }
                 });
-            photos.forEach(
-                function (e) {
-                    content += setArticle(e);
-                    aside += setAside(e);
+
+
+            displayAll();
+
+            if (typeof localStorage !== "undefined") {
+                for (var e in photos) {
+                    photos[e] = sortData(photos[e]);
                 }
-            );
-            $('#content').html(content);
-            $('aside > ul').html(aside);
+                localStorage.setItem("data", JSON.stringify(photos));
+            }
+
         });
 
 }
@@ -72,8 +72,8 @@ var setArticle = function (arr) {
     var item;
     item = "<article>";
     item += "    <figure>";
-    item += "        <div style=\"background-image :url('" + arr['img'] + "')\" ></div>";
-    item += "        <figcaption>" + arr['data']['Nom'] + " " + arr['data']['Prénom'] + "</figcaption>";
+    item += "        <div id='" + arr['data']['idPhoto'] + "' style=\"background-image :url('" + arr['img'] + "')\" ></div>";
+    item += "        <figcaption id='" + arr['data']['idPhoto'] + "'>" + arr['data']['Nom'] + " " + arr['data']['Prénom'] + "</figcaption>";
     item += "        <p><a href='https://github.com/" + arr['data']['login Github'] + "' target='_blank'>Profil Github</a>";
     item += "        <a href='https://www.diigo.com/user/" + arr['data']['login Diigo'] + "' target='_blank'>Profil Diigo</a></p>";
     item += "    </figure>";
@@ -83,8 +83,57 @@ var setArticle = function (arr) {
 
 var setAside = function (arr) {
     var item;
-    item = "<li>";
+    item = "<li id='" + arr['data']['idPhoto'] + "'>";
     item += arr['data']['Nom'] + " " + arr['data']['Prénom'];
     item += "</li>";
     return item;
+}
+
+var displayAll = function () {
+    var content = "";
+    var aside = "";
+    photos.forEach(
+        function (e) {
+            content += setArticle(e);
+            aside += setAside(e);
+        }
+    );
+    $('#content').html(content);
+    $('aside > ul').html(aside);
+    $("aside li, figure figcaption, figure div").click(function () {
+        displayCharts($(this));
+    });
+}
+
+var sortData = function (data) {
+
+    var student = data;
+
+    for (var index in student['data']) {
+
+        switch (student['data'][index]) {
+        case 'expert':
+            student['data'][index] = 100;
+            break;
+        case "trop bon":
+            student['data'][index] = 75;
+            break;
+        case 'bon':
+            student['data'][index] = 50;
+            break;
+        case "moins nul":
+            student['data'][index] = 25;
+            break;
+        case "nul":
+            student['data'][index] = 0;
+            break;
+        }
+    }
+    return student;
+}
+
+var displayCharts = function (thisItem) {
+    var id = thisItem.attr('id');
+    var photo = JSON.parse(localStorage.getItem('data'));
+    var student = photo[id];
 }
