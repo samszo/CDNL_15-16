@@ -1,7 +1,9 @@
 var dataEtu;
 var xmlDoc;
 var photos = new Array();
-var html = "";
+var content = "";
+var aside = "";
+var nav = "";
 
 $(document).ready(
     function () {
@@ -19,8 +21,10 @@ $(document).ready(
             var i = 0;
             $(data).find('enclosure').each(
                 function () {
-                    photos[i] = new Array();
-                    photos[i]['img'] = this.attributes[1].nodeValue;
+                    var image = this.attributes[1].nodeValue;
+                    photos[i] = {
+                        img: image
+                    };
                     i++;
                 }
             );
@@ -43,22 +47,44 @@ var getDatas = function () {
             xmlDoc.forEach(
                 function (d) {
                     if (d.idPhoto != "") {
-                        photos[d.idPhoto]['data'] = d;
+                        photos[d.idPhoto] = {
+                            img: photos[d.idPhoto]['img'],
+                            data: d
+                        };
+                        console.log(photos[d.idPhoto]);
                     }
                 });
             photos.forEach(
                 function (e) {
-                    var item = "";
-                    item = "<article>";
-                    item += "    <figure>";
-                    item += "        <div style=\"background-image :url('" + e['img'] + "')\" ></div>";
-                    item += "        <figcaption>" + e['data']['Nom'] + " " + e['data']['Prénom'] + "</figcaption>";
-                    item += "    </figure>";
-                    item += "</article>";
-                    html += item;
+                    content += setArticle(e);
+                    aside += setAside(e);
                 }
             );
-            $('#content').html(html);
+            $('#content').html(content);
+            $('aside > ul').html(aside);
         });
 
+}
+
+
+
+var setArticle = function (arr) {
+    var item;
+    item = "<article>";
+    item += "    <figure>";
+    item += "        <div style=\"background-image :url('" + arr['img'] + "')\" ></div>";
+    item += "        <figcaption>" + arr['data']['Nom'] + " " + arr['data']['Prénom'] + "</figcaption>";
+    item += "        <p><a href='https://github.com/" + arr['data']['login Github'] + "' target='_blank'>Profil Github</a>";
+    item += "        <a href='https://www.diigo.com/user/" + arr['data']['login Diigo'] + "' target='_blank'>Profil Diigo</a></p>";
+    item += "    </figure>";
+    item += "</article>";
+    return item;
+}
+
+var setAside = function (arr) {
+    var item;
+    item = "<li>";
+    item += arr['data']['Nom'] + " " + arr['data']['Prénom'];
+    item += "</li>";
+    return item;
 }
