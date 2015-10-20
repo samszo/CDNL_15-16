@@ -7,8 +7,8 @@
 						
 					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-			<script src="http://localhost/projects/CDNL_15-16/js/d3.v3.min.js" ></script>
-			<script src="js/bootstrap.min.js"></script>
+			<script src="../js/d3.v3.min.js" ></script>
+			<script src="../wumiolabisi/js/bootstrap.min.js"></script>
 			
 				<link href="css/bootstrap.min.css" rel="stylesheet">
 				
@@ -26,13 +26,13 @@
 		 $('#myCarousel').carousel({
     interval: false
 }) 	
-d3.csv("http://localhost/projects/CDNL_15-16/php/lecteurFlux.php?url=cdnl1516data", function(data) {
+d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
 			   dataEtu = data;
 			 });
 			 
 		   $.ajax( {
 		            type: "GET",
-		            url: "http://localhost/projects/CDNL_15-16/php/lecteurFlux.php?url=cdnl1516photo",
+		            url: "../php/lecteurFlux.php?url=cdnl1516photo",
 		           datatype: "xml",
 		            success: function(xml) 
 		                     {
@@ -350,16 +350,21 @@ switch(d['Langages informatiques [Android]']) {
 			
 		})
 		
-		$('<svg width="360" height="360"><g transform="translate(180,180)"><path d="M0,-180A..." fill="#393b79"></path><path d="M105.801..." fill="#5254a3"></path><path d="M171.190..." fill="#6b6ecf"></path><path d="M-105.80..." fill="#9c9ede"></path></g></svg>').appendTo('#chart');
+		$('<svg width="360" height="360"><g transform="translate(180,180)"><path d="M0,-180A..." fill="#393b79"></path><path d="M105.801..." fill="#5254a3"></path><path d="M171.190..." fill="#6b6ecf"></path><path d="M-105.80..." fill="#9c9ede"></path></g></svg>').appendTo('.data');
 		
 	}
 </script>
 </head>
 <body>
-
+<div class="container">
 <div id="myCarousel" class="carousel slide">
 
-  
+    <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+  </ol>
 
 
   <div class="carousel-inner" role="listbox" id="Div_XML">
@@ -368,14 +373,7 @@ switch(d['Langages informatiques [Android]']) {
     </div>
 
   </div>
-  
-   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-  </ol>
-
+   
   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Précédent</span>
@@ -386,6 +384,7 @@ switch(d['Langages informatiques [Android]']) {
   </a>
  
 </div>
-	
+</div>	
 </body>
+
 </html>
