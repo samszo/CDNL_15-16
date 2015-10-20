@@ -62,3 +62,209 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
+
+/*Colors*/
+/**/
+/*Main properties*/
+/*Header Properties*/
+/*Aside properties*/
+/*nav properties*/
+/*content properties*/
+/* line 6, ../../sass/main.scss */
+html,
+body {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  font-family: 'Avenir Next LT Pro Bold';
+  overflow: hidden;
+}
+
+/* line 15, ../../sass/main.scss */
+header {
+  height: 12vh;
+  width: 100vw;
+  z-index: 6;
+  color: #fdfefe;
+  background-color: #d46559;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  font-size: calc(12vh / 2);
+}
+
+/* line 26, ../../sass/main.scss */
+main {
+  min-height: 30vh;
+  width: 100vw;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  z-index: 10;
+}
+/* line 32, ../../sass/main.scss */
+main div#right-bloc {
+  width: 80vw;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+/* line 37, ../../sass/main.scss */
+main div#right-bloc ul {
+  width: 80vw;
+  height: 5vh;
+  color: #fdfefe;
+  background-color: #f08d82;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  z-index: 8;
+}
+/* line 47, ../../sass/main.scss */
+main div#right-bloc ul li {
+  padding: 20px;
+  text-align: center;
+  font-size: 1em;
+  font-family: 'Avenir Next LT Pro Bold';
+  transition: .2s;
+  text-transform: uppercase;
+}
+/* line 53, ../../sass/main.scss */
+main div#right-bloc ul li:hover {
+  cursor: pointer;
+  background-color: #fdfefe;
+  color: #d46559;
+  border-bottom: 15px inset #d46559;
+}
+/* line 60, ../../sass/main.scss */
+main div#right-bloc #content {
+  background-color: #fdfefe;
+  color: #d46559;
+  height: 83vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+/* line 72, ../../sass/main.scss */
+main div#right-bloc #content article figure div {
+  height: 250px;
+  width: 250px;
+  background-position: center 30%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../img/nophoto.jpg);
+  margin-bottom: 2%;
+}
+/* line 81, ../../sass/main.scss */
+main div#right-bloc #content article figure figcaption {
+  text-transform: capitalize;
+  text-align: center;
+  padding: 2% 0;
+}
+/* line 86, ../../sass/main.scss */
+main div#right-bloc #content article figure p {
+  width: 100%;
+  height: 30px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+/* line 94, ../../sass/main.scss */
+main div#right-bloc #content article figure p a {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  text-decoration: none;
+  width: 50%;
+  height: 100%;
+  color: #fdfefe;
+  background-color: #f08d82;
+  transition: .2s;
+}
+/* line 103, ../../sass/main.scss */
+main div#right-bloc #content article figure p a:hover {
+  background-color: #f08d82;
+  color: #fdfefe;
+  border-bottom: 15px inset #d46559;
+}
+/* line 112, ../../sass/main.scss */
+main aside {
+  height: 88vh;
+  width: 20vw;
+  color: #fdfefe;
+  background-color: #ec7063;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  z-index: 5;
+}
+/* line 118, ../../sass/main.scss */
+main aside div {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 5vh;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+}
+/* line 127, ../../sass/main.scss */
+main aside ul {
+  width: 100%;
+  height: 100%;
+}
+/* line 130, ../../sass/main.scss */
+main aside ul li {
+  text-transform: capitalize;
+  width: 100%;
+  padding: 3% 0;
+  text-align: center;
+  border-top: dashed 3px #f08d82;
+  border-bottom: dashed 3px #f08d82;
+  transition: .2s;
+}
+/* line 138, ../../sass/main.scss */
+main aside ul li:hover {
+  cursor: pointer;
+  background-color: #fdfefe;
+  color: #d46559;
+  border-bottom: 15px inset #d46559;
+}
