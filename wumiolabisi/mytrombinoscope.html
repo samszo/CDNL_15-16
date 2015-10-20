@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+					
+					<title>Trombinoscope</title>
+						
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+			<script src="http://localhost/projects/CDNL_15-16/js/d3.v3.min.js" ></script>
+			<script src="js/bootstrap.min.js"></script>
+			
+				<link href="css/bootstrap.min.css" rel="stylesheet">
+				
+				<link href="css/mystyle.css" rel="stylesheet">
+
+<h1 class="title1" align="center"><b>ETUDIANTS LP CDNL PARIS VIII - 2015/2016</b></h2>
+<script>
+	var dataEtu; 
+
+
+	$(document).ready(  
+		 function()
+		 {
+		 
+		 $('#myCarousel').carousel({
+    interval: false
+}) 	
+d3.csv("http://localhost/projects/CDNL_15-16/php/lecteurFlux.php?url=cdnl1516data", function(data) {
+			   dataEtu = data;
+			 });
+			 
+		   $.ajax( {
+		            type: "GET",
+		            url: "http://localhost/projects/CDNL_15-16/php/lecteurFlux.php?url=cdnl1516photo",
+		           datatype: "xml",
+		            success: function(xml) 
+		                     {
+							   console.log("ok");
+							   
+		            			var i=0;
+		                       $(xml).find('enclosure').each(  
+		                         function()
+		                         {
+								 
+		                            $('<div class="items item" align="center" id="link_' + i + '"></div>').html('<img onclick="voirData(' + i + ')" src="' + this.attributes[1].nodeValue + '" />').appendTo('#Div_XML');
+			                       i++;
+		                          });
+		                      },
+					error : function(){
+                             console.log("Oh error");
+                         }
+		        });
+		   		   		   
+		  }
+		);
+	
+	function voirData(id){
+		//chercher les data
+		
+		dataEtu.forEach(function(d){
+			if(d.idPhoto==id && d.idPhoto!=""){
+$('<div class="data" id="chart"><ul class="list-group"><li class="list-group-item">Nom : '+ d.Nom +'</li><li class="list-group-item">Prénom : '+ d['Prénom'] +'</li><li class="list-group-item">Mail : '+ d.mail +'</li><li class="list-group-item">Login GitHub : '+ d['login Github'] +'</li><li class="list-group-item">Login Diigo : '+ d['login Diigo']+'</li></ul></div>').appendTo('#link_'+ id);
+
+
+$('<div id="legendjavascript">Javascript</div>').appendTo('#chart');
+$('<div id="legendcss">CSS</div>').appendTo('#chart');
+
+
+switch(d['Langages informatiques [Javascript]']) {
+    case "nul":
+        varjavascript = 10;
+        break;
+    case "moins nul":
+        varjavascript = 30;
+        break;
+    case "bon":
+        varjavascript = 50;
+        break;
+	case "trop bon":
+        varjavascript = 70;
+        break;
+	case "expert":
+        varjavascript = 90;
+        break;
+}
+
+switch(d['Langages informatiques [CSS]']) {
+    case "nul":
+        varcss = 10;
+        break;
+    case "moins nul":
+        varcss = 30;
+        break;
+    case "bon":
+        varcss = 50;
+        break;
+	case "trop bon":
+        varcss = 70;
+        break;
+	case "expert":
+        varcss = 90;
+        break;
+}
+
+switch(d['Langages informatiques [HTML]']) {
+    case "nul":
+        varhtml = 10;
+        break;
+    case "moins nul":
+        varhtml = 30;
+        break;
+    case "bon":
+        varhtml = 50;
+        break;
+	case "trop bon":
+        varhtml = 70;
+        break;
+	case "expert":
+        varhtml = 90;
+        break;
+}
+
+switch(d['Langages informatiques [PHP]']) {
+    case "nul":
+        varphp = 10;
+        break;
+    case "moins nul":
+        varphp = 30;
+        break;
+    case "bon":
+        varphp = 50;
+        break;
+	case "trop bon":
+        varphp = 70;
+        break;
+	case "expert":
+        varphp = 90;
+        break;
+}
+
+switch(d['Langages informatiques [SVG]']) {
+    case "nul":
+        varsvg = 10;
+        break;
+    case "moins nul":
+        varsvg = 30;
+        break;
+    case "bon":
+        varsvg = 50;
+        break;
+	case "trop bon":
+        varsvg = 70;
+        break;
+	case "expert":
+        varsvg = 90;
+        break;
+}
+
+switch(d['Langages informatiques [OWL]']) {
+    case "nul":
+        varowl = 10;
+        break;
+    case "moins nul":
+        varowl = 30;
+        break;
+    case "bon":
+        varowl = 50;
+        break;
+	case "trop bon":
+        varowl = 70;
+        break;
+	case "expert":
+        varowl = 90;
+        break;
+}
+switch(d['Langages informatiques [JAVA]']) {
+    case "nul":
+        varjava = 10;
+        break;
+    case "moins nul":
+        varjava = 30;
+        break;
+    case "bon":
+        varjava = 50;
+        break;
+	case "trop bon":
+        varjava = 70;
+        break;
+	case "expert":
+        varjava = 90;
+        break;
+}
+switch(d['Langages informatiques [XML]']) {
+    case "nul":
+        varxml = 10;
+        break;
+    case "moins nul":
+        varxml = 30;
+        break;
+    case "bon":
+        varxml = 50;
+        break;
+	case "trop bon":
+        varxml = 70;
+        break;
+	case "expert":
+        varxml = 90;
+        break;
+}
+switch(d['Langages informatiques [SCALA]']) {
+    case "nul":
+        varscala = 10;
+        break;
+    case "moins nul":
+        varscala = 30;
+        break;
+    case "bon":
+        varscala = 50;
+        break;
+	case "trop bon":
+        varscala = 70;
+        break;
+	case "expert":
+        varscala = 90;
+        break;
+}
+switch(d['Langages informatiques [.NET]']) {
+    case "nul":
+        varnet = 10;
+        break;
+    case "moins nul":
+        varnet = 30;
+        break;
+    case "bon":
+        varnet = 50;
+        break;
+	case "trop bon":
+        varnet = 70;
+        break;
+	case "expert":
+        varnet = 90;
+        break;
+}
+
+switch(d['Langages informatiques [JSON]']) {
+    case "nul":
+        varjson = 10;
+        break;
+    case "moins nul":
+        varjson = 30;
+        break;
+    case "bon":
+        varjson = 50;
+        break;
+	case "trop bon":
+        varjson = 70;
+        break;
+	case "expert":
+        varjson = 90;
+        break;
+}
+
+switch(d['Langages informatiques [Objective-C]']) {
+    case "nul":
+        varobjectivec = 10;
+        break;
+    case "moins nul":
+        varobjectivec = 30;
+        break;
+    case "bon":
+        varobjectivec = 50;
+        break;
+	case "trop bon":
+        varobjectivec = 70;
+        break;
+	case "expert":
+        varobjectivec = 90;
+        break;
+}
+
+switch(d['Langages informatiques [Android]']) {
+    case "nul":
+        varandroid = 10;
+        break;
+    case "moins nul":
+        varandroid = 30;
+        break;
+    case "bon":
+        varandroid = 50;
+        break;
+	case "trop bon":
+        varandroid = 70;
+        break;
+	case "expert":
+        varandroid = 90;
+        break;
+}
+
+        'use strict';
+
+        var dataset = [
+          { label: 'Javascript', count: varjavascript }, 
+          { label: 'CSS', count: varcss },
+          { label: 'HTML', count: varhtml },
+          { label: 'PHP', count: varphp },
+		  { label: 'SVG',count: varsvg},
+		  { label: 'OWL',count: varowl},
+		  { label: 'JAVA',count: varjava},
+		  { label: 'XML',count: varxml},
+		  { label: 'SCALA',count: varscala},
+		  { label: 'NET',count: varnet},
+		  { label: 'JSON',count: varjson},
+		  { label: 'OBJECTIVEC',count: varobjectivec},
+		  { label: 'ANDROID',count: varandroid}
+		  ];
+
+        var width = 360;
+        var height = 360;
+        var radius = Math.min(width, height) / 2;
+
+        var color = d3.scale.category20b();
+
+        var svg = d3.select('#chart')
+          .append('svg')
+          .attr('width', width)
+          .attr('height', height)
+          .append('g')
+          .attr('transform', 'translate(' + (width / 2) + 
+            ',' + (height / 2) + ')');
+
+        var arc = d3.svg.arc()
+          .outerRadius(radius);
+
+        var pie = d3.layout.pie()
+          .value(function(d) { return d.count; })
+          .sort(null);
+
+        var path = svg.selectAll('path')
+          .data(pie(dataset))
+          .enter()
+          .append('path')
+          .attr('d', arc)
+          .attr('fill', function(d, i) { 
+            return color(d.data.label);
+          });
+
+
+			}
+			
+		})
+		
+		$('<svg width="360" height="360"><g transform="translate(180,180)"><path d="M0,-180A..." fill="#393b79"></path><path d="M105.801..." fill="#5254a3"></path><path d="M171.190..." fill="#6b6ecf"></path><path d="M-105.80..." fill="#9c9ede"></path></g></svg>').appendTo('#chart');
+		
+	}
+</script>
+</head>
+<body>
+
+<div id="myCarousel" class="carousel slide">
+
+  
+
+
+  <div class="carousel-inner" role="listbox" id="Div_XML">
+    <div class="item active" align="center">
+      <img src="img/logo.png" alt="Chania">
+    </div>
+
+  </div>
+  
+   <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+  </ol>
+
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Précédent</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Suivant</span>
+  </a>
+ 
+</div>
+	
+</body>
+</html>

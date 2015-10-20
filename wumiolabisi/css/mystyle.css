@@ -1,0 +1,48 @@
+.data{
+
+	height:400px;
+    width:400px;
+	margin:auto;
+	padding:10px;
+
+}
+
+body
+{
+    background-color:#FFE4B5;
+    color:#BC8F8F;
+	font-family: Tahoma; 
+}
+
+ .title1{
+  	font-family: segoe script; 
+
+  padding:20px;
+  margin:30px;
+ text-shadow: 2px 2px #8B4513;
+ }
+ 
+ 
+
+ #chart{
+ 
+ margin:10px;
+ 
+ }
+#legendjavascript{
+  background-color: #FFFF00;
+width:50px;
+font: 10px tahoma;
+margin:5px;
+}
+
+#legendcss{
+  background-color: #FFFF00;
+width:50px;
+font: 10px tahoma;
+margin:5px;
+
+}
+
+
+
