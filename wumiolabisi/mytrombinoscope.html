@@ -14,7 +14,7 @@
 				
 				<link href="css/mystyle.css" rel="stylesheet">
 
-<h1 class="title1" align="center"><b>ETUDIANTS LP CDNL PARIS VIII - 2015/2016</b></h2>
+<h1 class="title1" align="center"><b>ETUDIANTS LP CDNL - 2015/2016</b></h2>
 <script>
 	var dataEtu; 
 
@@ -43,7 +43,7 @@ d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
 		                         function()
 		                         {
 								 
-		                            $('<div class="items item" align="center" id="link_' + i + '"></div>').html('<img onclick="voirData(' + i + ')" src="' + this.attributes[1].nodeValue + '" />').appendTo('#Div_XML');
+		                            $('<div class="items item" align="center" id="link_' + i + '"></div>').html('<a href="#link_' + i + '"><img onclick="voirData(' + i + ')" src="' + this.attributes[1].nodeValue + '" /></a>').appendTo('#Div_XML');
 			                       i++;
 		                          });
 		                      },
@@ -60,319 +60,264 @@ d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
 		
 		dataEtu.forEach(function(d){
 			if(d.idPhoto==id && d.idPhoto!=""){
-$('<div class="data" id="chart"><ul class="list-group"><li class="list-group-item">Nom : '+ d.Nom +'</li><li class="list-group-item">Prénom : '+ d['Prénom'] +'</li><li class="list-group-item">Mail : '+ d.mail +'</li><li class="list-group-item">Login GitHub : '+ d['login Github'] +'</li><li class="list-group-item">Login Diigo : '+ d['login Diigo']+'</li></ul></div>').appendTo('#link_'+ id);
-
-
-$('<div id="legendjavascript">Javascript</div>').appendTo('#chart');
-$('<div id="legendcss">CSS</div>').appendTo('#chart');
+			
+			
+$('<div class="data" id="chart"><h3>Infos : </h3><ul class="list-group"><li class="list-group-item"><b>Nom</b> : '+ d.Nom +'</li><li class="list-group-item"><b>Prénom</b> : '+ d['Prénom'] +'</li><li class="list-group-item"><b>Mail</b> : '+ d.mail +'</li><li class="list-group-item"><b>Login GitHub</b> : '+ d['login Github'] +'</li><li class="list-group-item"><b>Login Diigo</b> : '+ d['login Diigo']+'</li><li class="list-group-item"><b>LinkedIn</b> : '+ d['page linkedin']+'</li><li class="list-group-item"><b>Login Twitter</b> : '+ d['login twitter']+'</li><li class="list-group-item"><b>Compte Viadeo</b> : '+ d['compte viadeo']+'</li></ul></div>').appendTo('#link_'+ id);
 
 
 switch(d['Langages informatiques [Javascript]']) {
     case "nul":
-        varjavascript = 10;
+        varjavascript = "nulle";
         break;
     case "moins nul":
-        varjavascript = 30;
+        varjavascript = "moinsnul";
         break;
     case "bon":
-        varjavascript = 50;
+        varjavascript = "bon";
         break;
 	case "trop bon":
-        varjavascript = 70;
+        varjavascript = "tropbon";
         break;
 	case "expert":
-        varjavascript = 90;
+        varjavascript = "expert";
         break;
 }
 
 switch(d['Langages informatiques [CSS]']) {
     case "nul":
-        varcss = 10;
+        varcss = "nulle";
         break;
     case "moins nul":
-        varcss = 30;
+        varcss = "moinsnul";
         break;
     case "bon":
-        varcss = 50;
+        varcss = "bon";
         break;
 	case "trop bon":
-        varcss = 70;
+        varcss = "tropbon";
         break;
 	case "expert":
-        varcss = 90;
+        varcss = "expert";
         break;
 }
 
 switch(d['Langages informatiques [HTML]']) {
     case "nul":
-        varhtml = 10;
+        varhtml = "nulle";
         break;
     case "moins nul":
-        varhtml = 30;
+        varhtml = "moinsnul";
         break;
     case "bon":
-        varhtml = 50;
+        varhtml = "bon";
         break;
 	case "trop bon":
-        varhtml = 70;
+        varhtml = "tropbon";
         break;
 	case "expert":
-        varhtml = 90;
+        varhtml = "expert";
         break;
 }
 
 switch(d['Langages informatiques [PHP]']) {
     case "nul":
-        varphp = 10;
+        varphp = "nulle";
         break;
     case "moins nul":
-        varphp = 30;
+        varphp = "moinsnul";
         break;
     case "bon":
-        varphp = 50;
+        varphp = "bon";
         break;
 	case "trop bon":
-        varphp = 70;
+        varphp = "tropbon";
         break;
 	case "expert":
-        varphp = 90;
+        varphp = "expert";
         break;
 }
 
 switch(d['Langages informatiques [SVG]']) {
     case "nul":
-        varsvg = 10;
+        varsvg = "nulle";
         break;
     case "moins nul":
-        varsvg = 30;
+        varsvg = "moinsnul";
         break;
     case "bon":
-        varsvg = 50;
+        varsvg = "bon";
         break;
 	case "trop bon":
-        varsvg = 70;
+        varsvg = "tropbon";
         break;
 	case "expert":
-        varsvg = 90;
+        varsvg = "expert";
         break;
 }
 
 switch(d['Langages informatiques [OWL]']) {
     case "nul":
-        varowl = 10;
+        varowl = "nulle";
         break;
     case "moins nul":
-        varowl = 30;
+        varowl = "moinsnul";
         break;
     case "bon":
-        varowl = 50;
+        varowl = "bon";
         break;
 	case "trop bon":
-        varowl = 70;
+        varowl = "tropbon";
         break;
 	case "expert":
-        varowl = 90;
+        varowl = "expert";
         break;
 }
 switch(d['Langages informatiques [JAVA]']) {
     case "nul":
-        varjava = 10;
+        varjava = "nulle";
         break;
     case "moins nul":
-        varjava = 30;
+        varjava = "moinsnul";
         break;
     case "bon":
-        varjava = 50;
+        varjava = "bon";
         break;
 	case "trop bon":
-        varjava = 70;
+        varjava = "tropbon";
         break;
 	case "expert":
-        varjava = 90;
+        varjava = "expert";
         break;
 }
 switch(d['Langages informatiques [XML]']) {
     case "nul":
-        varxml = 10;
+        varxml = "nulle";
         break;
     case "moins nul":
-        varxml = 30;
+        varxml = "moinsnul";
         break;
     case "bon":
-        varxml = 50;
+        varxml = "bon";
         break;
 	case "trop bon":
-        varxml = 70;
+        varxml = "tropbon";
         break;
 	case "expert":
-        varxml = 90;
+        varxml = "expert";
         break;
 }
 switch(d['Langages informatiques [SCALA]']) {
     case "nul":
-        varscala = 10;
+        varscala = "nulle";
         break;
     case "moins nul":
-        varscala = 30;
+        varscala = "moinsnul";
         break;
     case "bon":
-        varscala = 50;
+        varscala = "bon";
         break;
 	case "trop bon":
-        varscala = 70;
+        varscala = "tropbon";
         break;
 	case "expert":
-        varscala = 90;
+        varscala = "expert";
         break;
 }
 switch(d['Langages informatiques [.NET]']) {
     case "nul":
-        varnet = 10;
+        varnet = "nulle";
         break;
     case "moins nul":
-        varnet = 30;
+        varnet = "moinsnul";
         break;
     case "bon":
-        varnet = 50;
+        varnet = "bon";
         break;
 	case "trop bon":
-        varnet = 70;
+        varnet = "tropbon";
         break;
 	case "expert":
-        varnet = 90;
+        varnet = "expert";
         break;
 }
 
 switch(d['Langages informatiques [JSON]']) {
     case "nul":
-        varjson = 10;
+        varjson = "nulle";
         break;
     case "moins nul":
-        varjson = 30;
+        varjson = "moinsnul";
         break;
     case "bon":
-        varjson = 50;
+        varjson = "bon";
         break;
 	case "trop bon":
-        varjson = 70;
+        varjson = "tropbon";
         break;
 	case "expert":
-        varjson = 90;
+        varjson = "expert";
         break;
 }
 
 switch(d['Langages informatiques [Objective-C]']) {
     case "nul":
-        varobjectivec = 10;
+        varobjectivec = "nulle";
         break;
     case "moins nul":
-        varobjectivec = 30;
+        varobjectivec = "moinsnul";
         break;
     case "bon":
-        varobjectivec = 50;
+        varobjectivec = "bon";
         break;
 	case "trop bon":
-        varobjectivec = 70;
+        varobjectivec = "tropbon";
         break;
 	case "expert":
-        varobjectivec = 90;
+        varobjectivec = "expert";
         break;
 }
 
 switch(d['Langages informatiques [Android]']) {
     case "nul":
-        varandroid = 10;
+        varandroid = "nulle";
         break;
     case "moins nul":
-        varandroid = 30;
+        varandroid = "moinsnul";
         break;
     case "bon":
-        varandroid = 50;
+        varandroid = "bon";
         break;
 	case "trop bon":
-        varandroid = 70;
+        varandroid = "tropbon";
         break;
 	case "expert":
-        varandroid = 90;
+        varandroid = "expert";
         break;
 }
 
-        'use strict';
+$('<h3>Langages Informatiques : </h3><ul class="list-group"><li class="list-group-item"> <b>JAVASCRIPT</b> : <img class="icon" src="img/'+ varjavascript +'.png"/></li><li class="list-group-item"> <b>CSS</b> : <img class="icon" src="img/'+ varcss +'.png"/></li><li class="list-group-item"> <b>HTML</b> : <img class="icon" src="img/'+ varhtml +'.png"/></li><li class="list-group-item"> <b>PHP</b> : <img class="icon" src="img/'+ varphp +'.png"/></li><li class="list-group-item"> <b>JAVA</b> : <img class="icon" src="img/'+ varjava +'.png"/></li><li class="list-group-item"> <b>XML</b> : <img class="icon" src="img/'+ varxml +'.png"/></li><li class="list-group-item"> <b>SCALA</b> : <img class="icon" src="img/'+ varscala +'.png"/></li><li class="list-group-item"> <b>OWL</b> : <img class="icon" src="img/'+ varowl +'.png"/></li><li class="list-group-item"> <b>SVG</b> : <img class="icon" src="img/'+ varsvg +'.png"/></li><li class="list-group-item"> <b>.NET</b> : <img class="icon" src="img/'+ varnet +'.png"/></li><li class="list-group-item"> <b>JSON</b> : <img class="icon" src="img/'+ varjson +'.png"/></li><li class="list-group-item"> <b>OBJECTIVE-C</b> : <img class="icon" src="img/'+ varobjectivec +'.png"/></li><li class="list-group-item"> <b>ANDROID</b> : <img class="icon" src="img/'+ varandroid +'.png"/></li></ul>').appendTo('.data');
 
-        var dataset = [
-          { label: 'Javascript', count: varjavascript }, 
-          { label: 'CSS', count: varcss },
-          { label: 'HTML', count: varhtml },
-          { label: 'PHP', count: varphp },
-		  { label: 'SVG',count: varsvg},
-		  { label: 'OWL',count: varowl},
-		  { label: 'JAVA',count: varjava},
-		  { label: 'XML',count: varxml},
-		  { label: 'SCALA',count: varscala},
-		  { label: 'NET',count: varnet},
-		  { label: 'JSON',count: varjson},
-		  { label: 'OBJECTIVEC',count: varobjectivec},
-		  { label: 'ANDROID',count: varandroid}
-		  ];
-
-        var width = 360;
-        var height = 360;
-        var radius = Math.min(width, height) / 2;
-
-        var color = d3.scale.category20b();
-
-        var svg = d3.select('#chart')
-          .append('svg')
-          .attr('width', width)
-          .attr('height', height)
-          .append('g')
-          .attr('transform', 'translate(' + (width / 2) + 
-            ',' + (height / 2) + ')');
-
-        var arc = d3.svg.arc()
-          .outerRadius(radius);
-
-        var pie = d3.layout.pie()
-          .value(function(d) { return d.count; })
-          .sort(null);
-
-        var path = svg.selectAll('path')
-          .data(pie(dataset))
-          .enter()
-          .append('path')
-          .attr('d', arc)
-          .attr('fill', function(d, i) { 
-            return color(d.data.label);
-          });
-
-
-			}
-			
-		})
-		
-		$('<svg width="360" height="360"><g transform="translate(180,180)"><path d="M0,-180A..." fill="#393b79"></path><path d="M105.801..." fill="#5254a3"></path><path d="M171.190..." fill="#6b6ecf"></path><path d="M-105.80..." fill="#9c9ede"></path></g></svg>').appendTo('.data');
-		
 	}
+	}
+	)}
 </script>
 </head>
 <body>
 <div class="container">
 <div id="myCarousel" class="carousel slide">
 
-    <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-  </ol>
+   
 
 
   <div class="carousel-inner" role="listbox" id="Div_XML">
     <div class="item active" align="center">
-      <img src="img/logo.png" alt="Chania">
+      <img src="img/logop8.png" alt="Chania" height="600px" width="700px">
+	  <h4 align="bottom">Par Wumi Olabisi</h4>
     </div>
 
   </div>
+  
+ 
    
   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -382,7 +327,7 @@ switch(d['Langages informatiques [Android]']) {
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Suivant</span>
   </a>
- 
+
 </div>
 </div>	
 </body>
