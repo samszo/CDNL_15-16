@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background:url(../IMG/fond3.jpg) no-repeat center fixed;
+	color:white;
+	margin:80px 0px 0px 50px;
+	font-family: 'Mario-Kart-DS', Arial, serif;
+}
+img{
+
+	background-size: cover;
+	width:200px;
+
+}
+h1{
+	font-size:40px;
+}
+.data{
+
+	position:relative;
+	top:-355px;
+	text-align:center;
+	background-color:black;
+	color:white;
+	font-size: 24px;
+	padding:5px;
+	z-index:10000;
+
+
+}
+.data1{
+
+	position:relative;
+	top:-75px;
+	text-align:center;
+	background-color:black;
+	color:white;
+	font-size: 10px;
+	padding:5px;
+	z-index:10000;
+
+
+}
+
+.items{
+width:200px;
+margin-right:60px;
+height:420px;
+float:left;
+}
+@font-face { /* Définition d'une nouvelle police nommée LearningCurveProRegular */
+    font-family: 'Mario-Kart-DS';
+    src: url('Mario-Kart-DS.ttf') format('truetype');
+}
