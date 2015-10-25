@@ -1,6 +1,6 @@
 var dataEtu;
 var xmlDoc;
-var photos = new Array();
+var photos = [];
 var nav = "";
 
 $(document).ready(
@@ -111,6 +111,8 @@ var sortData = function (data) {
 
     for (var index in student['data']) {
 
+        getGeneralSection(index);
+
         switch (student['data'][index]) {
         case 'expert':
             student['data'][index] = 100;
@@ -136,4 +138,10 @@ var displayCharts = function (thisItem) {
     var id = thisItem.attr('id');
     var photo = JSON.parse(localStorage.getItem('data'));
     var student = photo[id];
+}
+
+
+var getGeneralSection = function(text){
+    var end = text.search(" \[");
+    console.log(end);
 }
