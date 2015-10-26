@@ -19,6 +19,8 @@ temp/
 demos/
 extras/documentation
 
+rekall_cache/
+
 .buildpath
 
 .project
