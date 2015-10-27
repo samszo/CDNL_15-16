@@ -1,0 +1,41 @@
+/*				FONTS				*/
+@font-face { 	
+	font-family : "codelight"; 	
+	src : url('fonts/CODE Light.otf'); 
+}
+
+body{
+    background-color : ;
+}
+#logo{
+	width : 100px;
+	margin : auto;
+}
+#logo img{
+	width : 100px;
+}
+p{
+	width : 100px;
+	text-align : center;
+	margin : auto;
+	line-height : 0.5;
+	font-family : codelight;
+	font-size : 40px;
+}
+
+#Div_XML{
+	width : 660px;
+	margin : auto;
+}
+
+.items img{
+	width : 200px;
+	float : left;
+	margin : 10px;
+}
+
+.data p{
+	background : red;
+	float : left;
+	margin : 10px;
+}
