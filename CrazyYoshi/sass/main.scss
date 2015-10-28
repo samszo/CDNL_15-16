@@ -115,6 +115,18 @@ main {
         @include maintone();
         @include flex-shrink(0);
         z-index: 5;
+        @include display-flex();
+        @include flex-direction(column);
+        @include align-items(center);
+        .img {
+            height: 250px;
+            width: 250px;
+            background-position: center 30%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url(../img/nophoto.jpg);
+            margin: 2% 0;
+        }
         div {
             @include display-flex();
             @include align-items(center);
@@ -123,6 +135,24 @@ main {
             width: 100%;
             text-align: center;
             text-transform: uppercase;
+        }
+        p,
+        a:link,
+        a:focus,
+        a:visited,
+        a:active {
+            @include maintone();
+            width: 100%;
+            padding: 3% 0;
+            text-align: center;
+            border-top: dashed 3px $maintone-clear;
+            border-bottom: dashed 3px $maintone-clear;
+            transition: .2s;
+            text-decoration: none;
+            &:hover {
+                cursor: pointer;
+                @include white-hover();
+            }
         }
         ul {
             width: 100%;

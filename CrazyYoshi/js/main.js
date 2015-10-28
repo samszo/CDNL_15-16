@@ -164,8 +164,6 @@ var setArticle = function (arr) {
     item += "    <figure>";
     item += "        <div id='" + arr['data']['idPhoto'] + "' style=\"background-image :url('" + arr['img'] + "')\" ></div>";
     item += "        <figcaption id='" + arr['data']['idPhoto'] + "'>" + arr['data']['Nom'] + " " + arr['data']['Prénom'] + "</figcaption>";
-    /*    item += "        <p><a href='https://github.com/" + arr['data']['login Github'] + "' target='_blank'>Profil Github</a>";
-        item += "        <a href='https://www.diigo.com/user/" + arr['data']['login Diigo'] + "' target='_blank'>Profil Diigo</a></p>";*/
     item += "    </figure>";
     item += "</article>";
     return item;
@@ -242,7 +240,7 @@ var displayStudents = function (kind) {
 
     }
 
-    aside+="</ul>";
+    aside += "</ul>";
 
     $('#content').html(content);
     $('aside').html(aside);
@@ -261,9 +259,25 @@ var detailStudent = function (item) {
     $('#head').html(name);
 
     var aside = "";
-    aside = '<div class="img" style="background-image=url('+student['img']+')"></div>';
-    aside = '<div id="head"></div>';
-    aside = '<p class="info"></p>';
+    aside += '<div id="head">' + name + '</div>';
+    aside += '<div class="img" style="background-image:url(\'' + student['img'] + '\')"></div>';
+    aside += '<p class="mail">' + student['data']['mail'] + '</p>';
+    aside += "<a href='https://github.com/" + student['data']['login Github'] + "' target='_blank'>Profil Github</a>";
+    aside += "<a href='https://www.diigo.com/user/" + student['data']['login Diigo'] + "' target='_blank'>Profil Diigo</a>";
+    if (student['data']['login twitter'] != "") {
+        aside += "<a href='https://twitter.com/search?q=" + student['data']['login twitter'] + "&src=typd&lang=fr' target='_blank'>Twitter</a>";
+    }
+
+    if (student['data']['compte viadéo'] != "") {
+        aside += "<a href='http://www.viadeo.com/fr/search/#/?q=" + student['data']['compte viadéo'] + "' target='_blank'>Viadéo</a>";
+    }
+
+    if (student['data']['page linkedIn'] != "") {
+        aside += "<a href='" + student['data']['page linkedIn'] + "' target='_blank'>LinkedIn</a>";
+    }
+
+
+    $('aside').html(aside);
 
 
 
