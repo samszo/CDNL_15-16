@@ -182,7 +182,8 @@ var setAside = function (arr) {
 var displayStudents = function (kind) {
     kind = (typeof kind === 'undefined') ? 'all' : kind;
     var content = "";
-    var aside = "";
+    var aside = "<div id=\"head\">étudiants</div>";
+    aside += "<ul>";
     var photos = JSON.parse(localStorage.getItem('data'));
 
 
@@ -241,9 +242,10 @@ var displayStudents = function (kind) {
 
     }
 
+    aside+="</ul>";
+
     $('#content').html(content);
-    $('#head').html("étudiants");
-    $('aside > ul').html(aside);
+    $('aside').html(aside);
     $("aside li, figure figcaption, figure div").click(function () {
         detailStudent($(this));
     });
@@ -257,6 +259,14 @@ var detailStudent = function (item) {
     var name = student['data']["Prénom"] + " " + student['data']['Nom'];
 
     $('#head').html(name);
+
+    var aside = "";
+    aside = '<div class="img" style="background-image=url('+student['img']+')"></div>';
+    aside = '<div id="head"></div>';
+    aside = '<p class="info"></p>';
+
+
+
 
 
 
