@@ -26,11 +26,7 @@
                                        i++;
                                       });
 									  
-									  $('.items').click(function () {
-											console.log(this);
-											$(this).css("width", "100%");
-										});
-									  
+
                                   } 	
                     });
                d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
@@ -48,7 +44,13 @@
             //chercher les data
             dataEtu.forEach(function(d){
                 if(d.idPhoto==id && d.idPhoto!=""){
+                    var nomprenom = '<p class="name">'+d.Prénom+" "+d.Nom+'</p>';
+                        $('.name').remove();
+                        $('#link_' + id).append(nomprenom);
+/*
                     $('<div class="data" id="data_' + id + '"></div>').html('<p>'+d.Prénom+" "+d.Nom+'</p>').appendTo('#link_' + id);
+*/
+
 
                 }
             })
