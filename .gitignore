@@ -33,3 +33,5 @@ rekall_cache/
 
 .settings/org.eclipse.wst.jsdt.ui.superType.name
 /CrazyYoshi/.sass-cache/
+
+.DS_Store
