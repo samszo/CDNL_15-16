@@ -1,0 +1,725 @@
+@font-face {
+  font-family: 'wes_FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=3.2.1');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=3.2.1') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=3.2.1') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=3.2.1') format('truetype'), url('../fonts/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,body {
+    /*
+    force visible scrollbars in IE to avoid right tabs being hidden by scrollbar
+    see https://msdn.microsoft.com/en-us/library/ie/hh771902(v=vs.85).aspx
+    */
+   -ms-overflow-style: scrollbar;
+}
+
+div.wes_main div, div.wes_main span, div.wes_main applet, div.wes_main object, div.wes_main iframe,
+div.wes_main h1, div.wes_main h2, div.wes_main h3, div.wes_main h4, div.wes_main h5, div.wes_main h6,
+div.wes_main p, div.wes_main blockquote, div.wes_main pre,
+div.wes_main a, div.wes_main abbr, div.wes_main acronym, div.wes_main address, div.wes_main big, div.wes_main cite, div.wes_main code,
+div.wes_main del, div.wes_main dfn, div.wes_main em, div.wes_main img, div.wes_main ins, div.wes_main kbd, div.wes_main q, div.wes_main s, div.wes_main samp,
+div.wes_main small, div.wes_main strike, div.wes_main strong, div.wes_main sub, div.wes_main sup, div.wes_main tt, div.wes_main var,
+div.wes_main b, div.wes_main u, div.wes_main i, div.wes_main center,
+div.wes_main dl, div.wes_main dt, div.wes_main dd, div.wes_main ol, div.wes_main ul, div.wes_main li,
+div.wes_main fieldset, div.wes_main form, div.wes_main label, div.wes_main legend,
+div.wes_main table, div.wes_main caption, div.wes_main tbody, div.wes_main tfoot, div.wes_main thead, div.wes_main tr, div.wes_main th, div.wes_main td,
+div.wes_main article, div.wes_main aside, div.wes_main canvas, div.wes_main details, div.wes_main embed,
+div.wes_main figure, div.wes_main figcaption, div.wes_main footer, div.wes_main header, div.wes_main hgroup,
+div.wes_main menu, div.wes_main nav, div.wes_main output, div.wes_main ruby, div.wes_main section, div.wes_main summary,
+div.wes_main time, div.wes_main mark, div.wes_main audio, div.wes_main video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: arial,helvetica,sans-serif;
+    float:none;
+    position:none;
+}
+/* HTML5 display-role reset for older browsers */
+div.wes_main article, div.wes_main aside, div.wes_main details, div.wes_main figcaption, div.wes_main figure,
+div.wes_main footer, div.wes_main header, div.wes_main hgroup, div.wes_main menu, div.wes_main nav, div.wes_main section {
+    display: block;
+}
+
+div.wes_main ol, div.wes_main ul {
+    list-style: none;
+}
+div.wes_main blockquote, div.wes_main q {
+    quotes: none;
+}
+div.wes_main blockquote:before, div.wes_main blockquote:after,
+div.wes_main q:before, div.wes_main q:after {
+    content: '';
+    content: none;
+}
+div.wes_main table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+div.wes_main a, div.wes_main a:active, div.wes_main a:hover {
+    outline:none;
+    cursor:pointer;
+}
+/* Fin Reset! */
+
+div.wes_main {
+    z-index:9999999;
+}
+
+/************ Tab ************/
+    /* Etat initial */
+div.wes_tabLeft  div.wesInitTab_wrapper,
+div.wes_tabRight div.wesInitTab_wrapper{
+    top:50%;
+    display:block;
+    position:fixed;
+    line-height: 1;
+    z-index:9999999;
+    width:0px;
+}
+div.wes_tabLeft  div.wesInitTab_wrapper {
+    left:-120px;
+}
+div.wes_tabRight  div.wesInitTab_wrapper {
+    right:-120px;
+}
+
+        /*content*/
+div.wes_tabLeft div.wesInitTab_content,
+div.wes_tabRight div.wesInitTab_content  {
+    background: transparent no-repeat scroll left top ;
+    height:0;
+    width:0;
+}
+div.wes_tabLeft div.wesInitTab_content div.wes_div,
+div.wes_tabRight div.wesInitTab_content div.wes_div{
+    background: grey no-repeat scroll left top ;
+    height:100px;
+    width:100px;
+    position:relative;
+}
+
+div.wes_tabLeft div.wesInitTab_content div.wes_div {
+    left:0;
+}
+div.wes_tabRight div.wesInitTab_content div.wes_div {
+    right:100px;
+}
+        /*counter*/
+div.wes_tabLeft div.wesInitTab_counter {
+    width:0;
+    height:0;
+}
+div.wes_tabLeft div.wesInitTab_counter div.wesCounter,
+div.wes_tabRight div.wesInitTab_counter div.wesCounter  {
+    z-index:50;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    top:0;
+    font-size:14px;
+}
+div.wes_tabLeft div.wesCounter div.wesCounter_bckgnd,
+div.wes_tabRight div.wesCounter div.wesCounter_bckgnd {
+    position:relative;
+    width: 52px;
+    height: 52px;
+    opacity:0.80;
+    -moz-border-radius: 27px;
+    -webkit-border-radius: 27px;
+    -o-border-radius: 27px;
+    -ms-border-radius: 27px;
+    -khtml-border-radius: 27px;
+    border-radius: 27px;
+    background-color:black;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+    z-index:40;
+
+}
+
+div.wes_tabLeft div.wesCounter div.wesCounter_spinner,
+div.wes_tabRight div.wesCounter div.wesCounter_spinner {
+    position:relative;
+    top:-52px;
+    left:1px;
+    width:100%;
+    height:100%;
+    margin:0 auto;
+    z-index:40;
+}
+div.wes_tabLeft div.wesCounter div.wesCounter_text,
+div.wes_tabRight div.wesCounter div.wesCounter_text {
+    position:relative;
+    top:-85px;
+    width:100%;
+    height:100%;
+    margin:0 auto;
+    color:white;
+    text-align:center;
+    font:arial;
+    font-weight:bold;
+    z-index:40;
+}
+
+        /*zone clic*/
+div.wes_tabLeft div.wesInitTab_zoneClic,
+div.wes_tabRight div.wesInitTab_zoneClic {
+    width:0;
+    height:0;
+}
+div.wes_tabLeft div.wesInitTab_zoneClic {
+    left: 0;
+}
+div.wes_tabRight div.wesInitTab_zoneClic {
+    right: 0;
+}
+div.wes_tabLeft div.wesInitTab_zoneClic div.wes_div,
+div.wes_tabRight div.wesInitTab_zoneClic  div.wes_div {
+    background: transparent no-repeat scroll left top ;
+    top: 0;
+    position: relative;
+    height: 100px;
+    width: 100px;
+    opacity: 0;
+    filter:alpha(opacity=0); /* For IE8 and earlier */
+    cursor:pointer;
+    z-index:100;
+    background-color:white
+}
+
+div.wes_tabRight div.wesInitTab_zoneClic  div.wes_div{
+    right:100px;
+}
+        /*close btn*/
+div.wes_tabLeft div.wesInitTab_closeBtn,
+div.wes_tabRight div.wesInitTab_closeBtn {
+    cursor: pointer;
+    width: 0;
+    height: 0;
+}
+div.wes_tabLeft div.wesInitTab_closeBtn div.wes_img,
+div.wes_tabRight div.wesInitTab_closeBtn div.wes_img {
+    width: 18px;
+    height: 18px;
+    position:relative;
+    z-index: 200;
+    top:10px;
+}
+div.wes_tabLeft div.wesInitTab_closeBtn div.wes_img {
+    left:91px;
+    background: url(../../images/api/wesTabs/btns.png) no-repeat scroll left top;
+}
+div.wes_tabRight div.wesInitTab_closeBtn div.wes_img {
+    right:91px;
+    background: url(../../images/api/wesTabs/btns.png) no-repeat scroll -18px top;
+}
+
+
+    /* Etat reduit */
+div.wes_tabLeft div.wesReduceTab_wrapper,
+div.wes_tabRight div.wesReduceTab_wrapper{
+    display:block;
+    position:fixed;
+    line-height: 1;
+    z-index:9999999;
+    top:50%;
+    width:0px;
+    margin-top:-75px;
+}
+div.wes_tabLeft div.wesReduceTab_wrapper{
+    left:-40px;
+}
+div.wes_tabRight div.wesReduceTab_wrapper{
+    right:-40px;
+}
+
+div.wes_tabLeft div.wesReduceTab_background,
+div.wes_tabRight div.wesReduceTab_background{
+    width:0;
+    height:0;
+    cursor: pointer;
+}
+div.wes_tabLeft div.wesReduceTab_background div.wes_div,
+div.wes_tabRight div.wesReduceTab_background div.wes_div  {
+    background: black no-repeat scroll left top;
+    opacity: 0.3;
+    filter:alpha(opacity=30); /* For IE8 and earlier */
+    width:12px;
+    height:75px;
+    position:relative;
+}
+div.wes_tabRight div.wesReduceTab_background div.wes_div  {
+    right:12px;
+}
+div.wes_tabLeft div.wesReduceTab_openBtn,
+div.wes_tabRight div.wesReduceTab_openBtn{
+    width:0;
+    height:0;
+    cursor: pointer;
+}
+div.wes_tabLeft div.wesReduceTab_openBtn div.wes_img,
+div.wes_tabRight div.wesReduceTab_openBtn div.wes_img{
+    width:18px;
+    height:18px;
+    position:relative;
+    top:66px;
+}
+div.wes_tabLeft div.wesReduceTab_openBtn div.wes_img {
+    background: url("../../images/api/wesTabs/btns.png") no-repeat scroll -18px top transparent;
+    left: 3px;
+    width: 18px;
+    height:18px;
+}
+div.wes_tabRight div.wesReduceTab_openBtn div.wes_img {
+    right:22px;
+    background: url(../../images/api/wesTabs/btns.png) no-repeat scroll left top;
+    width: 18px;
+    height:18px;
+}
+
+
+/************ Footer ************/
+    /* Etat initial */
+div.wes_footer div.wesInitTab_wrapper,
+div.wes_footer div.wesReduceTab_wrapper {
+    bottom:-40px;
+    display:block;
+    position:fixed;
+    line-height: 1;
+    z-index:9999999;
+}
+div.wes_footer div.wesInitTab_wrapper {
+    width:100%;
+    left:0;
+}
+        /*background*/
+div.wes_footer div.wesInitTab_background {
+    width:100%;
+    height:0;
+}
+div.wes_footer div.wesInitTab_background  div.wes_div {
+    background:purple no-repeat bottom center;
+    opacity:0.40;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
+    position:relative;
+    width:100%;
+    height:40px;
+    bottom:40px;
+}
+        /*content*/
+div.wes_footer div.wesInitTab_content {
+    height:0px;
+    width:100%;
+}
+div.wes_footer div.wesInitTab_content div.wes_div{
+    background: no-repeat scroll left top ;
+    height:69px;
+    bottom:69px;
+    position:relative;
+    margin:0 auto;
+}
+
+div.wes_footer div.wesInitTab_content div.wes_div div.wes_flashWrapper{
+    margin:auto;
+}
+
+        /*counter*/
+div.wes_footer div.wesInitTab_counter {
+    height:0px;
+    width:100%;
+}
+div.wes_footer div.wesInitTab_counter div.wesCounter {
+    z-index:50;
+    z-index:50;
+    position: relative;
+    margin:0 auto;
+    bottom: 60px;
+    width: 52px;
+    height: 52px;
+}
+
+div.wes_footer div.wesCounter  div.wesCounter_bckgnd {
+    width: 52px;
+    height: 52px;
+    opacity:0.80;
+    -moz-border-radius: 27px;
+    -webkit-border-radius: 27px;
+    -o-border-radius: 27px;
+    -ms-border-radius: 27px;
+    -khtml-border-radius: 27px;
+    border-radius: 27px;
+    background-color:black;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+div.wes_footer div.wesCounter  div.wesCounter_spinner {
+    position:relative;
+    top:-52px;
+    left:1px;
+    width:100%;
+    height:100%;
+    margin:0 auto;
+}
+.spinner {
+    background-color:#6a8dff;
+}
+div.wes_footer div.wesCounter  div.wesCounter_text {
+    position:relative;
+    top:-85px;
+    width:100%;
+    height:100%;
+    margin:0 auto;
+    color:white;
+    text-align:center;
+    font:arial;
+    font-weight:bold;
+    font-size:14px;
+}
+
+        /*zone de clic*/
+div.wes_footer div.wesInitTab_zoneClic{
+    height:0;
+    width:100%;
+}
+div.wes_footer div.wesInitTab_zoneClic div.wes_div {
+    background: transparent no-repeat scroll left top;
+    margin:0 auto;
+    position: relative;
+    bottom:69px;
+    width:800px;
+    height:69px;
+    opacity: 0.2;
+    filter:alpha(opacity=20); /* For IE8 and earlier */
+    cursor:pointer;
+    z-index:100;
+}
+
+        /*closebtn*/
+div.wes_footer div.wesInitTab_closeBtn {
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    right:45px;
+    position:absolute;
+}
+
+div.wes_footer div.wesInitTab_closeBtn div.wes_img {
+    bottom: 32px;
+    width: 26px;
+    height: 26px;
+    position:relative;
+    z-index: 200;
+    /* font-awesome */
+    font-family: wes_FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    *margin-right: .3em;
+    text-align:center;
+    line-height:26px;
+}
+div.wes_footer div.wesInitTab_closeBtn div.wes_img:before {
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none;
+    content: "\f078";
+}
+
+    /* Footer: Etat reduit */
+div.wes_footer div.wesReduceTab_wrapper{
+    position: fixed;
+    right: 45px;
+    line-height: 1;
+    z-index:9999999;
+}
+div.wes_footer div.wesReduceTab_background {
+    width:0;
+    height:0;
+}
+div.wes_footer div.wesReduceTab_background div.wes_div  {
+    background: black no-repeat scroll left top;
+    opacity: 0.8;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+    width: 44px;
+    height: 40px;
+    position:relative;
+    bottom:40px;
+}
+div.wes_footer div.wesReduceTab_openBtn {
+    width:44px;
+    height:0;
+    cursor:pointer;
+}
+div.wes_footer div.wesReduceTab_openBtn div.wes_img{
+    width:26px;
+    height:26px;
+    position:relative;
+    bottom:32px;
+    margin:0 auto;
+    /* font-awesome */
+    font-family: wes_FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    *margin-right: .3em;
+    text-align:center;
+    line-height:26px;
+}
+div.wes_footer div.wesReduceTab_openBtn div.wes_img:before {
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none;
+    content: "\f077";
+}
+
+
+/************ Tab/Footer Etat Ouvert ************/
+div.wes_main div.wesOpenTab_wrapper{
+    position:fixed;
+    display:none;
+    width:100%;
+    height:100%;
+    background: transparent no-repeat scroll left top;
+    z-index:9999999;
+    left:0px;
+}
+div.wes_tabRight div.wesOpenTab_wrapper {
+    top:0;
+    left:0;
+}
+div.wes_tabLeft div.wesOpenTab_wrapper {
+    top:0;
+    left:0;
+}
+div.wes_footer div.wesOpenTab_wrapper {
+    bottom:0;
+    left:0;
+}
+    /* Layer background */
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerBackground {
+    width:0;
+    height:0;
+}
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerBackground div.wes_div {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background: black no-repeat scroll left top;
+    margin:0 auto;
+    opacity:0.8;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layer {
+    width:0;
+    height:0;
+}
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layer div.wes_div {
+    position:absolute;
+    margin:0 auto;
+    top:50%;
+    left:50%;
+}
+    /* Layer custom */
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerCustom {
+    width:0;
+    height:0;
+}
+div.debug div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerCustom div.wes_div {
+    background: pink no-repeat scroll left top;
+    width:1000px;
+    height:700px;
+    margin:-350px -500px;
+}
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerCustom div.wes_div {
+    position:absolute;
+    width:0;
+    height:0;
+    top:50%;
+    left:50%;
+}
+
+    /* Layer Arrow */
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerArrows {
+    width:0;
+    height:0;
+}
+
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerArrows div.wes_arrowLeft {
+    background: url(../../images/api/wesTabs/btns.png) no-repeat scroll -126px top;
+    height: 35px;
+    left: 5%;
+    position: absolute;
+    top: 49%;
+    width: 35px;
+    cursor:pointer;
+}
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerArrows div.wes_arrowLeft:hover{
+    background: url(../../images/api/wesTabs/btns.png) no-repeat scroll -91px top;
+}
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerArrows div.wes_arrowRight {
+    background: url(../../images/api/wesTabs/btns.png) no-repeat scroll -196px top;
+    height: 35px;
+    position: absolute;
+    right: 5%;
+    top: 49%;
+    width: 35px;
+    cursor:pointer;
+}
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerArrows div.wes_arrowRight:hover{
+    background: url(../../images/api/wesTabs/btns.png) no-repeat scroll -161px top;
+}
+    /* Layer with header */
+
+                /* pour le debug */
+div.debug  div.wesOpenTab_wrapper div.wesOpenTab_layerWithHeader div.wes_layerWrapper{
+    background: purple no-repeat scroll left top;
+    width:700px;
+    height:400px;
+    margin:-200px -350px;
+}
+div.debug  div.wesOpenTab_layerWithHeader div.wes_layerHeader{
+    background: white no-repeat scroll left top;
+}
+div.debug  div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft{
+    background: blue no-repeat scroll left top;
+}
+div.debug  div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadRight{
+    background: red no-repeat scroll left top;
+}
+div.debug div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div {
+    background: grey no-repeat scroll left top;
+}
+
+
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerContent {
+    /*background: white no-repeat scroll left top;*/
+}
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerWithHeader {
+    width:0;
+    height:0;
+}
+div.wes_main div.wesOpenTab_wrapper div.wesOpenTab_layerWithHeader div.wes_layerWrapper {
+    top:50%;
+    left:50%;
+    position:absolute;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader  {
+    overflow: hidden;
+    height: 40px;
+    text-align:left;
+    vertical-align:top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft {
+    text-align:left;
+    display:inline-block;
+    height:30px;
+    /*width:50%;*/
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadRight {
+    text-align:right;
+    display:inline-block;
+    height:30px;
+    width:49.9%;
+    float:right;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadRight div{
+    display:inline-block;
+    height:30px;
+    width:30px;
+    cursor:pointer;
+}
+        /*btn partage*/
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_facebook,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_twitter,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_pinterest,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_gplus,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_linkedin,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_tuenti,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_xing,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_weibo,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_vkontakte,
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_renren {
+    background: url(../../images/api/wesTabs/shares.png) no-repeat scroll left top;
+    background-size: 300px 30px;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_twitter {
+    background-position: -30px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_gplus {
+    background-position: -60px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_pinterest {
+    background-position: -90px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_linkedin {
+    background-position: -120px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_vkontakte {
+    background-position: -150px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_renren {
+    background-position: -180px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_weibo {
+    background-position: -210px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_tuenti {
+    background-position: -240px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_xing {
+    background-position: -270px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div.wes_opaque {
+    background-image: url(../../images/api/wesTabs/partageOpaque.png);
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div{
+    margin-right:0px;
+}
+
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div a{
+    display:block;
+    width:100%;
+    height:100%;
+    background-color:black;
+    opacity:0;
+}
+
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadLeft div div{
+    background-color:black;
+    width:100%;
+    height:100%;
+    opacity:0;
+}
+    /*btn close*/
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadRight div{
+    width:27px;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadRight div.wes_closeBtn {
+    background: url(../../images/api/wesTabs/btns.png) no-repeat scroll -258px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerHeader div.wes_layerHeadRight div.wes_closeBtn:hover {
+    background: url(../../images/api/wesTabs/btns.png) no-repeat scroll -231px top;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerContent  {
+    height:300px;
+}
+div.wes_main div.wesOpenTab_layerWithHeader div.wes_layerContent iframe {
+    border:none;
+}
+
+
+/* Pixels de tracking*/
+div#wes_track .wes_trackingPixel{
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    z-index: 0;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+}
