@@ -7,13 +7,35 @@
     <title>CrazyYoshi's Trombino</title>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/d3.v3.min.js"></script>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="assets/css/main.css" type='text/css'>
+    <link rel="stylesheet" href='assets/css/fonts.css' type="text/css">
+
 </head>
 
 <body>
     <script src="js/main.js"></script>
-    <div id="Div_XML"></div>
+    <header>LP Création Développement Numérique en Ligne 2015-2016</header>
 
+    <main>
+        <aside id='left-bloc'>
+            <div id="head"></div>
+            <ul>
+
+            </ul>
+        </aside>
+        <div id='right-bloc'>
+            <ul>
+                <li onClick='displayStudents()'>Tous</li>
+                <li onClick='displayStudents("dev")'>Développeurs</li>
+                <li onClick='displayStudents("gra")'>Graphistes</li>
+                <li onClick='displayStudents("mix")'>Polyvalents</li>
+            </ul>
+            <div id="content">
+            </div>
+
+        </div>
+
+    </main>
 </body>
 
 </html>

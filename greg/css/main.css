@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background:url(../IMG/fond3.jpg) no-repeat center fixed;
+	color:white;
+	margin:110px 0px 0px 50px;
+	font-family: 'StoutDeco', Arial, serif;
+}
+img{
+
+	background-size: cover;
+	width:200px;
+	position:relative;
+	top:-30px;
+
+}
+h1{
+	font-size:40px;
+	margin-bottom:90px;
+}
+.data{
+
+/*	position:relative;
+	top:-355px;*/
+	text-align:center;
+	background-color:black;
+	color:white;
+	font-size: 24px;
+	padding:5px;
+	z-index:10000;
+
+
+}
+.data1{
+
+	/*position:relative;
+	top:-75px;*/
+	text-align:center;
+	background-color:black;
+	color:white;
+	font-size: 10px;
+	padding:5px;
+	z-index:10000;
+
+
+}
+
+.items{
+width:200px;
+margin-right:60px;
+float:left;
+}
+@font-face { /* Définition d'une nouvelle police nommée LearningCurveProRegular */
+    font-family: 'StoutDeco';
+    src: url('StoutDeco.ttf') format('truetype');
+}
+#fotof{overflow:hidden;height:200px;margin-bottom:30px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 100px;
+	float:left;}
+#contenu{
+	margin-right:700px;
+	margin-left:50px;
+	
+}
+.chartContainer{
+position:fixed;
+top:40%;
+right:10px;
+z-index:50;
+	
+}
+#fondCont{
+position:fixed;
+background-color:#123F5C;
+height:100%;
+width:650px;
+right:0;
+top:0;
+z-index:1;	
+padding-top:275px;
+padding-left:80px;
+}
+#fondhead{
+position: absolute;
+background-color:black;
+top:0;
+left:0;
+height:230px;
+width:100%;
+z-index:-1;	
+}

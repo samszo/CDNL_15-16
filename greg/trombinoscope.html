@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/main.css" media="all"/>
+<title>Greg Trombinoscope</title>
+<script src="../js/jquery.min.js" ></script>
+<script src="../js/d3.v3.min.js" ></script>
+<!--  AJOUT DES BIBLIO --->
+  <script src="lib/d3.v3.4.8.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
+<!-- FIN D'AJOUT--->
+<script>
+	var dataEtu;   
+
+	$(document).ready(  
+		 function()
+		 {
+		   $.ajax( {
+		            type: "GET",
+		            url: "../php/lecteurFlux.php?url=cdnl1516photo",
+		            dataType: "xml",
+		            success: function(xml) 
+		                     {
+		            				var i=0;
+		                       $(xml).find('enclosure').each(   
+		                         function()
+		                         {
+		                        	 	//console.log(this.attributes[1].nodeValue);
+		                            $('<div class="items" id="link_' + i + '" onclick="voirData(' + i + ')" onmouseout="fermerData(' + i + ')"></div>').html('<div id="fotof"><img src="' + this.attributes[1].nodeValue + '" /></div>').appendTo('#Div_XML');
+			                       i++;
+		                          });
+		                      }
+		        });
+		   d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
+			   dataEtu = data;
+			   /*
+			   data.forEach(function(d,i){
+				   console.log(d.idPhoto+" "+d.Nom);
+			   })
+			   */
+			 });		   		   
+		  }
+		);
+	
+	function voirData(id){
+		$('.data').remove();
+		$('.data1').remove();
+	    $('.chartContainer').remove();
+		//chercher les data
+		dataEtu.forEach(function(d){
+			if(d.idPhoto==id && d.idPhoto!=""){
+                $('<div class="data" id="data_' + id + '"></div>').html(d.Prénom+" "+d.Nom).appendTo('#link_' + id);
+				$('<div class="data1" id="data_' + id + '"></div>').html(d.mail).appendTo('#link_' + id);
+				$('<div class="chartContainer" id="data_' + id + '"></div>').appendTo('#link_' + id); 
+			
+	
+var li =['Langages informatiques [Javascript]',	
+				'Langages informatiques [CSS]',	
+				'Langages informatiques [HTML]',	
+				'Langages informatiques [PHP]',	
+				'Langages informatiques [SVG]',	
+				'Langages informatiques [OWL]',	
+				'Langages informatiques [JAVA]',	
+				'Langages informatiques [XML]',	
+				'Langages informatiques [SCALA]',	
+				'Langages informatiques [.NET]',	
+				'Langages informatiques [JSON]',	
+				'Langages informatiques [Objective-C]',	
+				'Langages informatiques [Android]',	
+				'Langages informatiques [Action script]',	
+				'Langages informatiques [JQuery]',	
+				'Langages informatiques [Cordova]',	
+				'Langages informatiques [Bootstrap]',	
+				'Langages informatiques [D3]',	
+				'Langages informatiques [SQL]'	,
+				'Langages informatiques [SASS]'	,
+				'Langages informatiques [COMPASS]'	,
+				'CMS [Drupal]'	,
+				'CMS [Wordpress]',	
+				'CMS [Joomla]'	,
+				'CMS [Prestashop]',
+				'CMS [Magento]'	,
+				'CMS [SPIP]'	,
+				'CMS [COMPASS]'	,
+				'Langages informatiques [Symphony]'	,
+				'Langages informatiques [Zend]'	,
+				'Langages informatiques [AJAX]'	,
+				'Outils graphiques [Photoshop]'	,
+				'Outils graphiques [GIMP]'	,
+				'Outils graphiques [IN Design]',	
+				'Outils graphiques [Illustrator]',	
+				'Outils graphiques [Inkscape]'	,
+				'Outils graphiques [Paint]'	,
+				'Outils graphiques [3DS MAX]'	,
+				'Outils graphiques [Blender]'	,
+				'Outils graphiques [Maya]'	,
+				'Outils graphiques [After Effect]',	
+				'Outils graphiques [Final Cut Pro]'	,
+				'Outils graphiques [Première]'	,
+				'Outils graphiques [Cinéma 4D]'	,
+				'Outils graphiques [Flash]'	,
+				'Outils graphiques [Bridge]'];
+				var data =[]; 
+				for (var i = 0; i < li.length; i++) {
+			
+	 if ( (d[li[i]]) == "expert"){data.push({"Owner":li[i],"Unit Sales":60})};
+	 if ( (d[li[i]]) == "trop bon"){data.push({"Owner":li[i],"Unit Sales":40})};
+	 if ( (d[li[i]]) == "bon"){data.push({"Owner":li[i], "Unit Sales":20})};
+	 if ( (d[li[i]]) == "moins nul"){data.push({"Owner":li[i],"Unit Sales":10})};
+	 
+				}
+	//************************************//
+	//$('#link_' + id).css({'width':'800px','height':'800px'});
+	//************************************//
+
+	var svg = dimple.newSvg(".chartContainer", 690, 400);
+   
+      var myChart = new dimple.chart(svg, data);
+      myChart.setBounds(20, 20, 460, 360)
+      myChart.addMeasureAxis("p", "Unit Sales");
+      myChart.addSeries("Owner", dimple.plot.pie);
+      myChart.addLegend(500, 20, 90, 300, "left");
+      myChart.draw();
+ 
+	
+    //**********************************//	
+			}
+		})
+		
+	};
+	function fermerData(id){
+		//enlever les data
+             /*   $('.data').remove();
+				$('.data1').remove();
+				$('.chartContainer').remove();
+				$('#link_' + id).css({'width':'','height':''});*/
+		     
+	};
+</script>
+</head>
+<body>
+<div id="fondhead"></div>
+<div id="contenu">
+<center><h1>TROMBINOSCOPE   des   CDNL 2015/2016</h1></center><br>
+<div id="Div_XML"></div>
+</div>
+<div id="fondCont">
+<h2>Les Compétences</h2>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+.data{
+
+	height:400px;
+    width:400px;
+	padding:10px;
+	margin:10px;
+	overflow:scroll;
+}
+
+
+body
+{
+    background-color:#FFE4B5;
+    color:#BC8F8F;
+	font-family: Tahoma; 
+}
+
+h3{
+margin:5px;
+
+}
+
+ .title1{
+  	font-family: segoe script; 
+
+  padding:20px;
+  margin:30px;
+ text-shadow: 2px 2px #8B4513;
+ }
+ 
+ 
+.carousel-inner{
+overflow:visible;
+max-width:100%;
+}
+ .icon{
+  height:50px;
+  width:50px;
+ 
+ 
+ }
+
+

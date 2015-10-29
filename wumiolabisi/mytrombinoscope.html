@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+					
+					<title>Trombinoscope des CDNL fait par Wumi</title>
+						
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+			<script src="../js/d3.v3.min.js" ></script>
+			<script src="../wumiolabisi/js/bootstrap.min.js"></script>
+			
+				<link href="css/bootstrap.min.css" rel="stylesheet">
+				
+				<link href="css/mystyle.css" rel="stylesheet">
+
+<h1 class="title1" align="center"><b>ETUDIANTS LP CDNL - 2015/2016</b></h2>
+<script>
+	var dataEtu; 
+
+
+	$(document).ready(  
+		 function()
+		 {
+		 
+		 $('#myCarousel').carousel({
+    interval: false
+}) 	
+d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
+			   dataEtu = data;
+			 });
+			 
+		   $.ajax( {
+		            type: "GET",
+		            url: "../php/lecteurFlux.php?url=cdnl1516photo",
+		           datatype: "xml",
+		            success: function(xml) 
+		                     {
+							   console.log("ok");
+							   
+		            			var i=0;
+		                       $(xml).find('enclosure').each(  
+		                         function()
+		                         {
+								 
+		                            $('<div class="items item" align="center" id="link_' + i + '"></div>').html('<a href="#link_' + i + '"><img onclick="voirData(' + i + ')" src="' + this.attributes[1].nodeValue + '" /></a>').appendTo('#Div_XML');
+			                       i++;
+		                          });
+		                      },
+					error : function(){
+                             console.log("Oh error");
+                         }
+		        });
+		   		   		   
+		  }
+		);
+	
+	function voirData(id){
+		//chercher les data
+		
+		dataEtu.forEach(function(d){
+			if(d.idPhoto==id && d.idPhoto!=""){
+			
+			
+$('<div class="data" id="chart"><h3>Infos : </h3><ul class="list-group"><li class="list-group-item"><b>Nom</b> : '+ d.Nom +'</li><li class="list-group-item"><b>Prénom</b> : '+ d['Prénom'] +'</li><li class="list-group-item"><b>Mail</b> : '+ d.mail +'</li><li class="list-group-item"><b>Login GitHub</b> : '+ d['login Github'] +'</li><li class="list-group-item"><b>Login Diigo</b> : '+ d['login Diigo']+'</li><li class="list-group-item"><b>LinkedIn</b> : '+ d['page linkedin']+'</li><li class="list-group-item"><b>Login Twitter</b> : '+ d['login twitter']+'</li><li class="list-group-item"><b>Compte Viadeo</b> : '+ d['compte viadeo']+'</li></ul></div>').appendTo('#link_'+ id);
+
+
+switch(d['Langages informatiques [Javascript]']) {
+    case "nul":
+        varjavascript = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varjavascript = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varjavascript = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varjavascript = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varjavascript = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+
+switch(d['Langages informatiques [CSS]']) {
+    case "nul":
+        varcss = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varcss = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varcss = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varcss = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varcss = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';;
+        break;
+}
+
+switch(d['Langages informatiques [HTML]']) {
+    case "nul":
+        varhtml = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varhtml = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varhtml = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varhtml = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varhtml = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+
+switch(d['Langages informatiques [PHP]']) {
+    case "nul":
+        varphp = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varphp = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varphp = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varphp = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varphp = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+
+switch(d['Langages informatiques [SVG]']) {
+    case "nul":
+        varsvg = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varsvg = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varsvg = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varsvg = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varsvg = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+
+switch(d['Langages informatiques [OWL]']) {
+    case "nul":
+        varowl = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varowl = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varowl = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varowl = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varowl = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+switch(d['Langages informatiques [JAVA]']) {
+    case "nul":
+        varjava = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varjava = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varjava = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varjava = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varjava = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+switch(d['Langages informatiques [XML]']) {
+    case "nul":
+        varxml = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varxml = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varxml = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varxml = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varxml = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+switch(d['Langages informatiques [SCALA]']) {
+    case "nul":
+        varscala = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varscala = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varscala = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varscala = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varscala = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+switch(d['Langages informatiques [.NET]']) {
+    case "nul":
+        varnet = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varnet = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varnet = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varnet = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varnet = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+
+switch(d['Langages informatiques [JSON]']) {
+    case "nul":
+        varjson = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varjson = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varjson = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varjson = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varjson = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+
+switch(d['Langages informatiques [Objective-C]']) {
+    case "nul":
+        varobjectivec = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varobjectivec = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varobjectivec = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varobjectivec = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varobjectivec = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+
+switch(d['Langages informatiques [Android]']) {
+    case "nul":
+        varandroid = '<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width:5%">5% Nul(le)</div>';
+        break;
+    case "moins nul":
+        varandroid = '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">30% Moyen</div>';
+        break;
+    case "bon":
+        varandroid = '<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%"> 60% Bon</div>';
+        break;
+	case "trop bon":
+        varandroid = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">70% Très bon</div>';
+        break;
+	case "expert":
+        varandroid = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100% Expert</div>';
+        break;
+}
+
+
+$('<h3>Langages Informatiques : </h3><ul class="list-group"><li class="list-group-item"> <b>JAVASCRIPT</b> : <div class="progress"> '+ varjavascript +' </div></li><li class="list-group-item"> <b>CSS</b> : <div class="progress">'+ varcss +' </div></li><li class="list-group-item"> <b>HTML</b> : <div class="progress"> '+ varhtml +' </div></li><li class="list-group-item"> <b>PHP</b> : <div class="progress"> '+ varphp +'</div></li><li class="list-group-item"> <b>JAVA</b> : <div class="progress"> '+ varjava +'</div></li><li class="list-group-item"> <b>XML</b> : <div class="progress"> '+ varxml +' </div></li><li class="list-group-item"> <b>SCALA</b> : <div class="progress"> '+ varscala +'</div></li><li class="list-group-item"> <b>OWL</b> : <div class="progress">'+ varowl +'</div></li><li class="list-group-item"> <b>SVG</b> : <div class="progress"> '+ varsvg +'</div></li><li class="list-group-item"> <b>.NET</b> : <div class="progress">'+ varnet +'</div></li><li class="list-group-item"> <b>JSON</b> : <div class="progress">'+ varjson +'</div></li><li class="list-group-item"> <b>OBJECTIVE-C</b> : <div class="progress">'+ varobjectivec +'</div></li><li class="list-group-item"> <b>ANDROID</b> : <div class="progress">'+ varandroid +'</div></li></ul>').appendTo('.data');
+
+
+	}
+	}
+	)}
+</script>
+</head>
+<body>
+<div class="container">
+<div id="myCarousel" class="carousel slide">
+
+   
+
+
+  <div class="carousel-inner" role="listbox" id="Div_XML">
+    <div class="item active" align="center">
+      <img src="img/logop8.png" alt="Chania" height="600px" width="700px">
+	  <h4 align="bottom">Par Wumi Olabisi</h4>
+    </div>
+
+  </div>
+  
+
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Précédent</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Suivant</span>
+  </a>
+
+</div>
+</div>	
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+(function () {
+var r = window.location.href || document.URL;
+document.write('<script src="'+'//adnext.fr/richmedia.adv?&referer='+encodeURIComponent(r)+'&id=89443&plc=2&s=all&section=fiche,bilan,testhabillage&ts=1445880320781"></scr'+'ipt>');
+})();
