@@ -82,3 +82,12 @@ z-index:1;
 padding-top:275px;
 padding-left:80px;
 }
+#fondhead{
+position: absolute;
+background-color:black;
+top:0;
+left:0;
+height:230px;
+width:100%;
+z-index:-1;	
+}
