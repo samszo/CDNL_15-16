@@ -19,6 +19,8 @@ temp/
 demos/
 extras/documentation
 
+rekall_cache/
+
 .buildpath
 
 .project
@@ -31,3 +33,5 @@ extras/documentation
 
 .settings/org.eclipse.wst.jsdt.ui.superType.name
 /CrazyYoshi/.sass-cache/
+
+.DS_Store

@@ -1,0 +1,55 @@
+.photo
+{
+	width: 70px;
+	border-radius: 5px;
+	border: #A27F4A solid 0.7px;
+	box-shadow: 5px 5px 20px #A27F4A;
+}
+
+h1
+{
+	margin-left: 770px;
+}
+
+.figure
+{
+	display: inline-block;
+	margin-left: 5px;
+	height:10px;
+	margin-bottom: 130px;
+}
+
+Figcaption
+{
+	text-align: center;
+	font-weight:bold;
+	font-size: 15px;
+}
+
+
+body
+{
+	 background: url("photo/vintage.jpg") no-repeat;
+	 padding-bottom: 150px;
+	 background-color: #A27F4A
+	 
+	
+}
+
+#fond
+{
+  min-width: 1200px;
+  margin-left: 160px;
+  margin-top: -389px;
+}
+
+iframe
+{
+	display: inline-block;
+	margin-left: 762px;
+	margin-top: 150px;
+	
+}
+
+
+

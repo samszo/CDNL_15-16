@@ -18,21 +18,17 @@
 
     <main>
         <aside id='left-bloc'>
-            <div>
-                étudiants
-            </div>
+            <div id="head"></div>
             <ul>
-                <li>Caroline Mourer</li>
-                <li>Baptiste Cottereau</li>
-                <li>Luis Ernesto</li>
+
             </ul>
         </aside>
         <div id='right-bloc'>
             <ul>
-                <li>Tous</li>
-                <li>Développeurs</li>
-                <li>Graphistes</li>
-                <li>Polyvalents</li>
+                <li onClick='displayStudents()'>Tous</li>
+                <li onClick='displayStudents("dev")'>Développeurs</li>
+                <li onClick='displayStudents("gra")'>Graphistes</li>
+                <li onClick='displayStudents("mix")'>Polyvalents</li>
             </ul>
             <div id="content">
             </div>

@@ -1,0 +1,143 @@
+/* Header + logo */
+h1
+{
+	font-family: oswald;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 40px;
+	margin-left: 250px;
+}
+.logop8
+{
+	height: 200px;
+	vertical-align: middle;	
+}
+
+header, head
+{
+	background: url("photo/degradebody.png") repeat-x;
+	box-shadow: 5px 5px 25px;
+	margin-top: 0px;
+	border-radius: 5px;
+	padding-top: 5px;
+	padding-bottom: 4px;
+}
+
+/* photo + logo */
+.gmail
+{
+	width: 48px;
+	height: 48px;
+	-moz-transition: all 0.5s ease-in-out 0s;
+    -webkit-transition: all 0.5s ease-in-out 0s;
+    -o-transition: all 0.5s ease-in-out 0s;
+    -ms-transition: all 0.5s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s;
+    opacity: 0.7;
+}
+.github
+{
+	width: 42px;
+	height: 42px;
+	-moz-transition: all 0.5s ease-in-out 0s;
+    -webkit-transition: all 0.5s ease-in-out 0s;
+    -o-transition: all 0.5s ease-in-out 0s;
+    -ms-transition: all 0.5s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s;
+    opacity: 0.7;
+}
+
+.github:hover, .gmail:hover, .logo_effet:hover
+{
+	-moz-transform: rotate(5deg) scale(1.10);
+    -webkit-transform: rotate(5deg) scale(1.10);
+    -o-transform: rotate(5deg) scale(1.10);
+    -ms-transform: rotate(5deg) scale(1.10);
+    transform: rotate(5deg) scale(1.10);
+    opacity: 1
+}
+
+.logo_effet
+{
+	-moz-transition: all 0.5s ease-in-out 0s;
+    -webkit-transition: all 0.5s ease-in-out 0s;
+    -o-transition: all 0.5s ease-in-out 0s;
+    -ms-transition: all 0.5s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s;
+    opacity: 0.7;
+}
+
+.logo_margin
+{
+	margin-left: 58px;	
+}
+
+.photo
+{
+	width: 195px;
+	border-radius: 12px;
+	margin-left: 50px;
+	border: outset lightgrey;			
+}
+
+.figure
+{
+	float:left;
+}
+
+
+
+figcaption
+{
+	font-family: oswald;
+	text-align: center;
+	width: 195px;
+	font-weight: bold;
+	font-size: 20px;	
+	margin-top: 10px;
+	margin-bottom: 5px;
+	margin-left: 50px;
+}
+
+
+
+body
+{
+	background: lightgrey;
+}
+#body
+{
+	background-image: url("photo/fond_jaune.png");
+	margin-top: 50px;
+}
+/* footer */
+
+#bouton_rouge
+{
+	background: url("photo/fond_degraderouge.png")repeat-x;
+	padding: 5px;
+	width: 70px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+/* fleche blanche du bouton modifier */
+#fleche
+{
+	margin-left: 5px;
+	border-radius: 5px;
+}
+
+a
+{
+	text-decoration: none;
+	
+}
+footer a
+{
+	color: white;
+
+}

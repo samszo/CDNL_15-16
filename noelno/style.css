@@ -1,0 +1,40 @@
+#conteneur {
+    background: pink;
+    max-width:100%;
+}
+#menu {
+    min-width: 23%;
+    min-height: 100%;
+    //position:fixed;
+    display: table-cell;
+    background: black;
+}
+#Div_XML{
+    margin:0 auto;
+    max-width: 950px;
+}
+nav, article,#Div_XML,.carte_id{
+    display: inline-block;
+}
+img{
+    max-height: 400px;
+}
+.carte_id{
+    padding: 2% 3.5%;
+    //padding: 25px;
+}
+.idEtudVisible,.idEtudInvisible{
+    max-width: 100%;
+}
+.idEtudInvisible{
+
+}
+.idEtudVisible{
+    background : blue;
+    //max-width: 90%;
+}
+article{
+    //max-width: 90%;
+    background: whitesmoke;
+    display: table-cell;
+}

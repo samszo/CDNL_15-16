@@ -5,6 +5,8 @@
 <title>Trombinoscope</title>
 <script src="../js/jquery.min.js" ></script>
 <script src="../js/d3.v3.min.js" ></script>
+<script src="../js/d3pie.js"></script>
+
 <script>
 	var dataEtu;   
 	$(document).ready(  
@@ -42,11 +44,112 @@
 		dataEtu.forEach(function(d){
 			if(d.idPhoto==id && d.idPhoto!=""){
                 $('<div class="data" id="data_' + id + '"></div>').html(d.Prénom+" "+d.Nom).appendTo('#link_' + id);
-				
+				voirGraphique(d);
 			}
-		})
+		})		
+	}
+	
+    var niveau = {'nul':10,'moins nul':20, 'bon':40,'trop bon':60,'expert':100};
+
+	function voirGraphique(dtEtu){
+		//merci à http://d3pie.org/#about
+		/*formatage des données
+		
+			{
+				"label": "Bisule",
+				"value": 45566,
+				"color": "#f30000"
+			},
+		
+		*/
+		var dt = [
+			{"label": "Langages informatiques [Objective-C]","value": niveau[dtEtu["Langages informatiques [Objective-C]"]],"color": "#f30000"},		        	       
+			{"label": "Langages informatiques [JSON]","value": niveau[dtEtu["Langages informatiques [JSON]"]],"color": "#f30000"},		        	       
+		];	
+		
+		var pie = new d3pie("data_" + dtEtu.idPhoto, {
+			"header": {
+				"title": {
+					"text": dtEtu.Prénom+" "+dtEtu.Nom,
+					"fontSize": 24,
+					"font": "open sans"
+				},
+				"subtitle": {
+					"text": "Ses compétences",
+					"color": "#999999",
+					"fontSize": 12,
+					"font": "open sans"
+				},
+				"titleSubtitlePadding": 9
+			},
+			"footer": {
+				"color": "#999999",
+				"fontSize": 10,
+				"font": "open sans",
+				"location": "bottom-center"
+			},
+			"size": {
+				"canvasWidth": 590,
+				"pieInnerRadius": "27%",
+				"pieOuterRadius": "85%"
+			},
+			"data": {
+				"sortOrder": "value-desc",
+				"content": dt
+			},
+			"labels": {
+				"outer": {
+					"pieDistance": 32
+				},
+				"inner": {
+					"hideWhenLessThanPercentage": 3
+				},
+				"mainLabel": {
+					"fontSize": 11
+				},
+				"percentage": {
+					"color": "#ffffff",
+					"decimalPlaces": 0
+				},
+				"value": {
+					"color": "#adadad",
+					"fontSize": 11
+				},
+				"lines": {
+					"enabled": true
+				},
+				"truncation": {
+					"enabled": true
+				}
+			},
+			"tooltips": {
+				"enabled": true,
+				"type": "placeholder",
+				"string": "{label}: {value}, {percentage}%",
+				"styles": {
+					"fadeInSpeed": 602,
+					"backgroundOpacity": 0.36
+				}
+			},
+			"effects": {
+				"pullOutSegmentOnClick": {
+					"effect": "back",
+					"speed": 400,
+					"size": 8
+				}
+			},
+			"misc": {
+				"gradient": {
+					"enabled": true,
+					"percentage": 100
+				}
+			},
+			"callbacks": {}
+		});
 		
 	}
+	
+	
 </script>
 </head>
 <body>
