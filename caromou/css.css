@@ -26,11 +26,13 @@ p{
 #Div_XML{
 	width : 660px;
 	margin : auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .items img{
 	width : 200px;
-	float : left;
 	margin : 10px;
 }
 
@@ -38,4 +40,9 @@ p{
 	background : red;
 	float : left;
 	margin : 10px;
+}
+.name{
+    font-size: 20px;
+    line-height: 22px;
+    font-family: corbel;
 }

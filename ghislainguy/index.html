@@ -72,8 +72,7 @@
 				j = 0;
 				dicton = d.Prénom + " connaît bien ";
 				
-				changerGraph(d.Prénom);
-			
+							
 				for(i = 2 ; i <= 53 ; i++){
 
 					     if(i == 2){obj = "Outils graphiques [Photoshop]"; texte="Photoshop, ";}
@@ -137,6 +136,8 @@
 					$('#comp_' + id ).html(dicton);
 					//$('#comp_' + id ).css("display", "block");
 					$('#comp_' + id ).fadeIn(2000);
+					
+					changerGraph(d);
 				
 			}
 		})
@@ -167,12 +168,108 @@
 <div id="pieChart" class="centre"></div>
 <script src="d3pie.js"></script> 
 <script>
-var pie = new d3pie("pieChart", {
+
+
+function changerGraph(d){
+	//alert(d.Prénom);
+	console.log(d);
+	
+	var niveau = {"nul": 0, "moins nul": 10, "bon": 20, "trop bon": 30, "expert": 100};
+	
+	var tableauComp = [
+			{
+				"label": "JavaScript",
+				"value": niveau[d["Langages informatiques [Javascript]"]],
+				"color": "#a83"
+			},
+			{
+				"label": "PHP",
+				"value": niveau[d["Langages informatiques [PHP]"]],
+				"color": "#8a3"
+			},
+			{
+				"label": "SQL",
+				"value": niveau[d["Langages informatiques [SQL]"]],
+				"color": "#aa3"
+			},
+			{
+				"label": "HTML",
+				"value": niveau[d["Langages informatiques [HTML]"]],
+				"color": "#8aa"
+			},
+			{
+				"label": "CSS",
+				"value": niveau[d["Langages informatiques [CSS]"]],
+				"color": "#37a"
+			},
+			{
+				"label": "Photoshop",
+				"value": niveau[d["Outils graphiques [Photoshop]"]],
+				"color": "#25b"
+			},
+			{
+				"label": "Illustrator",
+				"value": niveau[d["Outils graphiques [Illustrator]"]],
+				"color": "#c90"
+			},
+			{
+				"label": "Inkscape",
+				"value": niveau[d["Outils graphiques [Inkscape]"]],
+				"color": "#996"
+			},
+			{
+				"label": "Indesign",
+				"value": niveau[d["Outils graphiques [IN Design]"]],
+				"color": "#b38"
+			},
+			{
+				"label": "Gimp",
+				"value": niveau[d["Outils graphiques [GIMP]"]],
+				"color": "#88a"
+			},
+			{
+				"label": "Flash",
+				"value": niveau[d["Outils graphiques [Flash]"]],
+				"color": "#c22"
+			},
+			{
+				"label": "Final Cut Pro",
+				"value": niveau[d["Outils graphiques [Final Cut Pro]"]],
+				"color": "#777"
+			},
+			{
+				"label": "After Effect",
+				"value": niveau[d["Outils graphiques [After Effect]"]],
+				"color": "#c27"
+			},
+			{
+				"label": "Objective-C",
+				"value": niveau[d["Langages informatiques [Objective-C]"]],
+				"color": "#c27"
+			},
+			{
+				"label": "Android",
+				"value": niveau[d["Langages informatiques [Android]"]],
+				"color": "#c27"
+			},
+			{
+				"label": "JAVA",
+				"value": niveau[d["Langages informatiques [JAVA]"]],
+				"color": "#c27"
+			},
+		];
+	
+	//alert(d["Langages informatiques [Javascript]"]);
+	//alert(niveau["moins nul"]);
+	//alert(niveau[d["Langages informatiques [Javascript]"]]);
+	
+	
+	var pie = new d3pie("pieChart", {
 	"header": {
 		"title": {
-			"text": "Lots of Programming Languages",
+			"text": d.Prénom + " " + d.Nom,
 			"fontSize": 24,
-			"font": "open sans"
+			"font": "verdana"
 		}
 	},
 	"footer": {
@@ -187,148 +284,7 @@ var pie = new d3pie("pieChart", {
 	},
 	"data": {
 		"sortOrder": "value-desc",
-		"content": [
-			{
-				"label": "JavaScript",
-				"value": 264131,
-				"color": "#2484c1"
-			},
-			{
-				"label": "Ruby",
-				"value": 218812,
-				"color": "#0c6197"
-			},
-			{
-				"label": "Java",
-				"value": 157618,
-				"color": "#4daa4b"
-			},
-			{
-				"label": "PHP",
-				"value": 114384,
-				"color": "#90c469"
-			},
-			{
-				"label": "Python",
-				"value": 95002,
-				"color": "#daca61"
-			},
-			{
-				"label": "C+",
-				"value": 78327,
-				"color": "#e4a14b"
-			},
-			{
-				"label": "C",
-				"value": 67706,
-				"color": "#e98125"
-			},
-			{
-				"label": "Objective-C",
-				"value": 36344,
-				"color": "#cb2121"
-			},
-			{
-				"label": "Shell",
-				"value": 28561,
-				"color": "#830909"
-			},
-			{
-				"label": "Cobol",
-				"value": 24131,
-				"color": "#923e99"
-			},
-			{
-				"label": "C#",
-				"value": 100,
-				"color": "#ae83d5"
-			},
-			{
-				"label": "Coldfusion",
-				"value": 68,
-				"color": "#bf273e"
-			},
-			{
-				"label": "Fortran",
-				"value": 218812,
-				"color": "#ce2aeb"
-			},
-			{
-				"label": "Coffeescript",
-				"value": 157618,
-				"color": "#bca44a"
-			},
-			{
-				"label": "Node",
-				"value": 114384,
-				"color": "#618d1b"
-			},
-			{
-				"label": "Basic",
-				"value": 95002,
-				"color": "#1ee67b"
-			},
-			{
-				"label": "Cola",
-				"value": 36344,
-				"color": "#b0ec44"
-			},
-			{
-				"label": "Perl",
-				"value": 32170,
-				"color": "#a4a0c9"
-			},
-			{
-				"label": "Dart",
-				"value": 28561,
-				"color": "#322849"
-			},
-			{
-				"label": "Go",
-				"value": 264131,
-				"color": "#86f71a"
-			},
-			{
-				"label": "Groovy",
-				"value": 218812,
-				"color": "#d1c87f"
-			},
-			{
-				"label": "Processing",
-				"value": 157618,
-				"color": "#7d9058"
-			},
-			{
-				"label": "Smalltalk",
-				"value": 114384,
-				"color": "#44b9b0"
-			},
-			{
-				"label": "Scala",
-				"value": 95002,
-				"color": "#7c37c0"
-			},
-			{
-				"label": "Visual Basic",
-				"value": 78327,
-				"color": "#cc9fb1"
-			},
-			{
-				"label": "Scheme",
-				"value": 67706,
-				"color": "#e65414"
-			},
-			{
-				"label": "Rust",
-				"value": 36344,
-				"color": "#8b6834"
-			},
-			{
-				"label": "FoxPro",
-				"value": 32170,
-				"color": "#248838"
-			}
-		]
+		"content": tableauComp
 	},
 	"labels": {
 		"outer": {
@@ -369,11 +325,11 @@ var pie = new d3pie("pieChart", {
 		}
 	}
 });
-
-function changerGraph(nom){
-	alert(nom);
 	
-	pie.pieChart.header.title.text = "Le nouveau texte !"
+	
+	
+	
+	// pie.pieChart.header.title.text = "Le nouveau texte !"
 	
 	/*
 	var pie = new d3pie("pieChart", {

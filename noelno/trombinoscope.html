@@ -9,7 +9,7 @@
 <script src="../js/jquery.min.js" ></script>
 <script src="../js/d3.v3.min.js" ></script>
 <script>
-        /* Variable globale utilisée pour garder en mémoire les données du formulaire sous forme de tableau 
+        /* Variables globale utilisée pour garder en mémoire les données du formulaire sous forme de tableau 
            hors de la fonction qui traite le flux csv, et donc à portée de la fonction voirData();
            Une ligne = un étudiant = une case du tableau. 
            Ex : le premier étudiant de la liste est accessible en dataEtudiants[0] */
@@ -18,7 +18,7 @@
         var cLang = ['Javascript','CSS','HTML','PHP','SVG','OWL','JAVA','XML','SCALA','.NET','JSON','Objective-C','Android','page linkedIn','login twitter','compte viadéo','Action script','JQuery','Cordova','Bootstrap','D3','SQL','SASS','COMPASS','Symphony','Zend','AJAX'];
         var cCMS = ['Drupal','Wordpress','Joomla','Prestashop','Magento','SPIP','COMPASS'];
         var cGraph = ['Photoshop','GIMP','IN Design','Illustrator','Inkscape','Paint','3DS MAX','Blender','Maya','After Effect','Final Cut Pro','Première','Cinéma 4D','Flash','Bridge','.NET','JSON','Objective-C','Android','Action script','JQuery','Cordova','Bootstrap','D3','SQL'];               
-        var niveau = ['nul','moins nul', 'bon','trop bon','expert'];
+        var niveau = {'nul':10,'moins nul':30, 'bon':50,'trop bon':75,'expert':100};
         
         /**
          * jQuery. Les instructions qui suivent s'exécutent après le chargement du DOM. (les balises, pas les fichiers source).
@@ -28,63 +28,53 @@
 	$(document).ready(  
 		function() //Fonction anonyme. Pas besoin de nom car elle est exécutée immédiatement et une seule fois.
 		{
-            /* Récupère les données de tous les étudiants dans un objet data */
-			   d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
-				   dataEtudiants = data;
-	                           
-				   /*
-				   data.forEach(function(d,i){
-					   console.log(d.idPhoto+" "+d.Nom);
-				   })
-				   */
+                        /* Récupère les données de tous les étudiants dans un objet data */
+                        d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
+                                dataEtudiants = data;                  
+                                /**
+                                * jQuery. Requête HTTP au serveur hébergeant le fichier xml de notre répertoire Picasa.
+                                * Tente de récupérer les données du fichier xml dans un objet xml puis crée les éléments 
+                                * de la page en cas de succès.
+                                */
+                                $.ajax( 
+                                {
+                                       type: "GET",
+                                       url: "../php/lecteurFlux.php?url=cdnl1516photo",
+                                       dataType: "xml",
+                                       success: function(xml) 
+                                       {
+                                               var numPhoto = 0; //initialisation d'un compteur qui permettra de numéroter les photos du répertoire Picasa dans l'ordre
 
-                   /**
-                    * jQuery. Requête HTTP au serveur hébergeant le fichier xml de notre répertoire Picasa.
-                    * Tente de récupérer les données du fichier xml dans un objet xml puis crée les éléments 
-                    * de la page en cas de succès.
-                    */
-                   $.ajax( 
-                   {
-                           type: "GET",
-                           url: "../php/lecteurFlux.php?url=cdnl1516photo",
-                           dataType: "xml",
-                           success: function(xml) 
-                           {
-                                   var numPhoto = 0; //initialisation d'un compteur qui permettra de numéroter les photos du répertoire Picasa dans l'ordre
-                                   
-                                   /**
-                                    * jQuery. Pour chaque balise <enclosure> trouvée dans le DOM du fichier xml le code suivant sera exécuté
-                                    */
-                                   $(xml).find('enclosure').each(
-                                           /**
-                                            * Crée dans la <div id="DIV_Xml"> une nouvelle <div> pour chaque étudiant, 
-                                            * avec le numéro d'ordre d'appartition de la photo dans l'album,
-                                            * concaténé avec "carte_" pour distinguer chaque div l'une de l'autre. 
-                                            * Chaque <div> a pour enfant une <img> qui appelle au clic une fonction voirData().
-                                            * Cette fonction reçoit en paramètre l'url de la photo en cours d'itération.
-                                            * La boucle s'arrête donc quand la dernière photo du répertoire a été affichée.
-                                            * @returns {undefined}
-                                            */
-                                           function()
-                                           {
-                                                   /* this.attributes[1].nodeValue correspond à la valeur du deuxième attribut
-                                                    * de la balise sur laquelle on itère (ici <enclosure> pour rappel). Soit
-                                                    * la valeur de l'attribut url, qui dans le fichier xml du répertoire Picasa 
-                                                    * correspond à l'url de la photo.
-                                                    * C'est justement parce que c'est la balise <enclosure> qui porte l'url de
-                                                    * la photo que l'on itère sur cette balise et pas une autre.
-                                                    */
-                                                   $('<li class="carte_id" id="etudiant_' + numPhoto + '"></li>').html('<img src="' + this.attributes[1].nodeValue + '" /><div>'+ voirData(numPhoto) +'</div>').appendTo('#Div_XML');
-                                                   numPhoto++;
-                                           });
-                           }
-                   });
-				   
-				   
-				 });		   		   
-			
-		  }
-		);
+                                               /**
+                                                * jQuery. Pour chaque balise <enclosure> trouvée dans le DOM du fichier xml le code suivant sera exécuté
+                                                */
+                                               $(xml).find('enclosure').each(
+                                                       /**
+                                                        * Crée dans la <div id="DIV_Xml"> une nouvelle <div> pour chaque étudiant, 
+                                                        * avec le numéro d'ordre d'appartition de la photo dans l'album,
+                                                        * concaténé avec "carte_" pour distinguer chaque div l'une de l'autre. 
+                                                        * Chaque <div> a pour enfant une <img> qui appelle au clic une fonction voirData().
+                                                        * Cette fonction reçoit en paramètre l'url de la photo en cours d'itération.
+                                                        * La boucle s'arrête donc quand la dernière photo du répertoire a été affichée.
+                                                        * @returns {undefined}
+                                                        */
+                                                       function()
+                                                       {
+                                                               /* this.attributes[1].nodeValue correspond à la valeur du deuxième attribut
+                                                                * de la balise sur laquelle on itère (ici <enclosure> pour rappel). Soit
+                                                                * la valeur de l'attribut url, qui dans le fichier xml du répertoire Picasa 
+                                                                * correspond à l'url de la photo.
+                                                                * C'est justement parce que c'est la balise <enclosure> qui porte l'url de
+                                                                * la photo que l'on itère sur cette balise et pas une autre.
+                                                                */
+                                                               $('<li class="carte_id" id="etudiant_' + numPhoto + '"></li>').html('<img src="' + this.attributes[1].nodeValue + '" /><div id="nomprenom_' + numPhoto +'" class="nomprenom">'+ voirData(numPhoto) +'</div>').appendTo('#Div_XML');
+                                                               numPhoto++;
+                                                       });
+                                        }
+                                });
+                        });		   		   
+		}
+        );
 	
         /**
          * Recherche dans le csv les données qui correspondent au numéro de photo transmis en paramètre. 
@@ -105,7 +95,7 @@
                  * On aurait aussi pu éviter le problème en initialisant le compteur idPhoto à 1, mais
                  * il faudrait mettre à jour le csv pour ajouter +1 au champ idPhoto.
                  */
-     	var dataHTML = "";
+                var dataHTML = "";
 		dataEtudiants.forEach(function(etudiantCourant){
 			if(etudiantCourant['idPhoto'] == numPhoto && etudiantCourant.idPhoto != ""){
                                 //vérifier pour chaque champ s'il n'est pas égal à ""
@@ -114,22 +104,21 @@
                                 //var reseaux = "<ul class='donnees_de_base'><li>" + etudiantCourant['mail'] + "</li><li>Compte Github : @" + etudiantCourant['login Github']+"</li><li>Compte Diigo : " + etudiantCourant['login Diigo']+"</li><li>LinkedIn : " + etudiantCourant['page linkedIn']+"</li><li>Twitter : @" + etudiantCourant['login twitter']+"</li><li>Viadeo : " + etudiantCourant['compte viadéo']+"</li></ul>";
                                 dataHTML = "<h1>"+etudiantCourant['Prénom']+" "+etudiantCourant['Nom']+"</h1>";	
 			}
-		})
+		});
 		return dataHTML;
       	}
 </script>
 </head>
-<body>
-        <div id="conteneur">
+<body>         
                 <nav id="menu">
                         <!-- <img src="logo.gif" /> -->
                         <h1 id="titre">Trombinoscope</h1>
                         <p id="presentation">Lorem ipsum</p>
                         <p id="copyright">Copyright etc... - @noelno</p>
                 </nav>
-                <article>
+            
+                <article id="content">
                         <ul id="Div_XML"></ul>
                 </article>
-        </div>
 </body>
 </html>

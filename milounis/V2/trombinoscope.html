@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Trombinoscope Milounis</title>
+<script src="../../js/jquery.min.js" ></script>
+<script src="../../js/d3.v3.min.js" ></script>
+<script src="../../js/d3pie.js"></script>
+<style type="text/css">
+.imgcb{ margin:10px; float:left; border-radius:10px; padding:5px; border:#ccc 3px solid; }
+.imgcb:hover{box-shadow: 1px 1px 20px #555;}
+
+</style>
+<script>
+	var dataEtu;   
+	$(document).ready(  
+		 function()
+		 {
+		   $.ajax( {
+		            type: "GET",
+		            url: "../../php/lecteurFlux.php?url=cdnl1516photo",
+		            dataType: "xml",
+		            success: function(xml) 
+		                     {
+								   d3.csv("../../php/lecteurFlux.php?url=cdnl1516data", function(data) {
+									   dataEtu = data;
+									   /*
+									   data.forEach(function(d,i){
+										   console.log(d.idPhoto+" "+d.Nom);
+									   })
+									   */
+		            				var i=0;
+		                       $(xml).find('enclosure').each(   
+		                         function()
+		                         {
+								 urlimg = this.attributes[1].nodeValue ;
+		                        	 	//console.log(this.attributes[1].nodeValue);
+										dataEtu.forEach(function(d){
+										if(d.idPhoto==i & d.idPhoto!="" ){
+										$('<a onclick="voirGraphique(' + i + ')" class="fancybox-effects-d imgcb" href="#graph'+ i +'" title="' + d['Prénom']+" "+d.Nom +'">').html(' <img width="100px"  class="example-image" src="' + urlimg + '" alt="' + d['Prénom']+" "+d.Nom +'" /></a>').appendTo('#Div_XML');
+										$('<div id="graph'+ i +'" style="display: none; padding:20px;">').html(' <img  src="' + urlimg + '" alt="' + d['Prénom']+" "+d.Nom +'" style=" float: left; margin-right:20px" /></div>').appendTo('#Div_XML');
+										
+										
+																				
+										}
+			                       
+		                          });i++;
+		                      
+							});
+									 
+									 
+									 });		   		   
+				
+				
+				
+			
+				
+				
+				
+		        }});
+	  
+		});
+			function voirGraphique(idEtu){
+		//merci à http://d3pie.org/#about
+		/*formatage des données
+		
+			{
+				"label": "Bisule",
+				"value": 45566,
+				"color": "#f30000"
+			},
+		
+		*/ 
+					//chercher les data
+					dataEtu.forEach(function(d){ 
+						if(d.idPhoto==idEtu && d.idPhoto!=""){
+						dtEtu = d;
+		    var niveau = {'nul':10,'moins nul':20, 'bon':40,'trop bon':60,'expert':100};
+			var dt = [
+			{"label": "Javascript","value": niveau[dtEtu["Langages informatiques [Javascript]"]],"color": "#a65"},		        	       
+			{"label": "CSS","value": niveau[dtEtu["Langages informatiques [CSS]"]],"color": "#5a6"},	        	       
+			{"label": "HTML","value": niveau[dtEtu["Langages informatiques [HTML]"]],"color": "#c25"},	        	       
+			{"label": "PHP","value": niveau[dtEtu["Langages informatiques [PHP]"]],"color": "#b62"},	        	       
+			{"label": "SVG","value": niveau[dtEtu["Langages informatiques [SVG]"]],"color": "#5b3"},	        	       
+			{"label": "OWL","value": niveau[dtEtu["Langages informatiques [OWL]"]],"color": "#1e6"}	,        	       
+			{"label": "JAVA","value": niveau[dtEtu["Langages informatiques [JAVA]"]],"color": "#a95"},	        	       
+			{"label": "XML","value": niveau[dtEtu["Langages informatiques [XML]"]],"color": "#41a"}	 ,       	       
+			{"label": "SCALA","value": niveau[dtEtu["Langages informatiques [SCALA]"]],"color": "#26a"}	,        	       
+			{"label": ".NET","value": niveau[dtEtu["Langages informatiques [.NET]"]],"color": "#ab4"}	    ,    	       
+			{"label": "JSON","value": niveau[dtEtu["Langages informatiques [JSON]"]],"color": "#bc5"}	,        	       
+			{"label": "Objective-C","value": niveau[dtEtu["Langages informatiques [Objective-C]"]],"color": "#ba4"}	  ,      	       
+			{"label": "Android","value": niveau[dtEtu["Langages informatiques [Android]"]],"color": "#c02"}	        	  ,     
+			{"label": "Action script","value": niveau[dtEtu["Langages informatiques [Action script]"]],"color": "#ca5"}	,        	       
+			{"label": "JQuery","value": niveau[dtEtu["Langages informatiques [JQuery]"]],"color": "#aa9"}	,        	       
+			{"label": "Cordova","value": niveau[dtEtu["Langages informatiques [Cordova]"]],"color": "#ca6"},	        	       
+			{"label": "Bootstrap","value": niveau[dtEtu["Langages informatiques [Bootstrap]"]],"color": "#abc"},	        	       
+			{"label": "D3","value": niveau[dtEtu["Langages informatiques [D3]"]],"color": "#cba"},	        	       
+			{"label": "SPIP","value": niveau[dtEtu["CMS [SPIP]"]],"color": "#bba"},	        	       
+			{"label": "Symphony","value": niveau[dtEtu["Langages informatiques [Symphony]"]],"color": "#ccb"},	        	       
+			{"label": "Zend","value": niveau[dtEtu["Langages informatiques [Zend]"]],"color": "#cab"},	        	       
+			{"label": "AJAX","value": niveau[dtEtu["Langages informatiques [AJAX]"]],"color": "#5cc"},	        	       
+			{"label": "Photoshop","value": niveau[dtEtu["Outils graphiques [Photoshop]"]],"color": "#b5a"},	        	       
+			{"label": "GIMP","value": niveau[dtEtu["Outils graphiques [GIMP]"]],"color": "#3ab"},	        	       
+			{"label": "IN Design","value": niveau[dtEtu["Outils graphiques [IN Design]"]],"color": "#5ac"},	        	       
+			{"label": "Illustrator","value": niveau[dtEtu["Outils graphiques [Illustrator]"]],"color": "#32a"},	        	       
+			{"label": "Inkscape","value": niveau[dtEtu["Outils graphiques [Inkscape]"]],"color": "#c12"},	        	       
+			{"label": "Paint","value": niveau[dtEtu["Outils graphiques [Paint]"]],"color": "#11a"},	        	       
+			{"label": "3DS MAX","value": niveau[dtEtu["Outils graphiques [3DS MAX]"]],"color": "#a14"},	        	       
+			{"label": "Blender","value": niveau[dtEtu["Outils graphiques [Blender]"]],"color": "#ba5"},	        	       
+			{"label": "Maya","value": niveau[dtEtu["Outils graphiques [Maya]"]],"color": "#bc5"},	        	       
+			{"label": "After Effect","value": niveau[dtEtu["Outils graphiques [After Effect]"]],"color": "#cbab5a"},	        	       
+			{"label": "Final Cut Pro","value": niveau[dtEtu["Outils graphiques [Final Cut Pro"]],"color": "#ab9"},	        	       
+		];	
+		
+		var pie = new d3pie("graph"+idEtu, {
+			"header": {
+				"title": {
+					"text": "Ses compétences",
+					"fontSize": 24,
+					"font": "open sans"
+				},
+				"titleSubtitlePadding": 9
+			},
+			"footer": {
+				"color": "#999999",
+				"fontSize": 10,
+				"font": "open sans",
+				"location": "bottom-center"
+			},
+			"size": {
+				"canvasWidth": 590,
+				"pieInnerRadius": "27%",
+				"pieOuterRadius": "85%"
+			},
+			"data": {
+				"sortOrder": "value-desc",
+				"content": dt
+			},
+			"labels": {
+				"outer": {
+					"pieDistance": 32
+				},
+				"inner": {
+					"hideWhenLessThanPercentage": 3
+				},
+				"mainLabel": {
+					"fontSize": 11
+				},
+				"percentage": {
+					"color": "#ffffff",
+					"decimalPlaces": 0
+				},
+				"value": {
+					"color": "#adadad",
+					"fontSize": 11
+				},
+				"lines": {
+					"enabled": true
+				},
+				"truncation": {
+					"enabled": true
+				}
+			},
+			"tooltips": {
+				"enabled": true,
+				"type": "placeholder",
+				"string": "{label}: {value}, {percentage}%",
+				"styles": {
+					"fadeInSpeed": 602,
+					"backgroundOpacity": 0.36
+				}
+			},
+			"effects": {
+				"pullOutSegmentOnClick": {
+					"effect": "back",
+					"speed": 400,
+					"size": 8
+				}
+			},
+			"misc": {
+				"gradient": {
+					"enabled": true,
+					"percentage": 100
+				}
+			},
+			"callbacks": {}
+		});
+						}
+						
+					});	
+		  
+		}
+
+
+</script>
+
+	<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+			box-shadow: 0 0 50px #222;
+		}
+
+	</style>
+
+</head>
+<link rel="stylesheet" href="dist/css/lightbox.css">
+<body>
+<img src="https://lh6.googleusercontent.com/-dMDFKVhDksw/AAAAAAAAAAI/AAAAAAAAAAA/CB0GmcQWu_c/s0-c-k-no-ns/photo.jpg" width="200px" style="float:left; margin-right:300px"  /> <br /><br /><br /><h1 style="font-family:Arial;  display:block; text-shadow: 1px 1px 2px #999;">Classe CDNL 2015-2016</h1>
+<div style="clear:both; border-top:#b5101e solid 20px;margin-bottom:20px"></div>
+<div id="Div_XML"></div>
+<div id="graph"></div>
+  
+
+		<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="source/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+
+	<script type="text/javascript" src="source/js.js"></script>
+
+
+
+</body>
+</html>

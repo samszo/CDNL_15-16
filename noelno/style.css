@@ -1,40 +1,39 @@
-#conteneur {
+body {
     background: pink;
-    max-width:100%;
 }
 #menu {
-    min-width: 23%;
+    width: 100%;
     min-height: 100%;
-    //position:fixed;
-    display: table-cell;
+    position: fixed;
     background: black;
 }
-#Div_XML{
-    margin:0 auto;
-    max-width: 950px;
-}
-nav, article,#Div_XML,.carte_id{
+#content{
+    background: whitesmoke;
     display: inline-block;
+    position: absolute;
+    left: 291px;
+    width: 77%;
+}
+
+.carte_id{
+    margin: 2% 3.5%;
+    display: inline-block;
+    max-height: 400px;
+    position: relative;
 }
 img{
     max-height: 400px;
 }
-.carte_id{
-    padding: 2% 3.5%;
-    //padding: 25px;
-}
-.idEtudVisible,.idEtudInvisible{
-    max-width: 100%;
-}
-.idEtudInvisible{
 
+.nomprenom{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: green;
 }
-.idEtudVisible{
-    background : blue;
-    //max-width: 90%;
-}
-article{
-    //max-width: 90%;
-    background: whitesmoke;
-    display: table-cell;
+.nomprenom h1{
+    font-size:1.5em;
+    padding: 15px 0;
+    width: 100%;
+    text-align: center;
 }
