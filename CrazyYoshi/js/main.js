@@ -96,39 +96,51 @@ var datatreatment = function (data) {
         img: data['img'],
         data: {}
     };
+    student['data']['skills'] = {
+        "name": "Compétences",
+        "children": []
+    };
 
     for (var index in data['data']) {
         if (index != "") {
 
             if (getGeneralSection(index)) {
-
+                var niveau = {
+                    'nul': 0,
+                    'moins nul': 20,
+                    'bon': 40,
+                    'trop bon': 60,
+                    'expert': 100
+                };
                 var majorIndex = getGeneralSection(index);
                 var minorIndex = getSmallSection(index);
-                if (typeof student['data'][majorIndex] === "undefined") {
-                    student['data'][majorIndex] = {};
 
-                    if (typeof student['data'][majorIndex][minorIndex] === "undefined") {
-                        student['data'][majorIndex][minorIndex] = {};
+                var majorSection = {
+                    "name": majorIndex,
+                    "children": []
+                };
+
+                if (niveau[data['data'][index]] > 0) {
+
+                    var childSection = {
+                        "name": minorIndex,
+                        "size": niveau[data['data'][index]]
                     }
 
-                }
+                    var filtered = student['data']['skills']['children'].filter(function (item) {
+                        return item.name === majorIndex;
+                    });
 
-                switch (data['data'][index]) {
-                case 'expert':
-                    student['data'][majorIndex][minorIndex] = 100;
-                    break;
-                case "trop bon":
-                    student['data'][majorIndex][minorIndex] = 75;
-                    break;
-                case 'bon':
-                    student['data'][majorIndex][minorIndex] = 50;
-                    break;
-                case "moins nul":
-                    student['data'][majorIndex][minorIndex] = 25;
-                    break;
-                case "nul":
-                    student['data'][majorIndex][minorIndex] = 0;
-                    break;
+
+                    if (typeof filtered[0] !== "undefined" && filtered[0].name === majorIndex) {
+                        majorSection = filtered[0];
+                        majorSection['children'].push(childSection);
+                        removeCsvEntry(student['data']['skills']['children'], 'name', majorIndex);
+
+                    } else {
+                        majorSection['children'].push(childSection);
+                    }
+                    student['data']['skills']['children'].push(majorSection);
                 }
 
 
@@ -140,20 +152,34 @@ var datatreatment = function (data) {
 
     var somG = 0;
     var somD = 0;
+    var niveau = {
+        0: 0,
+        20: 25,
+        40: 50,
+        60: 75,
+        100: 100
+    };
 
-    for (var outil in student['data']["Outils graphiques"]) {
-        somG += parseInt(student['data']["Outils graphiques"][outil]);
+    var graphisme = student['data']['skills']['children'].filter(function (item) {
+        return item.name === "Outils graphiques";
+    });
+    var developpement = student['data']['skills']['children'].filter(function (item) {
+        return item.name === "Langages informatiques";
+    });
+    for (var outil in graphisme[0]['children']) {
+        somG += niveau[parseInt(graphisme[0]['children'][outil]['size'])];
     }
 
-    var avgG = somG / Object.keys(student['data']["Outils graphiques"]).length;
+    var avgG = somG / 15;
     student['data']["Graphiste"] = avgG;
 
-    for (var langage in student['data']["Langages informatiques"]) {
-        somD += parseInt(student['data']["Langages informatiques"][langage]);
+    for (var langage in developpement[0]['children']) {
+        somD += niveau[parseInt(developpement[0]['children'][langage]['size'])];
     }
 
-    var avgD = somD / Object.keys(student['data']["Langages informatiques"]).length;
+    var avgD = somD / 24;
     student['data']["Developpeur"] = avgD;
+
 
     return student;
 }
@@ -249,7 +275,6 @@ var displayStudents = function (kind) {
     });
 }
 
-
 var detailStudent = function (item) {
     var idStudent = item[0].id;
     var data = JSON.parse(localStorage.getItem('data'));
@@ -278,65 +303,93 @@ var detailStudent = function (item) {
 
 
     $('aside').html(aside);
-    chartBubble();
+
+    var skills = student['data']['skills'];
+
+    bubbleChart("#content", skills);
 
 }
 
+var bubbleChart = function (container, root) {
 
-var chartBubble = function(){
+    /*http: //bl.ocks.org/mbostock/4063269*/
 
-var diameter = 960,
-    format = d3.format(",d"),
-    color = d3.scale.category20c();
+    var diameter = 850,
+        format = d3.format(",d"),
+        color = d3.scale.category10();
 
-var bubble = d3.layout.pack()
-    .sort(null)
-    .size([diameter, diameter])
-    .padding(1.5);
+    var bubble = d3.layout.pack()
+        .sort(null)
+        .size([diameter, diameter])
+        .padding(1.5);
 
-var svg = d3.select("#content").append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
-    .attr("class", "bubble");
+    $(container).html('');
+    var svg = d3.select(container).append("svg")
+        .attr("width", diameter)
+        .attr("height", diameter)
+        .attr("class", "bubble");
 
-d3.json("flare.json", function(error, root) {
-  if (error) throw error;
+    var node = svg.selectAll(".node")
+        .data(bubble.nodes(classes(root))
+            .filter(function (d) {
+                return !d.children;
+            }))
+        .enter().append("g")
+        .attr("class", "node")
+        .attr("transform", function (d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
 
-  var node = svg.selectAll(".node")
-      .data(bubble.nodes(classes(root))
-      .filter(function(d) { return !d.children; }))
-    .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    node.append("title")
+        .text(function (d) {
+            return d.className + ": " + format(d.value);
+        });
 
-  node.append("title")
-      .text(function(d) { return d.className + ": " + format(d.value); });
+    node.append("circle")
+        .attr("r", function (d) {
+            return d.r;
+        })
+        .style("fill", function (d) {
+            return color(d.packageName);
+        });
 
-  node.append("circle")
-      .attr("r", function(d) { return d.r; })
-      .style("fill", function(d) { return color(d.packageName); });
+    node.append("text")
+        .attr("dy", ".3em")
+        .style("text-anchor", "middle")
+        .text(function (d) {
+            return d.className.substring(0, d.r / 3);
+        });
 
-  node.append("text")
-      .attr("dy", ".3em")
-      .style("text-anchor", "middle")
-      .text(function(d) { return d.className.substring(0, d.r / 3); });
-});
+    function classes(root) {
+        var classes = [];
 
+        function recurse(name, node) {
+            if (node.children) node.children.forEach(function (child) {
+                recurse(node.name, child);
+            });
+            else classes.push({
+                packageName: name,
+                className: node.name,
+                value: node.size
+            });
+        }
 
+        recurse(null, root);
+        return {
+            children: classes
+        };
+    }
+    d3.select(self.frameElement).style("height", diameter + "px");
 }
 
+function removeCsvEntry(object, key, value) {
 
-// Returns a flattened hierarchy containing all leaf nodes under the root.
-function classes(root) {
-  var classes = [];
-
-  function recurse(name, node) {
-    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-    else classes.push({packageName: name, className: node.name, value: node.size});
-  }
-
-  recurse(null, root);
-  return {children: classes};
+    /*http: //jsfiddle.net/J2KuY/1/*/
+    $.each(object, function (index) {
+        $.each(this, function (k, v) {
+            if (k == key && v == value) {
+                object.splice(index, 1);
+            }
+        });
+    });
 }
-
-d3.select(self.frameElement).style("height", diameter + "px");
