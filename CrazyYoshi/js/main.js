@@ -267,10 +267,11 @@ var displayStudents = function (kind) {
     }
 
     aside += "</ul>";
+    aside += "<p class='bottom' id='8'>Trombinoscope développé par Maamar Miloud.</p>";
 
     $('#content').html(content);
     $('aside').html(aside);
-    $("aside li, figure figcaption, figure div").click(function () {
+    $("aside li, figure figcaption, figure div, .bottom").click(function () {
         detailStudent($(this));
     });
 }
@@ -286,22 +287,25 @@ var detailStudent = function (item) {
     var aside = "";
     aside += '<div id="head">' + name + '</div>';
     aside += '<div class="img" style="background-image:url(\'' + student['img'] + '\')"></div>';
-    aside += '<p class="mail">' + student['data']['mail'] + '</p>';
-    aside += "<a href='https://github.com/" + student['data']['login Github'] + "' target='_blank'>Profil Github</a>";
-    aside += "<a href='https://www.diigo.com/user/" + student['data']['login Diigo'] + "' target='_blank'>Profil Diigo</a>";
+    aside += '<ul>';
+    aside += '<li class="mail">' + student['data']['mail'] + '</li>';
+    aside += "<li><a href='https://github.com/" + student['data']['login Github'] + "' target='_blank'>Profil Github</a></li>";
+    aside += "<li><a href='https://www.diigo.com/user/" + student['data']['login Diigo'] + "' target='_blank'>Profil Diigo</a></li>";
     if (student['data']['login twitter'] != "") {
-        aside += "<a href='https://twitter.com/search?q=" + student['data']['login twitter'] + "&src=typd&lang=fr' target='_blank'>Twitter</a>";
+        aside += "<li><a href='https://twitter.com/search?q=" + student['data']['login twitter'] + "&src=typd&lang=fr' target='_blank'>Twitter</a></li>";
     }
 
     if (student['data']['compte viadéo'] != "") {
-        aside += "<a href='http://www.viadeo.com/fr/search/#/?q=" + student['data']['compte viadéo'] + "' target='_blank'>Viadéo</a>";
+        aside += "<li><a href='http://www.viadeo.com/fr/search/#/?q=" + student['data']['compte viadéo'] + "' target='_blank'>Viadéo</a></li>";
     }
 
     if (student['data']['page linkedIn'] != "") {
-        aside += "<a href='" + student['data']['page linkedIn'] + "' target='_blank'>LinkedIn</a>";
+        aside += "<li><a href='" + student['data']['page linkedIn'] + "' target='_blank'>LinkedIn</a></li>";
     }
 
 
+    aside += "</ul>";
+    aside += "<p class='bottom' id='8'>Trombinoscope développé par Maamar Miloud.</p>";
     $('aside').html(aside);
 
     var skills = student['data']['skills'];
