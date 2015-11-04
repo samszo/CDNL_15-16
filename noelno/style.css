@@ -5,7 +5,9 @@ body {
     width: 100%;
     min-height: 100%;
     position: fixed;
-    background: black;
+    background: #232323;
+    color: white;
+    padding: 0.5em;
 }
 #content{
     background: whitesmoke;
@@ -24,16 +26,23 @@ body {
 img{
     max-height: 400px;
 }
-
-.nomprenom{
+.figure{
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: green;
+    background: #007FEB;
+    padding: 5px 0;
+    color: white;
 }
-.nomprenom h1{
-    font-size:1.5em;
-    padding: 15px 0;
+.figure h1{
+    font-size:1.4em;
     width: 100%;
-    text-align: center;
+    margin-left: 5%;
+}
+.figG, .figD{
+    width: 45%;
+    display: inline-block;
+}
+.figD{
+    text-align: right;
 }
