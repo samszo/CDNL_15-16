@@ -35,3 +35,4 @@ rekall_cache/
 /CrazyYoshi/.sass-cache/
 
 .DS_Store
+/nbproject/private/

@@ -6,10 +6,9 @@
 
 <link rel="stylesheet" type="text/css" href="normalize.css" />
 <link rel="stylesheet" type="text/css" href="style.css" />
-<link rel="stylesheet" type="text/css" href="colorbox.css" />
 <script src="../js/jquery.min.js" ></script>
 <script src="../js/d3.v3.min.js" ></script>
-<script src="jquery.colorbox-min.js" ></script>
+<script src="../js/d3pie.js"></script>
 <script>
         /* Variables globale utilisée pour garder en mémoire les données du formulaire sous forme de tableau 
            hors de la fonction qui traite le flux csv, et donc à portée de la fonction voirData();
@@ -20,8 +19,8 @@
         var cLang = ['Javascript','CSS','HTML','PHP','SVG','OWL','JAVA','XML','SCALA','.NET','JSON','Objective-C','Android','Action script','JQuery','Cordova','Bootstrap','D3','SQL','SASS','COMPASS','Symphony','Zend','AJAX'];
         var cCMS = ['Drupal','Wordpress','Joomla','Prestashop','Magento','SPIP','COMPASS'];
         var cGraph = ['Photoshop','GIMP','IN Design','Illustrator','Inkscape','Paint','3DS MAX','Blender','Maya','After Effect','Final Cut Pro','Première','Cinéma 4D','Flash','Bridge','.NET','JSON','Objective-C','Android','Action script','JQuery','Cordova','Bootstrap','D3','SQL'];               
-        var niveau = {'nul':10,'moins nul':30, 'bon':50,'trop bon':75,'expert':100};
-        
+        var niveau = {'nul':0,'moins nul':20, 'bon':50,'trop bon':75,'expert':100};
+        var couleurs = ['#39AE85','#48A72','#BACC01','#FBC214','#ED8100','#E85711','#E3231B','#CC071D','#A10d59','#CB3789','#C75496','#F19EB4','#3979B8','#003782','#808285','#39AE85','#48A72','#BACC01','#FBC214','#ED8100','#E85711','#E3231B','#CC071D','#A10d59','#CB3789','#C75496','#F19EB4','#3979B8','#003782'];
         /**
          * jQuery. Les instructions qui suivent s'exécutent après le chargement du DOM. (les balises, pas les fichiers source).
          * Cette fonction reçoit en paramètre une autre fonction qu'elle exécute immédiatement.
@@ -30,8 +29,17 @@
 	$(document).ready(  
 		function() //Fonction anonyme. Pas besoin de nom car elle est exécutée immédiatement et une seule fois.
 		{
-                    
-                        $(".inline").colorbox({inline:true, width:"80%"});
+                        
+                        //Evénements d'affichage de la boîte avec le graphique
+                        var boxclose = document.getElementById('boxclose');
+                        boxclose.addEventListener("click",function(){ document.getElementById('box').style.display='none'; document.getElementById('shadowing').style.display='none';},false);
+                        boxclose.addEventListener("click",function(){ boxcontent.innerHTML ="";},false);
+                        var boxcontent = document.getElementById('boxcontent');
+                        boxcontent.addEventListener("click",function(){ },false);
+                        var quitter = document.getElementById('quitter');
+                        quitter.addEventListener("click",function(){ document.getElementById('box').style.display='none'; document.getElementById('shadowing').style.display='none';},false);
+                        quitter.addEventListener("click",function(){ boxcontent.innerHTML ="";},false);
+                        
                         /* Récupère les données de tous les étudiants dans un objet data */
                         d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
                                 dataEtudiants = data;                  
@@ -71,7 +79,7 @@
                                                                 * C'est justement parce que c'est la balise <enclosure> qui porte l'url de
                                                                 * la photo que l'on itère sur cette balise et pas une autre.
                                                                 */
-                                                               $('<li class="carte_id" id="etudiant_' + numPhoto + '"></li>').html('<a class='inline' href="#inline_content"><img src="' + this.attributes[1].nodeValue + '" /></a><figure id="figure_' + numPhoto +'" class="figure">' + voirData(numPhoto) + '</figure>').appendTo('#Div_XML');
+                                                               $('<li class="carte_id" id="etudiant_' + numPhoto + '"></li>').html('<a class="inline" id="graphique_'+ numPhoto + '" onclick="voirGraphique('+ numPhoto +')"><img src="' + this.attributes[1].nodeValue + '" /></a><figure id="figure_' + numPhoto + '" class="figure">' + voirData(numPhoto) + '</figure>').appendTo('#Div_XML');
                                                                numPhoto++;
                                                        });
                                         }
@@ -145,25 +153,143 @@
 		});
 		return '<div class="figG">'+ nomPrenom +'</div><div class="figD">'+reseaux+'</div>';
       	}
-</script>
+        
+        function voirGraphique(numPhoto){
+                
+                var dtEtu;
+                dataEtudiants.forEach(function(etudiantCourant){
+                        if(etudiantCourant['idPhoto'] == numPhoto && etudiantCourant.idPhoto != ""){
+                                dtEtu = etudiantCourant;
+                        }
+                })
+                
+        	var dt = []; i = 0;
+                
+                for (var j = 0, length = cLang.length ; j < length ; j++){
+                        dt[i] = {"label": cLang[j], "value": niveau[dtEtu["Langages informatiques ["+cLang[j]+"]"]],"color": couleurs[i]};
+                        i++;
+                }
+                
+                for (var j = 0, length = cCMS.length ; j < length ; j++){
+                        dt[i] = {"label": cCMS[j], "value": niveau[dtEtu["CMS ["+cCMS[j]+"]"]],"color": couleurs[i]};
+                        i++;
+                }
+                    
+                for (var j=0, length = cGraph.length ; j < length ; j++){
+                       
+                        dt[i] = {"label": cGraph[j], "value": niveau[dtEtu["Outils graphiques ["+cGraph[j]+"]"]],"color": couleurs[i]};
+                        i++;    
+                }
+
+		var pie = new d3pie("boxcontent", {
+			"header": {
+				"title": {
+					"text": dtEtu.Prénom+" "+dtEtu.Nom,
+					"fontSize": 24,
+					"font": "open sans"
+				},
+				"subtitle": {
+					"text": "Ses compétences",
+					"color": "#999999",
+					"fontSize": 12,
+					"font": "open sans"
+				},
+				"titleSubtitlePadding": 9
+			},
+			"footer": {
+				"color": "#999999",
+				"fontSize": 10,
+				"font": "open sans",
+				"location": "bottom-center"
+			},
+			"size": {
+				"canvasWidth": 590,
+				"pieInnerRadius": "27%",
+				"pieOuterRadius": "85%"
+			},
+			"data": {
+				"sortOrder": "value-desc",
+				"content": dt
+			},
+			"labels": {
+				"outer": {
+					"pieDistance": 32
+				},
+				"inner": {
+					"hideWhenLessThanPercentage": 3
+				},
+				"mainLabel": {
+					"fontSize": 11
+				},
+				"percentage": {
+					"color": "#ffffff",
+					"decimalPlaces": 0
+				},
+				"value": {
+					"color": "#adadad",
+					"fontSize": 11
+				},
+				"lines": {
+					"enabled": true
+				},
+				"truncation": {
+					"enabled": true
+				}
+			},
+			"tooltips": {
+				"enabled": true,
+				"type": "placeholder",
+				"string": "{label}: {value}, {percentage}%",
+				"styles": {
+					"fadeInSpeed": 602,
+					"backgroundOpacity": 0.36
+				}
+			},
+			"effects": {
+				"pullOutSegmentOnClick": {
+					"effect": "back",
+					"speed": 400,
+					"size": 8
+				}
+			},
+			"misc": {
+				"gradient": {
+					"enabled": true,
+					"percentage": 100
+				}
+			},
+			"callbacks": {}
+		});
+                
+                    
+                        //affiche la fenêtre
+                        document.getElementById("shadowing").style.display="block";
+                        document.getElementById("box").style.display="block";
+                        
+                        
+                }
+		
+       </script>
 </head>
 <body>         
-                <nav id="menu">
-                        <!-- <img src="logo.gif" /> -->
-                        <h1 id="titre">Trombinoscope</h1>
-                        <p id="presentation"><a class='inline' href="#inline_content">Inline HTML</a></p>
-                        <p id="copyright">Copyright etc... - @noelno</p>
-                        <div style='display:none'>
-                            <div id='inline_content' style='padding:10px; background:#fff;'>
-                                <p><strong>This content comes from a hidden element on this page.</strong></p>
-                                <p>The inline option preserves bound JavaScript events and changes, and it puts the content back where it came from when it is closed.</p>
-                                <p><a id="click" href="#" style='padding:5px; background:#ccc;'>Click me, it will be preserved!</a></p>
-                            </div>
-                        </div>
-                </nav>
-            
-                <article id="content">
-                        <ul id="Div_XML"></ul>
-                </article>
+        <nav id="menu">
+                <!-- <img src="logo.gif" /> -->
+                <h1 id="titre">Trombinoscope</h1>
+                <p id="presentation"><!-- <a class='inline' href="#inline_content">Inline HTML</a> --></p>
+                <p id="copyright">Copyright etc... - @noelno</p>
+                
+        </nav>
+
+        <article id="content">
+                <ul id="Div_XML"></ul>
+                <a id="quitter"><div id="shadowing"></div></a>
+                        <div id="box">
+
+                                        <span id="boxclose"> </span>
+
+                                <div id="boxcontent">
+                                </div>
+</div>
+        </article>
 </body>
 </html>
