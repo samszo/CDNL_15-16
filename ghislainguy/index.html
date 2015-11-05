@@ -137,6 +137,9 @@
 					//$('#comp_' + id ).css("display", "block");
 					$('#comp_' + id ).fadeIn(2000);
 					
+					var divGraph = document.getElementById("pieChart");
+					divGraph.style.minHeight = "510px";
+					divGraph.innerHTML = "";
 					changerGraph(d);
 				
 			}
