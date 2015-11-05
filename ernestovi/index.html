@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="main.css">
     <script src="../js/jquery.min.js" ></script>
     <script src="../js/d3.v3.min.js" ></script>
+    <script src="../js/d3pie.js"></script>
     <script>
 	var dataEtu;   
-	$(document).ready(  
+	$(document).ready(
         function() {
             $.ajax({
                 type: "GET",
@@ -31,7 +32,8 @@
                                 urlphoto = this.attributes[1].nodeValue;
                                 dataEtu.forEach(function(d){
                                     if(d.idPhoto == i && d.idPhoto != ""){
-                                        $('<a href="' + urlphoto + '" data-title="' + d['Prénom']+" "+d.Nom +'">').html(' <img src="' + urlphoto + '" alt="' + d['Prénom']+" "+d.Nom +'" /></a>').appendTo('#Div_XML');
+                                        $('<a onclick="voirGraphique(' + i + ')"  href="#graphique'+ i +'" data-width="500" data-rel="popup' + i +'" class="poplight" title="' + d['Prénom']+" "+d.Nom +'">').html(' <img src="' + urlphoto + '" alt="' + d['Prénom']+" "+d.Nom +'" /></a>').appendTo('#Div_XML');
+                                      // $('<div id="graphique'+ i +'" style="display:none; padding:20px;">').html('<img src="' + urlphoto + '" alt="' + d['Prénom']+" "+d.Nom +'" style="float:left; margin-right:20px;" /></div>').appendTo('#Div_XML'); 
                                     }
                                 });
                                 i++;
@@ -41,6 +43,147 @@
             });
         }
     );
+    
+    jQuery(function($){
+
+        //Lorsque vous cliquez sur un lien de la classe poplight
+        $('a.poplight').on('click', function() {
+            var popID = $(this).data('rel'); //Trouver la pop-up correspondante
+            var popWidth = $(this).data('width'); //Trouver la largeur
+
+            //Faire apparaitre la pop-up et ajouter le bouton de fermeture
+            $('#graphique' + popID).fadeIn().css({ 'width': popWidth}).prepend('<a href="#graphique" class="close"><img src="close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>');
+
+            //Récupération du margin, qui permettra de centrer la fenêtre - on ajuste de 80px en conformité avec le CSS
+            var popMargTop = ($('#graphique' + popID).height() + 80) / 2;
+            var popMargLeft = ($('#graphique' + popID).width() + 80) / 2;
+
+            //Apply Margin to Popup
+            $('#graphique' + popID).css({ 
+                'margin-top' : -popMargTop,
+                'margin-left' : -popMargLeft
+            });
+
+            //Apparition du fond - .css({'filter' : 'alpha(opacity=80)'}) pour corriger les bogues d'anciennes versions de IE
+            $('body').append('<div id="fade"></div>');
+            $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+
+            return false;
+        });
+
+
+        //Close Popups and Fade Layer
+        $('body').on('click', 'a.close, #fade', function() { //Au clic sur le body...
+            $('#fade , .popup_block').fadeOut(function() {
+                $('#fade, a.close').remove();  
+            }); //...ils disparaissent ensemble
+
+            return false;
+        });
+
+
+    });
+
+	
+    var niveau = {'nul':10,'moins nul':20, 'bon':40,'trop bon':60,'expert':100};
+
+	function voirGraphique(dtEtu){
+		//merci à http://d3pie.org/#about
+		/*formatage des données
+		
+			{
+				"label": "Bisule",
+				"value": 45566,
+				"color": "#f30000"
+			},
+		
+		*/
+		var dt = [
+			{"label": "Langages informatiques [Objective-C]","value": niveau[dtEtu["Langages informatiques [Objective-C]"]],"color": "#f30000"},		        	       
+			{"label": "Langages informatiques [JSON]","value": niveau[dtEtu["Langages informatiques [JSON]"]],"color": "#f30000"},		        	       
+		];	
+		
+		var pie = new d3pie("data_" + dtEtu.idPhoto, {
+			"header": {
+				"title": {
+					"text": dtEtu.Prénom+" "+dtEtu.Nom,
+					"fontSize": 24,
+					"font": "open sans"
+				},
+				"subtitle": {
+					"text": "Ses compétences",
+					"color": "#999999",
+					"fontSize": 12,
+					"font": "open sans"
+				},
+				"titleSubtitlePadding": 9
+			},
+			"footer": {
+				"color": "#999999",
+				"fontSize": 10,
+				"font": "open sans",
+				"location": "bottom-center"
+			},
+			"size": {
+				"canvasWidth": 590,
+				"pieInnerRadius": "27%",
+				"pieOuterRadius": "85%"
+			},
+			"data": {
+				"sortOrder": "value-desc",
+				"content": dt
+			},
+			"labels": {
+				"outer": {
+					"pieDistance": 32
+				},
+				"inner": {
+					"hideWhenLessThanPercentage": 3
+				},
+				"mainLabel": {
+					"fontSize": 11
+				},
+				"percentage": {
+					"color": "#ffffff",
+					"decimalPlaces": 0
+				},
+				"value": {
+					"color": "#adadad",
+					"fontSize": 11
+				},
+				"lines": {
+					"enabled": true
+				},
+				"truncation": {
+					"enabled": true
+				}
+			},
+			"tooltips": {
+				"enabled": true,
+				"type": "placeholder",
+				"string": "{label}: {value}, {percentage}%",
+				"styles": {
+					"fadeInSpeed": 602,
+					"backgroundOpacity": 0.36
+				}
+			},
+			"effects": {
+				"pullOutSegmentOnClick": {
+					"effect": "back",
+					"speed": 400,
+					"size": 8
+				}
+			},
+			"misc": {
+				"gradient": {
+					"enabled": true,
+					"percentage": 100
+				}
+			},
+			"callbacks": {}
+		});
+		
+	}
     </script>
   </head>
 
@@ -51,6 +194,11 @@
     </header>
     <content id="Div_XML">
     </content>
+      
+<div id="popup_name" class="popup_block">
+	<h2>Developpez.com</h2>
+	<p>Soh Tanaka est traduit sur developpez.com.</p>
+</div>
     <footer>
     </footer>
   </body>
