@@ -36,3 +36,4 @@ rekall_cache/
 
 .DS_Store
 /nbproject/private/
+/.brackets.json
