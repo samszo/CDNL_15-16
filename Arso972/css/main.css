@@ -91,3 +91,7 @@ height:230px;
 width:100%;
 z-index:-1;	
 }
+#pieChart{
+	position:relative;
+	z-index:3;
+}
