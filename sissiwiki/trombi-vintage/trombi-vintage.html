@@ -4,21 +4,48 @@
 		<link rel="stylesheet" href="stylee.css" />
 		<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 		<title>Trombinoscope</title>
+		
+		<script src="../../js/d3.v3.min.js" ></script>
+		<script src="../../js/jquery.min.js" ></script>
+		<script type="text/javascript">
+		var dateEtu;		
+		function chargeData(){
+			d3.csv("../../php/lecteurFlux.php?url=cdnl1516data", function(data) {
+				   dataEtu = data;
+				   /*
+				   data.forEach(function(d,i){
+					   console.log(d.idPhoto+" "+d.Nom);
+				   })
+				   */
+				 });		   		   
+			
+		} 
+		function voirData(id){
+			//chercher les data
+			dataEtu.forEach(function(d){
+				if(d.idPhoto==id && d.idPhoto!=""){
+	                $('<div class="data" id="data_' + id + '"></div>').html(d.Prénom+" "+d.Nom).appendTo('#link_' + id);
+					//voirGraphique(d);
+				}
+			})		
+		}		
+		</script>
+		
 	</head>
 	
-	<body>
+	<body onload="chargeData();">
 	
 	<header>	
 			<h1>Trombinoscope CDNL 2015-2016</h1>			
 	</header>
 	
 			
-		<iframe height="420px" width="500px" src="https://docs.google.com/spreadsheets/d/1ZAYFLUDXwX0ayz51fq9lYZn51AAl4_EX5VZGHM-lad0/pubhtml?widget=true&amp;headers=false"></iframe>
+		<iframe height="420px" width="500px" src="https://docs.google.com/spreadsheets/d/12M3uOcTnHHKUziA5Rhi2ygE_m6ORkBcEQ2THS6W2M4U/pubhtml"></iframe>
 		
 			<div id="fond">
-				<figure class="figure">
-					<img class="photo" src="photo/baptiste.jpg" alt="Baptiste" />
-					<figcaption>Baptiste</figcaption>
+				<figure class="figure"  >
+					<img class="photo" onclick="voirData(6);" src="photo/baptiste.jpg" alt="Baptiste" />
+					<figcaption id="link_6">Baptiste</figcaption>
 				</figure>
 				
 				<figure class="figure">
