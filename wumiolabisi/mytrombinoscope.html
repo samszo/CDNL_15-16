@@ -43,7 +43,7 @@ d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
 		                         function()
 		                         {
 								 
-		                            $('<div class="items item" align="center" id="link_' + i + '"></div>').html('<a href="#link_' + i + '"><img onclick="voirData(' + i + ')" src="' + this.attributes[1].nodeValue + '" /></a>').appendTo('#Div_XML');
+		                            $('<div class="items item" align="center" id="link_' + i + '"></div>').html('<div id="databis'+ i +'" class="data2"><a href="#link_' + i + '"><img class="photo" onclick="voirData(' + i + ')" src="' + this.attributes[1].nodeValue + '" /></a></div>').appendTo('#Div_XML');
 			                       i++;
 		                          });
 		                      },
@@ -62,7 +62,7 @@ d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
 			if(d.idPhoto==id && d.idPhoto!=""){
 			
 			
-$('<div class="data" id="chart"><h3>Infos : </h3><ul class="list-group"><li class="list-group-item"><b>Nom</b> : '+ d.Nom +'</li><li class="list-group-item"><b>Prénom</b> : '+ d['Prénom'] +'</li><li class="list-group-item"><b>Mail</b> : '+ d.mail +'</li><li class="list-group-item"><b>Login GitHub</b> : '+ d['login Github'] +'</li><li class="list-group-item"><b>Login Diigo</b> : '+ d['login Diigo']+'</li><li class="list-group-item"><b>LinkedIn</b> : '+ d['page linkedin']+'</li><li class="list-group-item"><b>Login Twitter</b> : '+ d['login twitter']+'</li><li class="list-group-item"><b>Compte Viadeo</b> : '+ d['compte viadeo']+'</li></ul></div>').appendTo('#link_'+ id);
+$('<div class="data" style="float:right" id="chart"><h3>Infos : </h3><ul class="list-group"><li class="list-group-item"><b>Nom</b> : '+ d.Nom +'</li><li class="list-group-item"><b>Prénom</b> : '+ d['Prénom'] +'</li><li class="list-group-item"><b>Mail</b> : '+ d.mail +'</li><li class="list-group-item"><b>Login GitHub</b> : '+ d['login Github'] +'</li><li class="list-group-item"><b>Login Diigo</b> : '+ d['login Diigo']+'</li><li class="list-group-item"><b>LinkedIn</b> : '+ d['page linkedin']+'</li><li class="list-group-item"><b>Login Twitter</b> : '+ d['login twitter']+'</li><li class="list-group-item"><b>Compte Viadeo</b> : '+ d['compte viadeo']+'</li></ul></div>').appendTo('#databis' + d.idPhoto);
 
 
 switch(d['Langages informatiques [Javascript]']) {
@@ -296,7 +296,7 @@ switch(d['Langages informatiques [Android]']) {
 }
 
 
-$('<h3>Langages Informatiques : </h3><ul class="list-group"><li class="list-group-item"> <b>JAVASCRIPT</b> : <div class="progress"> '+ varjavascript +' </div></li><li class="list-group-item"> <b>CSS</b> : <div class="progress">'+ varcss +' </div></li><li class="list-group-item"> <b>HTML</b> : <div class="progress"> '+ varhtml +' </div></li><li class="list-group-item"> <b>PHP</b> : <div class="progress"> '+ varphp +'</div></li><li class="list-group-item"> <b>JAVA</b> : <div class="progress"> '+ varjava +'</div></li><li class="list-group-item"> <b>XML</b> : <div class="progress"> '+ varxml +' </div></li><li class="list-group-item"> <b>SCALA</b> : <div class="progress"> '+ varscala +'</div></li><li class="list-group-item"> <b>OWL</b> : <div class="progress">'+ varowl +'</div></li><li class="list-group-item"> <b>SVG</b> : <div class="progress"> '+ varsvg +'</div></li><li class="list-group-item"> <b>.NET</b> : <div class="progress">'+ varnet +'</div></li><li class="list-group-item"> <b>JSON</b> : <div class="progress">'+ varjson +'</div></li><li class="list-group-item"> <b>OBJECTIVE-C</b> : <div class="progress">'+ varobjectivec +'</div></li><li class="list-group-item"> <b>ANDROID</b> : <div class="progress">'+ varandroid +'</div></li></ul>').appendTo('.data');
+$('<h3 class="titre3">Langages Informatiques : </h3><div class="data"><ul class="list-group"><li class="list-group-item"> <b>JAVASCRIPT</b> : <div class="progress"> '+ varjavascript +' </div></li><li class="list-group-item"> <b>CSS</b> : <div class="progress">'+ varcss +' </div></li><li class="list-group-item"> <b>HTML</b> : <div class="progress"> '+ varhtml +' </div></li><li class="list-group-item"> <b>PHP</b> : <div class="progress"> '+ varphp +'</div></li><li class="list-group-item"> <b>JAVA</b> : <div class="progress"> '+ varjava +'</div></li><li class="list-group-item"> <b>XML</b> : <div class="progress"> '+ varxml +' </div></li><li class="list-group-item"> <b>SCALA</b> : <div class="progress"> '+ varscala +'</div></li><li class="list-group-item"> <b>OWL</b> : <div class="progress">'+ varowl +'</div></li><li class="list-group-item"> <b>SVG</b> : <div class="progress"> '+ varsvg +'</div></li><li class="list-group-item"> <b>.NET</b> : <div class="progress">'+ varnet +'</div></li><li class="list-group-item"> <b>JSON</b> : <div class="progress">'+ varjson +'</div></li><li class="list-group-item"> <b>OBJECTIVE-C</b> : <div class="progress">'+ varobjectivec +'</div></li><li class="list-group-item"> <b>ANDROID</b> : <div class="progress">'+ varandroid +'</div></li></ul></div>').appendTo('#databis' + d.idPhoto );
 
 
 	}

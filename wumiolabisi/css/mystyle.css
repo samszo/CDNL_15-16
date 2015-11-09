@@ -2,11 +2,25 @@
 
 	height:400px;
     width:400px;
-	padding:10px;
 	margin:10px;
 	overflow:scroll;
 }
+ .titre3{
+ margin:20px;
+ font-size:25px;
+  text-shadow: 2px 2px #8B4513;
 
+ }
+.photo{
+width:300px;
+height:500px;
+}
+
+.data2{
+display:box;
+margin:5px;
+
+}
 
 body
 {
