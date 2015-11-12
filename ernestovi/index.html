@@ -13,10 +13,9 @@
     <script type="text/javascript" src="jquery.fancybox.pack.js"></script>
     <script>
 	var dataEtu;
-        var pieChart = document.getElementById('pieChart');
+    var pieChart = document.getElementById('pieChart');
         
 	$(document).ready(function() {
-        //var $= jQuery.noConflict();
         $.ajax({
             type: "GET",
             url: "../php/lecteurFlux.php?url=cdnl1516photo",
@@ -77,7 +76,7 @@
             
     <footer>
         <script>
-            function voirGraphique(i){
+            function voirGraphique(idPhoto){
                 //merci à http://d3pie.org/#about
                 /*formatage des données
 
@@ -87,116 +86,116 @@
                         "color": "#f30000"
                     };*/
                 //Data ?
-                        var dtEtu;
-                        dataEtu.forEach(function(d){
-                                if(d['idPhoto'] == i && d.idPhoto != ""){
-                                        dtEtu = d;
-                                }
-                        })
-                        var niveau = {'nul':0,'moins nul':25, 'bon':50,'trop bon':75,'expert':100};
-                        var dt = [
-                            {"label": "Javascript","value": niveau[dtEtu["Langages informatiques [Javascript]"]],"color": "#2383c1"},
-                            {"label": "CSS","value": niveau[dtEtu["Langages informatiques [CSS]"]],"color": "#64a61f"},
-                            {"label": "HTML","value": niveau[dtEtu["Langages informatiques [HTML]"]],"color": "#7b6788"},
-                            {"label": "PHP","value": niveau[dtEtu["Langages informatiques [PHP]"]],"color": "#a05c56"},
-                            {"label": "SVG","value": niveau[dtEtu["Langages informatiques [SVG]"]],"color": "#961919"},
-                            {"label": "OWL","value": niveau[dtEtu["Langages informatiques [OWL]"]],"color": "#d8d239"},
-                            {"label": "JAVA","value": niveau[dtEtu["Langages informatiques [JAVA]"]],"color": "#e98125"},
-                            {"label": "XML","value": niveau[dtEtu["Langages informatiques [XML]"]],"color": "#d0743c"},
-                            {"label": "SCALA","value": niveau[dtEtu["Langages informatiques [SCALA]"]],"color": "#635122"},
-                            {"label": ".NET","value": niveau[dtEtu["Langages informatiques [.NET]"]],"color": "#6ada6a"},
-                            {"label": "JSON","value": niveau[dtEtu["Langages informatiques [JSON]"]],"color": "#0b6197"},
-                            {"label": "Objective-C","value": niveau[dtEtu["Langages informatiques [Objective-C]"]],"color": "#7c9058"},
-                            {"label": "Android","value": niveau[dtEtu["Langages informatiques [Android]"]],"color": "#207f32"},
-                            {"label": "Action script","value": niveau[dtEtu["Langages informatiques [Action script]"]],"color": "#44b9af"},
-                            {"label": "JQuery","value": niveau[dtEtu["Langages informatiques [JQuery]"]],"color": "#bca349"},
-                            {"label": "Cordova","value": niveau[dtEtu["Langages informatiques [Cordova]"]],"color": "#e4a14a"},
-                            {"label": "Bootstrap","value": niveau[dtEtu["Langages informatiques [Bootstrap]"]],"color": "#a3acb2"},
-                            {"label": "D3","value": niveau[dtEtu["Langages informatiques [D3]"]],"color": "#8cc2e9"},
-                            {"label": "D3","value": niveau[dtEtu["Langages informatiques [SQL]"]],"color": "#69a5f9"},
-                            {"label": "D3","value": niveau[dtEtu["Langages informatiques [SASS]"]],"color": "#5a378f"},
-                            {"label": "D3","value": niveau[dtEtu["Langages informatiques [COMPASS]"]],"color": "#546e91"},
-                            {"label": "SPIP","value": niveau[dtEtu["CMS [Drupal]"]],"color": "#8bde94"},
-                            {"label": "SPIP","value": niveau[dtEtu["CMS [Wordpress]"]],"color": "#d2ab58"},
-                            {"label": "SPIP","value": niveau[dtEtu["CMS [Joomla]"]],"color": "#273c71"},
-                            {"label": "SPIP","value": niveau[dtEtu["CMS [Prestashop]"]],"color": "#98bf6e"},
-                            {"label": "SPIP","value": niveau[dtEtu["CMS [Magento]"]],"color": "#4caa4a"},
-                            {"label": "SPIP","value": niveau[dtEtu["CMS [SPIP]"]],"color": "#98aac5"},
-                            {"label": "Symphony","value": niveau[dtEtu["Langages informatiques [Symphony]"]],"color": "#cc0f0f"},
-                            {"label": "Zend","value": niveau[dtEtu["Langages informatiques [Zend]"]],"color": "#31373b"},
-                            {"label": "AJAX","value": niveau[dtEtu["Langages informatiques [AJAX]"]],"color": "#006291"},
-                            {"label": "Photoshop","value": niveau[dtEtu["Outils graphiques [Photoshop]"]],"color": "#c2643f"},
-                            {"label": "GIMP","value": niveau[dtEtu["Outils graphiques [GIMP]"]],"color": "#b0a474"},
-                            {"label": "IN Design","value": niveau[dtEtu["Outils graphiques [IN Design]"]],"color": "#a5a29c"},
-                            {"label": "Illustrator","value": niveau[dtEtu["Outils graphiques [Illustrator]"]],"color": "#a9c2bb"},
-                            {"label": "Inkscape","value": niveau[dtEtu["Outils graphiques [Inkscape]"]],"color": "#22af8c"},
-                            {"label": "Paint","value": niveau[dtEtu["Outils graphiques [Paint]"]],"color": "#7fcecf"},
-                            {"label": "3DS MAX","value": niveau[dtEtu["Outils graphiques [3DS MAX]"]],"color": "#9779c6"},
-                            {"label": "Blender","value": niveau[dtEtu["Outils graphiques [Blender]"]],"color": "#3d3a87"},
-                            {"label": "Maya","value": niveau[dtEtu["Outils graphiques [Maya]"]],"color": "#b77b1b"},
-                            {"label": "After Effect","value": niveau[dtEtu["Outils graphiques [After Effect]"]],"color": "#c9c2b6"},
-                            {"label": "Final Cut Pro","value": niveau[dtEtu["Outils graphiques [Final Cut Pro]"]],"color": "#7f7dce"},
-                            {"label": "Première","value": niveau[dtEtu["Outils graphiques [Première]"]],"color": "#8db27c"},
-                            {"label": "Cinéma 4D","value": niveau[dtEtu["Outils graphiques [Cinéma 4D]"]],"color": "#be66a2"},
-                            {"label": "Flash","value": niveau[dtEtu["Outils graphiques [Flash]"]],"color": "#9ed3c5"},
-                            {"label": "Bridge","value": niveau[dtEtu["Outils graphiques [Bridge]"]],"color": "#00644b"}
-                        ];
-                        var pie = new d3pie("pieChart", {
-                            "header": {
-                                "title": {
-                                    "text": dtEtu.Nom+" "+dtEtu.Prénom,
-                                    "fontSize": 24,
-                                    "font": "open sans"
-                                },
-                                "subtitle": {
-                                    "color": "#999999",
-                                    "fontSize": 12,
-                                    "font": "open sans"
-                                },
-                                "titleSubtitlePadding": 9
+                    var dtEtu;
+                    dataEtu.forEach(function(d){
+                            if(d['idPhoto'] == idPhoto && d.idPhoto != ""){
+                                    dtEtu = d;
+                            }
+                    })
+                    var niveau = {'nul':0,'moins nul':25, 'bon':50,'trop bon':75,'expert':100};
+                    var dt = [
+                        {"label": "Javascript","value": niveau[dtEtu["Langages informatiques [Javascript]"]],"color": "#2383c1"},
+                        {"label": "CSS","value": niveau[dtEtu["Langages informatiques [CSS]"]],"color": "#64a61f"},
+                        {"label": "HTML","value": niveau[dtEtu["Langages informatiques [HTML]"]],"color": "#7b6788"},
+                        {"label": "PHP","value": niveau[dtEtu["Langages informatiques [PHP]"]],"color": "#a05c56"},
+                        {"label": "SVG","value": niveau[dtEtu["Langages informatiques [SVG]"]],"color": "#961919"},
+                        {"label": "OWL","value": niveau[dtEtu["Langages informatiques [OWL]"]],"color": "#d8d239"},
+                        {"label": "JAVA","value": niveau[dtEtu["Langages informatiques [JAVA]"]],"color": "#e98125"},
+                        {"label": "XML","value": niveau[dtEtu["Langages informatiques [XML]"]],"color": "#d0743c"},
+                        {"label": "SCALA","value": niveau[dtEtu["Langages informatiques [SCALA]"]],"color": "#635122"},
+                        {"label": ".NET","value": niveau[dtEtu["Langages informatiques [.NET]"]],"color": "#6ada6a"},
+                        {"label": "JSON","value": niveau[dtEtu["Langages informatiques [JSON]"]],"color": "#0b6197"},
+                        {"label": "Objective-C","value": niveau[dtEtu["Langages informatiques [Objective-C]"]],"color": "#7c9058"},
+                        {"label": "Android","value": niveau[dtEtu["Langages informatiques [Android]"]],"color": "#207f32"},
+                        {"label": "Action script","value": niveau[dtEtu["Langages informatiques [Action script]"]],"color": "#44b9af"},
+                        {"label": "JQuery","value": niveau[dtEtu["Langages informatiques [JQuery]"]],"color": "#bca349"},
+                        {"label": "Cordova","value": niveau[dtEtu["Langages informatiques [Cordova]"]],"color": "#e4a14a"},
+                        {"label": "Bootstrap","value": niveau[dtEtu["Langages informatiques [Bootstrap]"]],"color": "#a3acb2"},
+                        {"label": "D3","value": niveau[dtEtu["Langages informatiques [D3]"]],"color": "#8cc2e9"},
+                        {"label": "SQL","value": niveau[dtEtu["Langages informatiques [SQL]"]],"color": "#69a5f9"},
+                        {"label": "SASS","value": niveau[dtEtu["Langages informatiques [SASS]"]],"color": "#5a378f"},
+                        {"label": "COMPASS","value": niveau[dtEtu["Langages informatiques [COMPASS]"]],"color": "#546e91"},
+                        {"label": "Drupal","value": niveau[dtEtu["CMS [Drupal]"]],"color": "#8bde94"},
+                        {"label": "Wordpress","value": niveau[dtEtu["CMS [Wordpress]"]],"color": "#d2ab58"},
+                        {"label": "Joomla","value": niveau[dtEtu["CMS [Joomla]"]],"color": "#273c71"},
+                        {"label": "Prestashop","value": niveau[dtEtu["CMS [Prestashop]"]],"color": "#98bf6e"},
+                        {"label": "Magento","value": niveau[dtEtu["CMS [Magento]"]],"color": "#4caa4a"},
+                        {"label": "SPIP","value": niveau[dtEtu["CMS [SPIP]"]],"color": "#98aac5"},
+                        {"label": "Symphony","value": niveau[dtEtu["Langages informatiques [Symphony]"]],"color": "#cc0f0f"},
+                        {"label": "Zend","value": niveau[dtEtu["Langages informatiques [Zend]"]],"color": "#31373b"},
+                        {"label": "AJAX","value": niveau[dtEtu["Langages informatiques [AJAX]"]],"color": "#006291"},
+                        {"label": "Photoshop","value": niveau[dtEtu["Outils graphiques [Photoshop]"]],"color": "#c2643f"},
+                        {"label": "GIMP","value": niveau[dtEtu["Outils graphiques [GIMP]"]],"color": "#b0a474"},
+                        {"label": "IN Design","value": niveau[dtEtu["Outils graphiques [IN Design]"]],"color": "#a5a29c"},
+                        {"label": "Illustrator","value": niveau[dtEtu["Outils graphiques [Illustrator]"]],"color": "#a9c2bb"},
+                        {"label": "Inkscape","value": niveau[dtEtu["Outils graphiques [Inkscape]"]],"color": "#22af8c"},
+                        {"label": "Paint","value": niveau[dtEtu["Outils graphiques [Paint]"]],"color": "#7fcecf"},
+                        {"label": "3DS MAX","value": niveau[dtEtu["Outils graphiques [3DS MAX]"]],"color": "#9779c6"},
+                        {"label": "Blender","value": niveau[dtEtu["Outils graphiques [Blender]"]],"color": "#3d3a87"},
+                        {"label": "Maya","value": niveau[dtEtu["Outils graphiques [Maya]"]],"color": "#b77b1b"},
+                        {"label": "After Effect","value": niveau[dtEtu["Outils graphiques [After Effect]"]],"color": "#c9c2b6"},
+                        {"label": "Final Cut Pro","value": niveau[dtEtu["Outils graphiques [Final Cut Pro]"]],"color": "#7f7dce"},
+                        {"label": "Première","value": niveau[dtEtu["Outils graphiques [Première]"]],"color": "#8db27c"},
+                        {"label": "Cinéma 4D","value": niveau[dtEtu["Outils graphiques [Cinéma 4D]"]],"color": "#be66a2"},
+                        {"label": "Flash","value": niveau[dtEtu["Outils graphiques [Flash]"]],"color": "#9ed3c5"},
+                        {"label": "Bridge","value": niveau[dtEtu["Outils graphiques [Bridge]"]],"color": "#00644b"}
+                    ];
+                    var pie = new d3pie("pieChart", {
+                        "header": {
+                            "title": {
+                                "text": dtEtu.Nom.toUpperCase() + " " + dtEtu.Prénom.charAt(0).toUpperCase() + dtEtu.Prénom.substring(1).toLowerCase(),
+                                "fontSize": 24,
+                                "font": "open sans"
                             },
-                            "footer": {
+                            "subtitle": {
                                 "color": "#999999",
-                                "fontSize": 10,
-                                "font": "open sans",
-                                "location": "bottom-left"
+                                "fontSize": 12,
+                                "font": "open sans"
                             },
-                            "size": {
-                                "canvasWidth": 590,
-                                "pieInnerRadius": "50%",
-                                "pieOuterRadius": "90%"
+                            "titleSubtitlePadding": 9
+                        },
+                        "footer": {
+                            "color": "#999999",
+                            "fontSize": 10,
+                            "font": "open sans",
+                            "location": "bottom-left"
+                        },
+                        "size": {
+                            "canvasWidth": 590,
+                            "pieInnerRadius": "50%",
+                            "pieOuterRadius": "90%"
+                        },
+                        "data": {
+                            "content": dt
+                        },
+                        "labels": {
+                            "inner": {
+                                "hideWhenLessThanPercentage": 2
                             },
-                            "data": {
-                                "content": dt
+                            "mainLabel": {
+                                "fontSize": 11
                             },
-                            "labels": {
-                                "inner": {
-                                    "hideWhenLessThanPercentage": 2
-                                },
-                                "mainLabel": {
-                                    "fontSize": 11
-                                },
-                                "percentage": {
-                                    "color": "#ffffff",
-                                    "decimalPlaces": 0
-                                },
-                                "value": {
-                                    "color": "#adadad",
-                                    "fontSize": 11
-                                },
-                                "lines": {
-                                    "enabled": true
-                                }
+                            "percentage": {
+                                "color": "#ffffff",
+                                "decimalPlaces": 0
                             },
-                            "effects": {
-                                "pullOutSegmentOnClick": {
-                                    "effect": "linear",
-                                    "speed": 400,
-                                    "size": 8
-                                }
+                            "value": {
+                                "color": "#adadad",
+                                "fontSize": 11
                             },
-                            "callbacks": {}
-                        });
+                            "lines": {
+                                "enabled": true
+                            }
+                        },
+                        "effects": {
+                            "pullOutSegmentOnClick": {
+                                "effect": "linear",
+                                "speed": 400,
+                                "size": 8
+                            }
+                        },
+                        "callbacks": {}
+                    });
                 };
         </script>
     </footer>

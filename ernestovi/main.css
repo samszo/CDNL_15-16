@@ -14,11 +14,7 @@ h2 {
 
 #Div_XML {
     text-align: center;
-}/*
-#Div_XML a {
-    float: left;
-    margin: 15px;
-}*/
+}
 img {
     height: 300px;
     border-radius: 25px;
@@ -36,9 +32,3 @@ li {
     display: inline-block;
     text-transform: capitalize;
 }
-
-/****** popup ***
-#pieChart {
-    width: 590px;
-    height: 500px;
-}*/
