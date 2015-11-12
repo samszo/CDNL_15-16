@@ -1,0 +1,54 @@
+﻿.data{
+	
+	
+	float: right;
+	
+	margin-top: 0px;
+}
+
+.items{
+	margin-left: 50px;
+	margin-top:50px;
+
+}
+
+.photo{
+	box-shadow: 5px 5px 25px;
+	border-radius: 9px;
+	
+}
+
+body{ 
+	background: url('fond_2.jpg') ;
+	background-position: fixed;
+	
+}
+
+#Div-XML{
+	display: table-cell;
+}
+
+.logo{
+	width:400px;
+	margin-left: 50%;
+	
+	min-width: 500px;
+	margin-top: -60px;
+	
+}
+
+h1{
+	margin-bottom: -150px;
+	margin-top: 30px;
+	margin-left: 500px;
+	font-size: 80px;
+}
+
+header{
+	background: url('logop8.png') no-repeat;
+	background-size: 380px;
+	height: 185px
+	
+
+	
+}

@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Trombinoscope</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" media="screen" href="style.css" type="text/css" />
+
+<script src="../js/jquery.min.js" ></script>
+<script src="../js/d3.v3.min.js" ></script>
+<script src="../js/d3pie.js"></script>
+
+
+<script>
+	var dataEtu;   
+	 
+	$(document).ready(  
+		 function()
+		 {
+		   $.ajax( {
+		            type: "GET",
+		            url: "../php/lecteurFlux.php?url=cdnl1516photo",
+		            dataType: "xml",
+		            success: function(xml) 
+		                     {
+		            				var i=0;
+		                       $(xml).find('enclosure').each(   
+		                         function()
+		                         {
+		                        	 	//console.log(this.attributes[1].nodeValue);
+		                            $('<div class="items" id="link_' + i + '"></div>').html('<img class="photo" onclick="voirData(' + i + ')" src="' + this.attributes[1].nodeValue + '"/>').appendTo('#Div_XML');
+										
+								   i++;
+		                          });
+		                      }
+		        });
+		   d3.csv("../php/lecteurFlux.php?url=cdnl1516data", function(data) {
+			   dataEtu = data;
+			   /*
+			   data.forEach(function(d,i){
+				   console.log(d.idPhoto+" "+d.Nom);
+			   })
+			   */
+			 });		   		   
+		  }
+		);
+	
+	function voirData(id){
+		$('.data').remove();
+		//chercher les data
+		dataEtu.forEach(function(d){
+			if(d.idPhoto==id && d.idPhoto!=""){
+                $('<div class="data" id="data_' + id + '"></div>').appendTo('#link_' + id);
+				voirGraphique(d);
+			}
+		})		
+	}
+	
+    var niveau = {'nul':10,'moins nul':20, 'bon':40,'trop bon':60,'expert':100};
+
+	function voirGraphique(dtEtu){
+		//merci à http://d3pie.org/#about
+		/*formatage des données
+		
+			{
+				"label": "Bisule",
+				"value": 45566,
+				"color": "#f30000"
+			},
+		
+		*/
+		var dt = [
+									        	       
+							{"label": " [Javascript]","value": niveau[dtEtu["Langages informatiques [Javascript]"]],"color": "#FFFF00"},		        	       
+							{"label": " [CSS]","value": niveau[dtEtu["Langages informatiques [CSS]"]],"color": "#FF0000"},
+							{"label": " [COMPASS]","value": niveau[dtEtu["Langages informatiques [COMPASS]"]],"color": "#66FF00"},
+							{"label": " [Drupal]","value": niveau[dtEtu["Langages informatiques [Drupal]"]],"color": "#330066"},
+							{"label": " [HTML]","value": niveau[dtEtu["Langages informatiques [HTML]"]],"color": "#66FFCC"},
+							{"label": " [PHP]","value": niveau[dtEtu["Langages informatiques [PHP]"]],"color": "#FF33FF"},
+							{"label": " [Magento]","value": niveau[dtEtu["CMS [Magento]"]],"color": "#CC0066"},
+							{"label": " [SPIP]","value": niveau[dtEtu["CMS [SPIP]"]],"color": "#00FF66"},
+							{"label": " [SVG]","value": niveau[dtEtu["Langages informatiques [SVG]"]],"color": "#CCFF66"},
+							{"label": " [OWL]","value": niveau[dtEtu["Langages informatiques [OWL]"]],"color": "#FFFF00"},
+							{"label": " [JAVA]","value": niveau[dtEtu["Langages informatiques [JAVA]"]],"color": "#66FF00"},
+							{"label": " [XML]","value": niveau[dtEtu["Langages informatiques [XML]"]],"color": "#330066"},
+							{"label": " [SCALA]","value": niveau[dtEtu["Langages informatiques [SCALA]"]],"color": "#66FFCC"},
+							{"label": " [.NET]","value": niveau[dtEtu["Langages informatiques [.NET]"]],"color": "#FF33FF"},
+							{"label": " [JSON]","value": niveau[dtEtu["Langages informatiques [JSON]"]],"color": "#CC0066"},
+							{"label": "[JQuery]","value": niveau[dtEtu["Langages informatiques [JQuery]"]],"color": "#00FF66"},
+							{"label": " [Cordova]","value": niveau[dtEtu["Langages informatiques [Cordova]"]],"color": "#CCFF66"},
+							{"label": " [Bootstrap]","value": niveau[dtEtu["Langages informatiques [Bootstrap]"]],"color": "#FFFF00"},
+							{"label": " [D3]","value": niveau[dtEtu["Langages informatiques [D3]"]],"color": "#66FF00"},
+							{"label": " [SQL]","value": niveau[dtEtu["Langages informatiques [SQL]"]],"color": "#330066"},
+							{"label": " [SASS]","value": niveau[dtEtu["Langages informatiques [SASS]"]],"color": "#66FFCC"},
+							{"label": " [SASS]","value": niveau[dtEtu["Langages informatiques [SASS]"]],"color": "#FF33FF"},
+							{"label": " [Wordpress]","value": niveau[dtEtu["CMS [Wordpress]"]],"color": "#CC0066"},
+							{"label": " [Première]","value": niveau[dtEtu["Outils graphiques [Première]"]],"color": "#00FF66"},
+							{"label": "[Cinéma 4D]","value": niveau[dtEtu["Outils graphiques [Cinéma 4D]"]],"color": "#CCFF66"},
+							{"label": " [Flash]","value": niveau[dtEtu["Outils graphiques [Flash]"]],"color": "#FFFF00"},
+							{"label": " [Bridge]","value": niveau[dtEtu["Outils graphiques [Bridge]"]],"color": "#66FF00"},
+							{"label": " [Joomla]","value": niveau[dtEtu["CMS [Joomla]"]],"color": "#330066"},
+							{"label": " [COMPASS]","value": niveau[dtEtu["CMS [COMPASS]"]],"color": "#66FFCC"},
+							{"label": " [Symphony]","value": niveau[dtEtu["Langages informatiques [Symphony]"]],"color": "#FF33FF"},
+							{"label": " [Zend]","value": niveau[dtEtu["Langages informatiques [Zend]"]],"color": "CC0066"},
+							{"label": " [AJAX]","value": niveau[dtEtu["Langages informatiques [AJAX]"]],"color": "#00FF66"},
+							{"label": " [Photoshop]","value": niveau[dtEtu["Outils graphiques [Photoshop]"]],"color": "#CCFF66"},
+							{"label": " [IN Design]","value": niveau[dtEtu["Outils graphiques [IN Design]"]],"color": "#FFFF00"},
+							{"label": " [Illustrator]","value": niveau[dtEtu["Outils graphiques [Illustrator]"]],"color": "#66FF00"},
+							{"label": " [Objective-C]","value": niveau[dtEtu["Langages informatiques [Objective-C]"]],"color": "#330066"},	
+							{"label": " [Android]","value": niveau[dtEtu["Langages informatiques [Android]"]],"color": "#66FFCC"},
+							{"label": " [Action scrip]","value": niveau[dtEtu["Langages informatiques [Action scrip]"]],"color": "#FF33FF"},
+							{"label": " [Inkscape]","value": niveau[dtEtu["Outils graphiques [Inkscape]"]],"color": "#CC0066"},
+							{"label": " [3DS MAX]","value": niveau[dtEtu["Outils graphiques [3DS MAX]"]],"color": "#00FF66"},
+							{"label": " [Blender]","value": niveau[dtEtu["Outils graphiques [Blender]"]],"color": "#FFFF00"},
+							{"label": " [Maya]","value": niveau[dtEtu["Outils graphiques [Maya]"]],"color": "#66FF00"},
+							{"label": " [After Effect]","value": niveau[dtEtu["Outils graphiques [After Effect]"]],"color": "#330066"},
+							{"label": " [Final Cut Pro]","value": niveau[dtEtu["Outils graphiques [Final Cut Pro]"]],"color": "#f30000"},			
+		];	
+		
+		var pie = new d3pie("data_" + dtEtu.idPhoto, {
+			"header": {
+				"title": {
+					"text": dtEtu.Prénom+" "+dtEtu.Nom,
+					"fontSize": 24,
+					"font": "open sans"
+				},
+				"subtitle": {
+					"text": "Ses compétences",
+					"color": "#999999",
+					"fontSize": 16,
+					"font": "open sans"
+				},
+				"titleSubtitlePadding": 9
+			},
+			"footer": {
+				"color": "#999999",
+				"fontSize": 10,
+				"font": "open sans",
+				"location": "bottom-center"
+			},
+			"size": {
+				"canvasWidth": 590,
+				"pieInnerRadius": "27%",
+				"pieOuterRadius": "85%"
+			},
+			"data": {
+				
+				"content": dt
+			},
+			"labels": {
+				"outer": {
+					"pieDistance": 70
+				},
+				"inner": {
+					"hideWhenLessThanPercentage": 5
+				},
+				"mainLabel": {
+					"fontSize": 11
+				},
+				"percentage": {
+					"color": "#ffffff",
+					"decimalPlaces": 0
+				},
+				"value": {
+					"color": "#adadad",
+					"fontSize": 11
+				},
+				"lines": {
+					"enabled": true
+				},
+				"truncation": {
+					"enabled": true
+				}
+			},
+			"tooltips": {
+				"enabled": true,
+				"type": "placeholder",
+				"string": "{label}: {value}, {percentage}%",
+				"styles": {
+					"fadeInSpeed": 602,
+					"backgroundOpacity": 0.36
+				}
+			},
+			"effects": {
+				"pullOutSegmentOnClick": {
+					"effect": "back",
+					"speed": 400,
+					"size": 8
+				}
+			},
+			"misc": {
+				"gradient": {
+					"enabled": true,
+					"percentage": 100
+				}
+			},
+			"callbacks": {}
+			
+		});
+		
+	}
+	
+	
+</script>
+</head>
+
+	
+		<body>
+			<header>
+				<h1>CNDL 2015- 2016</h1>
+			
+			</header>
+			<div id="Div_XML"></div>
+			
+		</body>
+	
+
+</html>
