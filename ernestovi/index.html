@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="jquery.fancybox.css" type="text/css" media="screen" />
     <script type="text/javascript" src="jquery.fancybox.pack.js"></script>
     <script>
-	var dataEtu;   
+	var dataEtu;
+        var pieChart = document.getElementById('pieChart');
+        
 	$(document).ready(function() {
         //var $= jQuery.noConflict();
         $.ajax({
@@ -35,7 +37,8 @@
                             var nom = d.Nom;
                             var nomUp = nom.toUpperCase();
                             if(d.idPhoto == i && d.idPhoto != ""){
-                                $('<li>' + nomUp + ' ' + d.Prénom + '<a href="#pieChart" class="fancybox" title="' + d['Prénom']+ " " + d.Nom + '"><img src="' + urlphoto + '" alt="' + d['Prénom']+ " " + d.Nom + '" /></a></li>').appendTo('#Div_XML');
+                                /* Appel de voirGraphique() en lui transmettant l'id de l'étudiant */
+                                $('<li>' + nomUp + ' ' + d.Prénom + '<a href="#pieChart" class="fancybox" title="' + d['Prénom']+ " " + d.Nom + '"><img src="' + urlphoto + '" alt="' + d['Prénom']+ " " + d.Nom + '" onclick="voirGraphique('+ i +')" /></a></li>').appendTo('#Div_XML');
                             }
                         });
                         i++;
@@ -52,6 +55,9 @@
                     speedOut : 0
                 }
             }
+            //efface le contenu de la div pieChart à sa fermeture pour être vide au moment de l'affichage d'un autre graphique (...mais ça marche pas)
+            //,
+            //beforeClose:function(){pieChart.innerHTML ="";}
         });
     });
 	
@@ -71,7 +77,7 @@
             
     <footer>
         <script>
-            function voirGraphique(dtEtu){
+            function voirGraphique(i){
                 //merci à http://d3pie.org/#about
                 /*formatage des données
 
@@ -81,9 +87,12 @@
                         "color": "#f30000"
                     };*/
                 //Data ?
-                dataEtu.forEach(function(d){ 
-                    if(d.idPhoto == idEtu && d.idPhoto != ""){
-                        dtEtu = d;
+                        var dtEtu;
+                        dataEtu.forEach(function(d){
+                                if(d['idPhoto'] == i && d.idPhoto != ""){
+                                        dtEtu = d;
+                                }
+                        })
                         var niveau = {'nul':0,'moins nul':25, 'bon':50,'trop bon':75,'expert':100};
                         var dt = [
                             {"label": "Javascript","value": niveau[dtEtu["Langages informatiques [Javascript]"]],"color": "#2383c1"},
@@ -132,10 +141,10 @@
                             {"label": "Flash","value": niveau[dtEtu["Outils graphiques [Flash]"]],"color": "#9ed3c5"},
                             {"label": "Bridge","value": niveau[dtEtu["Outils graphiques [Bridge]"]],"color": "#00644b"}
                         ];
-                        var pie = new d3pie("pieChart"+idEtu, {
+                        var pie = new d3pie("pieChart", {
                             "header": {
                                 "title": {
-                                    "text": "Nom étudiants",
+                                    "text": dtEtu.Nom+" "+dtEtu.Prénom,
                                     "fontSize": 24,
                                     "font": "open sans"
                                 },
@@ -188,8 +197,6 @@
                             },
                             "callbacks": {}
                         });
-                      }
-                    });
                 };
         </script>
     </footer>
