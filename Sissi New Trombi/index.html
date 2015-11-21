@@ -1,0 +1,496 @@
+<html>
+	<head>
+	
+		<title>Trombinoscope</title>
+		<meta charset="utf-8" />
+		
+		
+		
+		<link rel="stylesheet" href="./bootstrap-3.3.5-dist/css/bootstrap.min.css" >
+		<link rel="stylesheet" href="./bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" >
+		<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+		<script src="./jquery-1.11.3.min.js" ></script>
+		<script src="./bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+		<script src="./d3.min.js" ></script>
+		<script src="./d3pie.min.js"></script> 
+	
+	
+	<style>
+	
+	
+		.photo
+		
+		{
+		width: 120px;
+		padding: 5px;
+		background-color: white;
+		margin-left: 150px;
+		margin-bottom: 10px;
+		
+        }
+		     
+	
+		
+		h1
+		     {
+		     text-align: center;
+			margin-left: 300px ;
+			background-color: white;
+			font-family: !important center ;
+		      }
+		      
+		body
+		
+		{   
+
+			background-color: black;
+		}
+		
+		.deco
+		{
+			padding: 7px;
+			background-color: black;
+		}
+		
+		.item
+		{   
+			padding: 5px;
+			
+			
+		}
+		
+		.modal-body
+		{
+			background-color: white;
+			
+		}
+		
+		#myModal
+		
+		{
+		  margin-left:300px;
+		  
+		}
+		
+	</style>
+	
+	<script>
+	function prenom(id){
+			//chercher les data
+			dataEtu.forEach(function(d){
+				if(d.idPhoto==id && d.idPhoto!=""){
+						$('#data_' + id ).html(d.Prénom+" "+d.Nom).appendTo('#link_' + id + ' .deco');
+					
+				}
+			})
+		}
+		
+		function comp(id){
+		var dicton = "Très fort en ";
+		var texte = "";
+		var obj = "";
+		
+		//chercher les data
+		dataEtu.forEach(function(d){
+			if(d.idPhoto==id && d.idPhoto!=""){
+				j = 0;
+				dicton = d.Prénom + " connaît bien ";
+				
+							
+				for(i = 2 ; i <= 53 ; i++){
+					     if(i == 2){obj = "Outils graphiques [Photoshop]"; texte="Photoshop, ";}
+					else if(i == 3){obj = "Outils graphiques [Illustrator]"; texte="Illustrator, ";}
+					else if(i == 4){obj = "Outils graphiques [IN Design]"; texte="IN Design, ";}
+					else if(i == 5){obj = "Outils graphiques [GIMP]"; texte="GIMP, ";}
+					else if(i == 6){obj = "Outils graphiques [Flash]"; texte="Flash, ";}
+					else if(i == 7){obj = "Outils graphiques [Final Cut Pro]"; texte="Final Cut Pro, ";}
+					else if(i == 8){obj = "Langages informatiques [Zend]"; texte="Zend, ";}
+					else if(i == 9){obj = "Langages informatiques [XML]"; texte="XML, ";}
+					else if(i == 10){obj = "Langages informatiques [Symphony]"; texte="Symphony, ";}
+					else if(i == 11){obj = "Langages informatiques [HTML]"; texte="HTML, ";}
+					else if(i == 12){obj = "Langages informatiques [CSS]"; texte="CSS, ";}
+					else if(i == 13){obj = "Langages informatiques [PHP]"; texte="PHP, ";}
+					else if(i == 14){obj = "Langages informatiques [SQL]"; texte="SQL, ";}
+					else if(i == 15){obj = "Langages informatiques [Javascript]"; texte="Javascript, ";}
+					else if(i == 16){obj = "Langages informatiques [JQuery]"; texte="JQuery, ";}
+					else if(i == 17){obj = "Langages informatiques [AJAX]"; texte="AJAX (pas la lessive...), ";}
+					else if(i == 18){obj = "Langages informatiques [Bootstrap]"; texte="Bootstrap, ";}
+					else if(i == 19){obj = "Langages informatiques [Android]"; texte="Android, ";}
+					else if(i == 20){obj = "Langages informatiques [Objective-C]"; texte="Objective-C, ";}
+					else if(i == 21){obj = "Langages informatiques [JSON]"; texte="JSON, ";}
+					else if(i == 22){obj = "Langages informatiques [OWL]"; texte="OWL, ";}
+					else if(i == 23){obj = "Langages informatiques [SCALA]"; texte="SCALA, ";}
+					else if(i == 24){obj = "Langages informatiques [SASS]"; texte="SASS, ";}
+					else if(i == 25){obj = "Langages informatiques [SVG]"; texte="SVG, ";}
+					else if(i == 26){obj = "Langages informatiques [JAVA]"; texte="JAVA, ";}
+					else if(i == 27){obj = "Langages informatiques [D3]"; texte="D3, ";}
+					else if(i == 28){obj = "Langages informatiques [Cordova]"; texte="Cordova, ";}
+					else if(i == 29){obj = "Langages informatiques [COMPASS]"; texte="COMPASS, ";}
+					else if(i == 30){obj = "Langages informatiques [Action script]"; texte="Action script, ";}
+					else if(i == 31){obj = "Langages informatiques [.NET]"; texte=".NET, ";}
+					else if(i == 32){obj = "CMS [Wordpress]"; texte="Wordpress, ";}
+					else if(i == 33){obj = "CMS [SQL]"; texte="SQL, ";}
+					else if(i == 34){obj = "CMS [SPIP]"; texte="SPIP, ";}
+					else if(i == 35){obj = "CMS [SASS]"; texte="SASS, ";}
+					else if(i == 36){obj = "CMS [Prestashop]"; texte="Prestashop, ";}
+					else if(i == 37){obj = "CMS [Objective-C]"; texte="Objective-C, ";}
+					else if(i == 38){obj = "CMS [Magento]"; texte="Magento, ";}
+					else if(i == 39){obj = "CMS [Joomla]"; texte="Joomla, ";}
+					else if(i == 40){obj = "CMS [JSON]"; texte="JSON, ";}
+					else if(i == 41){obj = "CMS [Drupal]"; texte="Drupal, ";}
+					else if(i == 42){obj = "Outils graphiques [Cinéma 4D]"; texte="Cinéma 4D, ";}
+					else if(i == 43){obj = "Outils graphiques [Bridge]"; texte="Bridge, ";}
+					else if(i == 44){obj = "Outils graphiques [Blender]"; texte="Blender, ";}
+					else if(i == 45){obj = "Outils graphiques [After Effect]"; texte="After Effect, ";}
+					else if(i == 46){obj = "Outils graphiques [3DS MAX]"; texte="3DS MAX, ";}
+					else if(i == 47){obj = "Outils graphiques [Première]"; texte="Première, ";}
+					else if(i == 48){obj = "Outils graphiques [Paint]"; texte="Paint, ";}
+					else if(i == 49){obj = "Outils graphiques [Maya]"; texte="Maya, ";}
+					else if(i == 50){obj = "Outils graphiques [Inkscape]"; texte="Inkscape, ";}
+					else if(i == 51){obj = "aaaaaa"; texte="aaaaa, ";}
+					else if(i == 52){obj = "aaaaaa"; texte="aaaaa, ";}
+					if(j < 6 && d[obj] == "expert" || j < 6 && d[obj] == "trop bon" || j < 6 && d[obj] == "bon"){dicton += texte; j++;}
+				}
+				
+					dicton += "...";
+			
+					$(".bulle").fadeOut(2000);
+					$('#comp_' + id ).html(dicton);
+					//$('#comp_' + id ).css("display", "block");
+					$('#comp_' + id ).fadeIn(2000);
+					
+					var divGraph = document.getElementById("pieChart");
+					divGraph.style.minHeight = "510px";
+					divGraph.innerHTML = "";
+					changerGraph(d);
+				
+			}
+		})
+	}
+
+		function changerGraph(d){
+			//alert(d.Prénom);
+// 			console.log(d);
+			
+			var niveau = {"nul": 0, "moins nul": 10, "bon": 20, "trop bon": 30, "expert": 100};
+			
+			var tableauComp = [
+					{
+						"label": "JavaScript",
+						"value": niveau[d["Langages informatiques [Javascript]"]],
+						"color": "#a83"
+					},
+					{
+						"label": "PHP",
+						"value": niveau[d["Langages informatiques [PHP]"]],
+						"color": "#8a3"
+					},
+					{
+						"label": "SQL",
+						"value": niveau[d["Langages informatiques [SQL]"]],
+						"color": "#aa3"
+					},
+					{
+						"label": "HTML",
+						"value": niveau[d["Langages informatiques [HTML]"]],
+						"color": "#8aa"
+					},
+					{
+						"label": "CSS",
+						"value": niveau[d["Langages informatiques [CSS]"]],
+						"color": "#37a"
+					},
+					{
+						"label": "Photoshop",
+						"value": niveau[d["Outils graphiques [Photoshop]"]],
+						"color": "#25b"
+					},
+					{
+						"label": "Illustrator",
+						"value": niveau[d["Outils graphiques [Illustrator]"]],
+						"color": "#c90"
+					},
+					{
+						"label": "Inkscape",
+						"value": niveau[d["Outils graphiques [Inkscape]"]],
+						"color": "#996"
+					},
+					{
+						"label": "Indesign",
+						"value": niveau[d["Outils graphiques [IN Design]"]],
+						"color": "#b38"
+					},
+					{
+						"label": "Gimp",
+						"value": niveau[d["Outils graphiques [GIMP]"]],
+						"color": "#88a"
+					},
+					{
+						"label": "Flash",
+						"value": niveau[d["Outils graphiques [Flash]"]],
+						"color": "#c22"
+					},
+					{
+						"label": "Final Cut Pro",
+						"value": niveau[d["Outils graphiques [Final Cut Pro]"]],
+						"color": "#777"
+					},
+					{
+						"label": "After Effect",
+						"value": niveau[d["Outils graphiques [After Effect]"]],
+						"color": "#c27"
+					},
+					{
+						"label": "Objective-C",
+						"value": niveau[d["Langages informatiques [Objective-C]"]],
+						"color": "#c27"
+					},
+					{
+						"label": "Android",
+						"value": niveau[d["Langages informatiques [Android]"]],
+						"color": "#c27"
+					},
+					{
+						"label": "JAVA",
+						"value": niveau[d["Langages informatiques [JAVA]"]],
+						"color": "#c27"
+					},
+				];
+			
+			//alert(d["Langages informatiques [Javascript]"]);
+			//alert(niveau["moins nul"]);
+			//alert(niveau[d["Langages informatiques [Javascript]"]]);
+			
+			
+			var pie = new d3pie("pieChart", {
+			"header": {
+				"title": {
+					"text": " " ,
+					"fontSize": 15,
+					"font": "verdana"
+				}
+			},
+			"footer": {
+				"color": "#999999",
+				"fontSize": 10,
+				"font": "open sans",
+				"location": "bottom-left"
+			},
+			"size": {
+				"canvasWidth": 590,
+				"pieOuterRadius": "90%"
+			},
+			"data": {
+				"sortOrder": "value-desc",
+				"content": tableauComp
+			},
+			"labels": {
+				"outer": {
+					"pieDistance": 32
+				},
+				"inner": {
+					"hideWhenLessThanPercentage": 3
+				},
+				"mainLabel": {
+					"fontSize": 11
+				},
+				"percentage": {
+					"color": "#ffffff",
+					"decimalPlaces": 0
+				},
+				"value": {
+					"color": "#adadad",
+					"fontSize": 11
+				},
+				"lines": {
+					"enabled": true
+				},
+				"truncation": {
+					"enabled": true
+				}
+			},
+			"effects": {
+				"pullOutSegmentOnClick": {
+					"effect": "linear",
+					"speed": 400,
+					"size": 8
+				}
+			},
+			"misc": {
+				"gradient": {
+					"enabled": true,
+					"percentage": 100
+				}
+			}
+		});
+			
+			
+			
+			
+			
+		}	
+
+	
+	$(document).ready(function(){
+		
+		//get images
+		 $.ajax( {
+		            type: "GET",
+		            url: "./lecteurFlux.php?url=cdnl1516photo",
+		            dataType: "xml",
+		            success: function(xml) 
+		                     {
+		            			var i=0;
+		                       $(xml).find('enclosure').each(   
+		                         function()
+		                         {
+		                        	 	//console.log(this.attributes[1].nodeValue);
+		                            $('<div class="items" id="link_' + i + '"></div>').html('<div id="comp_'+ i +'" class="bulle"></div><div class="deco"><img alt="data_' + i + '" class="photo" onclick="comp(' + i + ')" onMouseOver="prenom(' + i + ')" src="' + this.attributes[1].nodeValue + '" /><div class="data" id="data_' + i + '"></div></div>').appendTo('#Div_XML');
+			                     
+			                       i++;
+		                          });
+								  
+								  nbrEtu = $(".items").length;
+								  if(nbrEtu > 0){$("#nombre").html("Les CDNL sont au nombre de " + nbrEtu + " !");}
+							
+								  $(".photo").on( "click", function() {
+									 	var userID = $(this).prop("alt");
+// 									 	alert ($(this).prop("src"));
+										$("#myModalLabel").text($("#"+userID).text());
+									
+								
+						        		$('#myModal').modal('show');
+							    });
+		                      }
+		        });
+	
+		 d3.csv("./lecteurFlux.php?url=cdnl1516data", function(data) {
+			   dataEtu = data;
+			   			   		
+			 });
+	
+			
+	
+	});
+	</script>
+	</head>
+	
+	<body>
+	
+	<header>	
+			<h1>Trombinoscope CDNL 2015-2016</h1>			
+	</header>
+	
+	
+	<div id="Div_XML">
+	</div>
+	<br>
+	<p id="nombre" class="centre"></p>
+	
+			
+<!-- 		<iframe height="420px" width="100%" src="https://docs.google.com/spreadsheets/d/1ZAYFLUDXwX0ayz51fq9lYZn51AAl4_EX5VZGHM-lad0/pubhtml?widget=true&amp;headers=false"></iframe> -->
+		
+<!-- 			<div id="fond"> -->
+				
+<!-- 				Button trigger modal -->
+<!-- 				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> -->
+<!-- 				  Launch demo modal -->
+<!-- 				</button> -->
+			
+<!-- 				<figure class="figure"> -->
+<!-- 					<img title="image" class="photo" src="photo/baptiste.jpg" alt="Baptiste" /> -->
+<!-- 					<figcaption>Baptiste</figcaption> -->
+<!-- 				</figure> -->
+				
+<!-- 				<figure class="figure"> -->
+<!-- 					<img class="photo" src="photo/caroline.jpg" alt="Caroline" /> -->
+<!-- 					<figcaption>Caroline</figcaption> -->
+<!-- 				</figure> -->
+				
+<!-- 				<figure class="figure"> -->
+<!-- 					<img class="photo" src="photo/djamel.jpg" alt="Djamel" /> -->
+<!-- 					<figcaption>Djamel</figcaption> -->
+<!-- 				</figure> -->
+				
+<!-- 				<figure class="figure"> -->
+<!-- 					<img class="photo" src="photo/ernesto.jpg" alt="Ernesto" /> -->
+<!-- 					<figcaption>Ernesto</figcaption> -->
+<!-- 				</figure> -->
+				
+<!-- 				<br/> -->
+				
+<!-- 				<figure class="figure"> -->
+<!-- 					<img class="photo" src="photo/ghislain.jpg" alt="Ghislain" /> -->
+<!-- 					<figcaption>Ghislain</figcaption> -->
+<!-- 				</figure> -->
+				
+<!-- 				<figure class="figure"> -->
+<!-- 					<img class="photo" src="photo/gregory.jpg" alt="Gregory" /> -->
+<!-- 					<figcaption>Gregory</figcaption> -->
+<!-- 				</figure> -->
+				
+				
+<!-- 				<figure class="figure"> -->
+<!-- 					<img class="photo" src="photo/lounis.jpg" alt="Lounis" /> -->
+<!-- 					<figcaption>Lounis</figcaption> -->
+<!-- 				</figure> -->
+				
+				
+<!-- 				<figure class="figure"> -->
+<!-- 					<img class="photo" src="photo/baptiste.jpg" alt="Baptiste" /> -->
+<!-- 					<figcaption>Baptiste</figcaption>			 -->
+<!-- 				</figure> -->
+				
+<!-- 				 <br/> -->
+				 
+<!-- 				<figure class="figure"> -->
+<!-- 			        <img class="photo" src="photo/miloud.jpg" alt="Miloud" /> -->
+<!-- 					<figcaption>Miloud</figcaption>				 -->
+<!-- 				</figure> -->
+			
+				
+<!-- 				<figure class="figure"> -->
+<!-- 			        <img class="photo" src="photo/nadine.jpg" alt="Nadine" /> -->
+<!-- 					<figcaption>Nadine</figcaption>			 -->
+<!-- 				</figure> -->
+				
+<!-- 				<figure class="figure"> -->
+<!-- 			        <img class="photo" src="photo/omar.jpg" alt="Omar" /> -->
+<!-- 					<figcaption>Omar</figcaption>				 -->
+<!-- 				</figure> -->
+				
+<!-- 		        <figure class="figure"> -->
+<!-- 				    <img class="photo" src="photo/omowumi.jpg" alt="Omowumi" /> -->
+<!-- 					<figcaption>Omowumi</figcaption>								 -->
+<!-- 				</figure> -->
+				
+<!-- 				<br/> -->
+				
+<!-- 			</div> -->
+		
+		
+		
+			<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		        <div id="pieChart" class="centre"></div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+	<body/>
+	</html>
+	
+	
